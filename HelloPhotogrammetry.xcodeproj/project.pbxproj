@@ -7,9 +7,40 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7B35773326155F6900EC1A97 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B35773226155F6900EC1A97 /* main.swift */; };
+		74467F302C1CB1B300CADD4A /* ModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74467F2F2C1CB1B300CADD4A /* ModelView.swift */; };
+		74467F322C1CB22D00CADD4A /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74467F312C1CB22D00CADD4A /* BoundingBox.swift */; };
+		745C3E842C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3E832C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift */; };
+		745C3E862C1927B300C0BE07 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3E852C1927B300C0BE07 /* ContentView.swift */; };
+		745C3E882C1927B300C0BE07 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3E872C1927B300C0BE07 /* Item.swift */; };
+		745C3E8A2C1927B400C0BE07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 745C3E892C1927B400C0BE07 /* Assets.xcassets */; };
+		745C3E8D2C1927B400C0BE07 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 745C3E8C2C1927B400C0BE07 /* Preview Assets.xcassets */; };
+		745C3E982C1927B400C0BE07 /* PizzaPhotogrammetryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3E972C1927B400C0BE07 /* PizzaPhotogrammetryTests.swift */; };
+		745C3EA22C1927B500C0BE07 /* PizzaPhotogrammetryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3EA12C1927B500C0BE07 /* PizzaPhotogrammetryUITests.swift */; };
+		745C3EA42C1927B500C0BE07 /* PizzaPhotogrammetryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3EA32C1927B500C0BE07 /* PizzaPhotogrammetryUITestsLaunchTests.swift */; };
+		745C3EAE2C1927BD00C0BE07 /* Photogrammetry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745060C32C18EBED009BAAD7 /* Photogrammetry.swift */; };
+		7463576F2C1C9DEF005E54E1 /* Model.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7463576E2C1C9DEF005E54E1 /* Model.usdz */; };
+		74E0D6332C19F676008E1E77 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E0D6322C19F676008E1E77 /* DetailView.swift */; };
+		74E0D6352C19F681008E1E77 /* NavigationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E0D6342C19F681008E1E77 /* NavigationCell.swift */; };
+		74E0D6382C19F6CB008E1E77 /* ProcesssingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E0D6372C19F6CB008E1E77 /* ProcesssingView.swift */; };
 		7B35773B261560A700EC1A97 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 7B35773A261560A700EC1A97 /* ArgumentParser */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		745C3E942C1927B400C0BE07 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7B35772726155F6900EC1A97 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 745C3E802C1927B300C0BE07;
+			remoteInfo = PizzaPhotogrammetry;
+		};
+		745C3E9E2C1927B400C0BE07 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7B35772726155F6900EC1A97 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 745C3E802C1927B300C0BE07;
+			remoteInfo = PizzaPhotogrammetry;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		7B35772D26155F6900EC1A97 /* CopyFiles */ = {
@@ -24,15 +55,54 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3AACFD8D2CBD36EDA66607F9 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
-		662F77A0D8C65CF208ABB917 /* ACKNOWLEDGEMENTS.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = ACKNOWLEDGEMENTS.txt; sourceTree = "<group>"; };
-		7365C4E25C9381B7EBEE3701 /* SampleCode.xcconfig */ = {isa = PBXFileReference; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
+		3AACFD8D2CBD36EDA66607F9 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		662F77A0D8C65CF208ABB917 /* ACKNOWLEDGEMENTS.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = ACKNOWLEDGEMENTS.txt; sourceTree = "<group>"; };
+		7365C4E25C9381B7EBEE3701 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
+		74467F2F2C1CB1B300CADD4A /* ModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelView.swift; sourceTree = "<group>"; };
+		74467F312C1CB22D00CADD4A /* BoundingBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
+		745060C32C18EBED009BAAD7 /* Photogrammetry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photogrammetry.swift; sourceTree = "<group>"; };
+		745C3E812C1927B300C0BE07 /* PizzaPhotogrammetry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PizzaPhotogrammetry.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		745C3E832C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaPhotogrammetryApp.swift; sourceTree = "<group>"; };
+		745C3E852C1927B300C0BE07 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		745C3E872C1927B300C0BE07 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		745C3E892C1927B400C0BE07 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		745C3E8C2C1927B400C0BE07 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		745C3E8E2C1927B400C0BE07 /* PizzaPhotogrammetry.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PizzaPhotogrammetry.entitlements; sourceTree = "<group>"; };
+		745C3E932C1927B400C0BE07 /* PizzaPhotogrammetryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PizzaPhotogrammetryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		745C3E972C1927B400C0BE07 /* PizzaPhotogrammetryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaPhotogrammetryTests.swift; sourceTree = "<group>"; };
+		745C3E9D2C1927B400C0BE07 /* PizzaPhotogrammetryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PizzaPhotogrammetryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		745C3EA12C1927B500C0BE07 /* PizzaPhotogrammetryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaPhotogrammetryUITests.swift; sourceTree = "<group>"; };
+		745C3EA32C1927B500C0BE07 /* PizzaPhotogrammetryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaPhotogrammetryUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7463576E2C1C9DEF005E54E1 /* Model.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Model.usdz; sourceTree = "<group>"; };
+		74E0D6322C19F676008E1E77 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		74E0D6342C19F681008E1E77 /* NavigationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCell.swift; sourceTree = "<group>"; };
+		74E0D6372C19F6CB008E1E77 /* ProcesssingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcesssingView.swift; sourceTree = "<group>"; };
 		7B35772F26155F6900EC1A97 /* HelloPhotogrammetry */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HelloPhotogrammetry; sourceTree = BUILT_PRODUCTS_DIR; };
-		7B35773226155F6900EC1A97 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		7B357763261566B200EC1A97 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		745C3E7E2C1927B300C0BE07 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		745C3E902C1927B400C0BE07 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		745C3E9A2C1927B400C0BE07 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7B35772C26155F6900EC1A97 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -50,7 +120,6 @@
 				3AACFD8D2CBD36EDA66607F9 /* LICENSE.txt */,
 				662F77A0D8C65CF208ABB917 /* ACKNOWLEDGEMENTS.txt */,
 			);
-			name = LICENSE;
 			path = LICENSE;
 			sourceTree = "<group>";
 		};
@@ -62,11 +131,74 @@
 			name = Configuration;
 			sourceTree = "<group>";
 		};
+		745C3E822C1927B300C0BE07 /* PizzaPhotogrammetry */ = {
+			isa = PBXGroup;
+			children = (
+				745C3E832C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift */,
+				7463576E2C1C9DEF005E54E1 /* Model.usdz */,
+				74E0D6362C19F6A1008E1E77 /* Views */,
+				746FCE5A2C1CC32A00F5E4BC /* Data */,
+				745C3E892C1927B400C0BE07 /* Assets.xcassets */,
+				745C3E8E2C1927B400C0BE07 /* PizzaPhotogrammetry.entitlements */,
+				745C3E8B2C1927B400C0BE07 /* Preview Content */,
+			);
+			path = PizzaPhotogrammetry;
+			sourceTree = "<group>";
+		};
+		745C3E8B2C1927B400C0BE07 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				745C3E8C2C1927B400C0BE07 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		745C3E962C1927B400C0BE07 /* PizzaPhotogrammetryTests */ = {
+			isa = PBXGroup;
+			children = (
+				745C3E972C1927B400C0BE07 /* PizzaPhotogrammetryTests.swift */,
+			);
+			path = PizzaPhotogrammetryTests;
+			sourceTree = "<group>";
+		};
+		745C3EA02C1927B500C0BE07 /* PizzaPhotogrammetryUITests */ = {
+			isa = PBXGroup;
+			children = (
+				745C3EA12C1927B500C0BE07 /* PizzaPhotogrammetryUITests.swift */,
+				745C3EA32C1927B500C0BE07 /* PizzaPhotogrammetryUITestsLaunchTests.swift */,
+			);
+			path = PizzaPhotogrammetryUITests;
+			sourceTree = "<group>";
+		};
+		746FCE5A2C1CC32A00F5E4BC /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				745060C32C18EBED009BAAD7 /* Photogrammetry.swift */,
+				745C3E872C1927B300C0BE07 /* Item.swift */,
+				74467F312C1CB22D00CADD4A /* BoundingBox.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		74E0D6362C19F6A1008E1E77 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				745C3E852C1927B300C0BE07 /* ContentView.swift */,
+				74E0D6342C19F681008E1E77 /* NavigationCell.swift */,
+				74467F2F2C1CB1B300CADD4A /* ModelView.swift */,
+				74E0D6322C19F676008E1E77 /* DetailView.swift */,
+				74E0D6372C19F6CB008E1E77 /* ProcesssingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		7B35772626155F6900EC1A97 = {
 			isa = PBXGroup;
 			children = (
 				7B357763261566B200EC1A97 /* README.md */,
-				7B35773126155F6900EC1A97 /* HelloPhotogrammetry */,
+				745C3E822C1927B300C0BE07 /* PizzaPhotogrammetry */,
+				745C3E962C1927B400C0BE07 /* PizzaPhotogrammetryTests */,
+				745C3EA02C1927B500C0BE07 /* PizzaPhotogrammetryUITests */,
 				7B35773026155F6900EC1A97 /* Products */,
 				3FA622068595B839DAC9BC34 /* Configuration */,
 				13329AE4E82D15B3A35CBB4C /* LICENSE */,
@@ -77,21 +209,69 @@
 			isa = PBXGroup;
 			children = (
 				7B35772F26155F6900EC1A97 /* HelloPhotogrammetry */,
+				745C3E812C1927B300C0BE07 /* PizzaPhotogrammetry.app */,
+				745C3E932C1927B400C0BE07 /* PizzaPhotogrammetryTests.xctest */,
+				745C3E9D2C1927B400C0BE07 /* PizzaPhotogrammetryUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		7B35773126155F6900EC1A97 /* HelloPhotogrammetry */ = {
-			isa = PBXGroup;
-			children = (
-				7B35773226155F6900EC1A97 /* main.swift */,
-			);
-			path = HelloPhotogrammetry;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		745C3E802C1927B300C0BE07 /* PizzaPhotogrammetry */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 745C3EAB2C1927B500C0BE07 /* Build configuration list for PBXNativeTarget "PizzaPhotogrammetry" */;
+			buildPhases = (
+				745C3E7D2C1927B300C0BE07 /* Sources */,
+				745C3E7E2C1927B300C0BE07 /* Frameworks */,
+				745C3E7F2C1927B300C0BE07 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PizzaPhotogrammetry;
+			productName = PizzaPhotogrammetry;
+			productReference = 745C3E812C1927B300C0BE07 /* PizzaPhotogrammetry.app */;
+			productType = "com.apple.product-type.application";
+		};
+		745C3E922C1927B400C0BE07 /* PizzaPhotogrammetryTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 745C3EAC2C1927B500C0BE07 /* Build configuration list for PBXNativeTarget "PizzaPhotogrammetryTests" */;
+			buildPhases = (
+				745C3E8F2C1927B400C0BE07 /* Sources */,
+				745C3E902C1927B400C0BE07 /* Frameworks */,
+				745C3E912C1927B400C0BE07 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				745C3E952C1927B400C0BE07 /* PBXTargetDependency */,
+			);
+			name = PizzaPhotogrammetryTests;
+			productName = PizzaPhotogrammetryTests;
+			productReference = 745C3E932C1927B400C0BE07 /* PizzaPhotogrammetryTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		745C3E9C2C1927B400C0BE07 /* PizzaPhotogrammetryUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 745C3EAD2C1927B500C0BE07 /* Build configuration list for PBXNativeTarget "PizzaPhotogrammetryUITests" */;
+			buildPhases = (
+				745C3E992C1927B400C0BE07 /* Sources */,
+				745C3E9A2C1927B400C0BE07 /* Frameworks */,
+				745C3E9B2C1927B400C0BE07 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				745C3E9F2C1927B400C0BE07 /* PBXTargetDependency */,
+			);
+			name = PizzaPhotogrammetryUITests;
+			productName = PizzaPhotogrammetryUITests;
+			productReference = 745C3E9D2C1927B400C0BE07 /* PizzaPhotogrammetryUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		7B35772E26155F6900EC1A97 /* HelloPhotogrammetry */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7B35773626155F6900EC1A97 /* Build configuration list for PBXNativeTarget "HelloPhotogrammetry" */;
@@ -118,10 +298,22 @@
 		7B35772726155F6900EC1A97 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1250;
+				DefaultBuildSystemTypeForWorkspace = Latest;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1400;
 				ORGANIZATIONNAME = Apple;
 				TargetAttributes = {
+					745C3E802C1927B300C0BE07 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					745C3E922C1927B400C0BE07 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 745C3E802C1927B300C0BE07;
+					};
+					745C3E9C2C1927B400C0BE07 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 745C3E802C1927B300C0BE07;
+					};
 					7B35772E26155F6900EC1A97 = {
 						CreatedOnToolsVersion = 12.5;
 					};
@@ -144,22 +336,260 @@
 			projectRoot = "";
 			targets = (
 				7B35772E26155F6900EC1A97 /* HelloPhotogrammetry */,
+				745C3E802C1927B300C0BE07 /* PizzaPhotogrammetry */,
+				745C3E922C1927B400C0BE07 /* PizzaPhotogrammetryTests */,
+				745C3E9C2C1927B400C0BE07 /* PizzaPhotogrammetryUITests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		745C3E7F2C1927B300C0BE07 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				745C3E8D2C1927B400C0BE07 /* Preview Assets.xcassets in Resources */,
+				745C3E8A2C1927B400C0BE07 /* Assets.xcassets in Resources */,
+				7463576F2C1C9DEF005E54E1 /* Model.usdz in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		745C3E912C1927B400C0BE07 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		745C3E9B2C1927B400C0BE07 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		745C3E7D2C1927B300C0BE07 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74E0D6382C19F6CB008E1E77 /* ProcesssingView.swift in Sources */,
+				745C3EAE2C1927BD00C0BE07 /* Photogrammetry.swift in Sources */,
+				745C3E862C1927B300C0BE07 /* ContentView.swift in Sources */,
+				74467F322C1CB22D00CADD4A /* BoundingBox.swift in Sources */,
+				745C3E882C1927B300C0BE07 /* Item.swift in Sources */,
+				74E0D6332C19F676008E1E77 /* DetailView.swift in Sources */,
+				745C3E842C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift in Sources */,
+				74467F302C1CB1B300CADD4A /* ModelView.swift in Sources */,
+				74E0D6352C19F681008E1E77 /* NavigationCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		745C3E8F2C1927B400C0BE07 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				745C3E982C1927B400C0BE07 /* PizzaPhotogrammetryTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		745C3E992C1927B400C0BE07 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				745C3EA22C1927B500C0BE07 /* PizzaPhotogrammetryUITests.swift in Sources */,
+				745C3EA42C1927B500C0BE07 /* PizzaPhotogrammetryUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7B35772B26155F6900EC1A97 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B35773326155F6900EC1A97 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		745C3E952C1927B400C0BE07 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 745C3E802C1927B300C0BE07 /* PizzaPhotogrammetry */;
+			targetProxy = 745C3E942C1927B400C0BE07 /* PBXContainerItemProxy */;
+		};
+		745C3E9F2C1927B400C0BE07 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 745C3E802C1927B300C0BE07 /* PizzaPhotogrammetry */;
+			targetProxy = 745C3E9E2C1927B400C0BE07 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		745C3EA52C1927B500C0BE07 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = PizzaPhotogrammetry/PizzaPhotogrammetry.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PizzaPhotogrammetry/Preview Content\"";
+				DEVELOPMENT_TEAM = HL3C4F29U9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Apple. All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dodobrands.PizzaPhotogrammetry;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		745C3EA62C1927B500C0BE07 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = PizzaPhotogrammetry/PizzaPhotogrammetry.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PizzaPhotogrammetry/Preview Content\"";
+				DEVELOPMENT_TEAM = HL3C4F29U9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Apple. All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dodobrands.PizzaPhotogrammetry;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		745C3EA72C1927B500C0BE07 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HL3C4F29U9;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dodobrands.PizzaPhotogrammetryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PizzaPhotogrammetry.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PizzaPhotogrammetry";
+			};
+			name = Debug;
+		};
+		745C3EA82C1927B500C0BE07 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HL3C4F29U9;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dodobrands.PizzaPhotogrammetryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PizzaPhotogrammetry.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PizzaPhotogrammetry";
+			};
+			name = Release;
+		};
+		745C3EA92C1927B500C0BE07 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HL3C4F29U9;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dodobrands.PizzaPhotogrammetryUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = PizzaPhotogrammetry;
+			};
+			name = Debug;
+		};
+		745C3EAA2C1927B500C0BE07 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HL3C4F29U9;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dodobrands.PizzaPhotogrammetryUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = PizzaPhotogrammetry;
+			};
+			name = Release;
+		};
 		7B35773426155F6900EC1A97 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7365C4E25C9381B7EBEE3701 /* SampleCode.xcconfig */;
@@ -286,7 +716,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = P67Q4Q7HA9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.HelloPhotogrammetry${SAMPLE_CODE_DISAMBIGUATOR}";
@@ -303,7 +733,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = P67Q4Q7HA9;
 				ENABLE_HARDENED_RUNTIME = YES;
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.HelloPhotogrammetry${SAMPLE_CODE_DISAMBIGUATOR}";
@@ -316,6 +746,33 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		745C3EAB2C1927B500C0BE07 /* Build configuration list for PBXNativeTarget "PizzaPhotogrammetry" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				745C3EA52C1927B500C0BE07 /* Debug */,
+				745C3EA62C1927B500C0BE07 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		745C3EAC2C1927B500C0BE07 /* Build configuration list for PBXNativeTarget "PizzaPhotogrammetryTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				745C3EA72C1927B500C0BE07 /* Debug */,
+				745C3EA82C1927B500C0BE07 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		745C3EAD2C1927B500C0BE07 /* Build configuration list for PBXNativeTarget "PizzaPhotogrammetryUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				745C3EA92C1927B500C0BE07 /* Debug */,
+				745C3EAA2C1927B500C0BE07 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		7B35772A26155F6900EC1A97 /* Build configuration list for PBXProject "HelloPhotogrammetry" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
