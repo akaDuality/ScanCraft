@@ -20,18 +20,20 @@ struct ModelView: View {
             }.frame(minWidth: 800, minHeight: 500)
             
             VStack(alignment: .leading) {
-                Text("Minimum")
-                InputView(title: "Min X", value: $boundingBox.min.x)
-                InputView(title: "Min Y", value: $boundingBox.min.y)
-                InputView(title: "Min Z", value: $boundingBox.min.z)
-                    .padding(.bottom, 20)
+                SizeChangeView(boundingBox: $boundingBox)
                 
-                Text("Maximum")
-                InputView(title: "Max X", value: $boundingBox.max.x)
-                InputView(title: "Max Y", value: $boundingBox.max.y)
-                InputView(title: "Max Z", value: $boundingBox.max.z)
+//                Text("Minimum")
+//                InputView(title: "Min X", value: $boundingBox.min.x)
+//                InputView(title: "Min Y", value: $boundingBox.min.y)
+//                InputView(title: "Min Z", value: $boundingBox.min.z)
+//                    .padding(.bottom, 20)
+//                
+//                Text("Maximum")
+//                InputView(title: "Max X", value: $boundingBox.max.x)
+//                InputView(title: "Max Y", value: $boundingBox.max.y)
+//                InputView(title: "Max Z", value: $boundingBox.max.z)
                 
-                CoordChange(boundingBox: $boundingBox)
+                
                 
                 // TODO: Add Tranform
 //                Text("Translation")
@@ -44,7 +46,7 @@ struct ModelView: View {
     }
 }
 
-struct CoordChange: View {
+struct SizeChangeView: View {
     @Binding var boundingBox: BoundingBox
     
     var body: some View {
@@ -105,6 +107,7 @@ enum CameraMode {
 struct View3d: View {
     let url: URL
     @Binding var boundingBox: BoundingBox
+    
     let cameraMode: CameraMode
     
     let cameraOffset: CGFloat = 0.3
@@ -113,69 +116,7 @@ struct View3d: View {
             // TODO: Keep camera position on change
             SceneView(
                 scene: {
-                    let scene = try! SCNScene(url: url)
-                    scene.rootNode.position = .init()
-                    
-                    let camera = SCNCamera()
-                    camera.automaticallyAdjustsZRange = true
-                    
-                    let cameraNode = SCNNode()
-                    cameraNode.camera = camera
-                    scene.rootNode.addChildNode(cameraNode)
-//                    scene.pointOfView = cameraNode
-                    
-                    switch cameraMode {
-                    case .x:
-                        cameraNode.worldPosition = SCNVector3(x: cameraOffset, y: 0, z: 0)
-                    case .y:
-                        cameraNode.worldPosition = SCNVector3(x: 0, y: cameraOffset, z: 0)
-                    case .z:
-                        cameraNode.worldPosition = SCNVector3(x: 0, y: 0, z: cameraOffset)
-                    case .free:
-                        cameraNode.worldPosition = SCNVector3(x: cameraOffset/2, y: cameraOffset/2, z: cameraOffset/2)
-                    }
-                    
-                    // TODO: Pass object center
-                    cameraNode.look(at: SCNVector3(x: 0, y: 0, z: 0))
-                    
-                    let box = SCNBox(width:  boundingBox.max.x - boundingBox.min.x,
-                                     height: boundingBox.max.y - boundingBox.min.y,
-                                     length: boundingBox.max.z - boundingBox.min.z,
-                                     chamferRadius: 0)
-                    let boxNode = SCNNode(geometry: box)
-                    
-                    let verticalCenter = SCNVector3(0,
-                                                  (boundingBox.max.y - boundingBox.min.y)/2,
-                                                  0)
-                    boxNode.position = verticalCenter
-                    
-                    boxNode.geometry?.firstMaterial?.diffuse.contents = NSColor.green
-                    boxNode.geometry?.firstMaterial?.transparency = 0.6
-                    scene.rootNode.addChildNode(boxNode)
-                    
-                    func addSphere(_ position: SCNVector3) {
-                        let sphere = SCNSphere(radius: 0.005)
-                        let sphereNode = SCNNode(geometry: sphere)
-                        sphereNode.position = position
-                        //                        coneNode.transform = SCNMatrix4Translate(.init(), 0, -0.02, 0)
-                        //                        coneNode.look(at: SCNVector3(x: 0, y: 2, z: 0))
-                        sphereNode.geometry?.firstMaterial?.diffuse.contents = NSColor.red
-                        
-                        scene.rootNode.addChildNode(sphereNode)
-                    }
-                    
-                    addSphere(SCNVector3((boundingBox.max.x - boundingBox.min.x)/2,
-                                         (boundingBox.max.y - boundingBox.min.y)/2,
-                                         0))
-                    addSphere(SCNVector3(0,
-                                         boundingBox.max.y - boundingBox.min.y,
-                                         0))
-                    addSphere(SCNVector3(0,
-                                         (boundingBox.max.y - boundingBox.min.y)/2,
-                                         (boundingBox.max.z - boundingBox.min.z)/2))
-                   
-                    
-                    return scene
+                    makeScene()
                 }(),
                 pointOfView: nil,
                 options: [
@@ -185,6 +126,80 @@ struct View3d: View {
                 ]
             )
         }
+    }
+    
+    func makeScene() -> SCNScene {
+        let scene = try! SCNScene(url: url)
+        scene.rootNode.position = .init()
+        
+        addCameraMode(to: scene)
+        addBox(to: scene)
+        
+        return scene
+    }
+    
+    func addCameraMode(to scene: SCNScene) {
+        let camera = SCNCamera()
+        camera.automaticallyAdjustsZRange = true
+        camera.usesOrthographicProjection = cameraMode != .free
+        camera.orthographicScale = 0.1
+        
+        let cameraNode = SCNNode()
+        cameraNode.camera = camera
+        scene.rootNode.addChildNode(cameraNode)
+        //                    scene.pointOfView = cameraNode
+        
+        switch cameraMode {
+        case .x:
+            cameraNode.worldPosition = SCNVector3(x: cameraOffset, y: 0, z: 0)
+        case .y:
+            cameraNode.worldPosition = SCNVector3(x: 0, y: cameraOffset, z: 0)
+        case .z:
+            cameraNode.worldPosition = SCNVector3(x: 0, y: 0, z: cameraOffset)
+        case .free:
+            cameraNode.worldPosition = SCNVector3(x: cameraOffset/2, y: cameraOffset/2, z: cameraOffset/2)
+        }
+        
+        // TODO: Pass object center
+        cameraNode.look(at: SCNVector3(x: 0, y: 0, z: 0))
+    }
+    
+    func addBox(to scene: SCNScene) {
+        let box = SCNBox(width:  boundingBox.max.x - boundingBox.min.x,
+                         height: boundingBox.max.y - boundingBox.min.y,
+                         length: boundingBox.max.z - boundingBox.min.z,
+                         chamferRadius: 0)
+        let boxNode = SCNNode(geometry: box)
+        scene.rootNode.addChildNode(boxNode)
+        let verticalCenter = SCNVector3(0,
+                                        (boundingBox.max.y - boundingBox.min.y)/2,
+                                        0)
+        boxNode.position = verticalCenter
+        
+        boxNode.geometry?.firstMaterial?.diffuse.contents = NSColor.green
+        boxNode.geometry?.firstMaterial?.transparency = 0.6
+        
+        
+        func addSphere(_ position: SCNVector3) {
+            let sphere = SCNSphere(radius: 0.005)
+            let sphereNode = SCNNode(geometry: sphere)
+            sphereNode.position = position
+            //                        coneNode.transform = SCNMatrix4Translate(.init(), 0, -0.02, 0)
+            //                        coneNode.look(at: SCNVector3(x: 0, y: 2, z: 0))
+            sphereNode.geometry?.firstMaterial?.diffuse.contents = NSColor.red
+            
+            scene.rootNode.addChildNode(sphereNode)
+        }
+        
+        addSphere(SCNVector3((boundingBox.max.x - boundingBox.min.x)/2,
+                             (boundingBox.max.y - boundingBox.min.y)/2,
+                             0))
+        addSphere(SCNVector3(0,
+                             boundingBox.max.y - boundingBox.min.y,
+                             0))
+        addSphere(SCNVector3(0,
+                             (boundingBox.max.y - boundingBox.min.y)/2,
+                             (boundingBox.max.z - boundingBox.min.z)/2))
     }
 }
 

@@ -21,8 +21,9 @@ final class Item: ObservableObject {
     var progress: Processing
     
     var boundingBox: BoundingBox = BoundingBox.zero
-    var mode: Photogrammetry.Mode
+    var transform: Transform = Transform.zero
     
+    var mode: Photogrammetry.Mode
     var status: Status
     
     init(

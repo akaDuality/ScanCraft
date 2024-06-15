@@ -31,19 +31,18 @@ struct NavigationCell: View {
                     }
                 }
                 
-                Spacer()
-                
                 switch item.status {
                 case .waiting:
                     Text("In queue")
                 case .processing:
-                    
-                    if let remainingTime = item.progress.estimatedRemainingTime {
-                        Text(timeFormatter.localizedString(fromTimeInterval: remainingTime))
-                    }
-                    
-                    if let stage = item.progress.stage?.description {
-                        Text("Stage: \(stage)")
+                    HStack {
+                        if let remainingTime = item.progress.estimatedRemainingTime {
+                            Text(timeFormatter.localizedString(fromTimeInterval: remainingTime))
+                        }
+                        
+                        if let stage = item.progress.stage?.description {
+                            Text("Stage: \(stage)")
+                        }
                     }
                     
                 case .failed, .finished:

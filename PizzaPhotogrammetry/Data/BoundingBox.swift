@@ -50,4 +50,16 @@ extension Coord {
     }
 }
 
+// MARK: - Trasform
 
+extension Item {
+    struct Transform: Codable {
+        let translation: Coord
+        let rotation: Coord
+        let scale: Coord
+        
+        static var zero: Self {
+            Self(translation: .zero, rotation: .zero, scale: .zero)
+        }
+    }
+}
