@@ -29,7 +29,7 @@ struct ContentView: View {
                     }, renderAction: { item in
                         item.mode = .result
                         processIfSessionIsNotBusy(item)
-                    }).frame(height: 100)
+                    }).frame(height: 150)
             }
             .onDelete(perform: deleteItems) // TODO: Not working
             

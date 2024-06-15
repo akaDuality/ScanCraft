@@ -7,37 +7,17 @@ struct ModelView: View {
     
     var body: some View {
         HStack {
-            SceneView(
-                scene: {
-                    let scene = try! SCNScene(url: url)
-                    scene.rootNode.position = .init()
-                    if let pizzaNode = scene.rootNode.childNodes.first {
-                        
-                        pizzaNode.boundingBox = boundingBox.sceneKitBoundingBox
-                        
-                        highlightNode(pizzaNode)
-                    }
-                    
-                    //                bounds(RealityKit.BoundingBox(
-                    //            min: SIMD3<Float>(-0.24121478, -0.12618387, -0.2925045),
-                    //            max: SIMD3<Float>(0.24121478, 0.26614827, 0.2925045)))
-                    
-                    //                let box = SCNBox(width: 0.48, height: 0.3, length: 0.6, chamferRadius: 0)
-                    //                let boxNode = SCNNode(geometry: box)
-                    //                boxNode.position = SCNVector3(0, 0.12, 0)
-                    
-                    //                boxNode.geometry?.firstMaterial?.transparency = 0.6
-                    
-                    //                scene.rootNode.addChildNode(boxNode)
-                    return scene
-                }(),
-                pointOfView: nil,
-                options: [
-                    .allowsCameraControl,
-                    .autoenablesDefaultLighting,
-                    .temporalAntialiasingEnabled
-                ]
-            ).frame(minWidth: 500, minHeight: 300)
+            // TODO: Keep camera position on change
+            VStack {
+                HStack {
+                    View3d(url: url, boundingBox: $boundingBox, cameraMode: .x)
+                    View3d(url: url, boundingBox: $boundingBox, cameraMode: .y)
+                }
+                HStack {
+                    View3d(url: url, boundingBox: $boundingBox, cameraMode: .z)
+                    View3d(url: url, boundingBox: $boundingBox, cameraMode: .free)
+                }
+            }.frame(minWidth: 800, minHeight: 500)
             
             VStack(alignment: .leading) {
                 Text("Minimum")
@@ -51,9 +31,159 @@ struct ModelView: View {
                 InputView(title: "Max Y", value: $boundingBox.max.y)
                 InputView(title: "Max Z", value: $boundingBox.max.z)
                 
+                CoordChange(boundingBox: $boundingBox)
+                
+                // TODO: Add Tranform
+//                Text("Translation")
+//                InputView(title: "X", value: $boundingBox.max.x)
+//                InputView(title: "Y", value: $boundingBox.max.y)
+//                InputView(title: "Z", value: $boundingBox.max.z)
+                
             }.padding()
+        }
+    }
+}
+
+struct CoordChange: View {
+    @Binding var boundingBox: BoundingBox
+    
+    var body: some View {
+        HStack {
+            Text("Width")
+            Button("+") {
+                boundingBox.min.x -= 0.01
+                boundingBox.max.x += 0.01
+            }
             
+            Button("-") {
+                boundingBox.min.x += 0.01
+                boundingBox.max.x -= 0.01
+            }
+        }
+        
+        HStack {
+            Text("Heigth")
+            Button("+") {
+                boundingBox.min.z -= 0.01
+                boundingBox.max.z += 0.01
+            }
             
+            Button("-") {
+                boundingBox.min.z += 0.01
+                boundingBox.max.z -= 0.01
+            }
+        }
+        
+        HStack {
+            Text("Top")
+            Button("+") {
+                boundingBox.max.y += 0.01
+            }
+            
+            Button("-") {
+                boundingBox.max.y -= 0.01
+            }
+        }
+        
+        HStack {
+            Text("Bottom")
+            Button("+") {
+                boundingBox.min.y += 0.01
+            }
+            
+            Button("-") {
+                boundingBox.min.y -= 0.01
+            }
+        }
+    }
+}
+
+enum CameraMode {
+    case x, y, z, free
+}
+
+struct View3d: View {
+    let url: URL
+    @Binding var boundingBox: BoundingBox
+    let cameraMode: CameraMode
+    
+    let cameraOffset: CGFloat = 0.3
+    var body: some View {
+        HStack {
+            // TODO: Keep camera position on change
+            SceneView(
+                scene: {
+                    let scene = try! SCNScene(url: url)
+                    scene.rootNode.position = .init()
+                    
+                    let camera = SCNCamera()
+                    camera.automaticallyAdjustsZRange = true
+                    
+                    let cameraNode = SCNNode()
+                    cameraNode.camera = camera
+                    scene.rootNode.addChildNode(cameraNode)
+//                    scene.pointOfView = cameraNode
+                    
+                    switch cameraMode {
+                    case .x:
+                        cameraNode.worldPosition = SCNVector3(x: cameraOffset, y: 0, z: 0)
+                    case .y:
+                        cameraNode.worldPosition = SCNVector3(x: 0, y: cameraOffset, z: 0)
+                    case .z:
+                        cameraNode.worldPosition = SCNVector3(x: 0, y: 0, z: cameraOffset)
+                    case .free:
+                        cameraNode.worldPosition = SCNVector3(x: cameraOffset/2, y: cameraOffset/2, z: cameraOffset/2)
+                    }
+                    
+                    // TODO: Pass object center
+                    cameraNode.look(at: SCNVector3(x: 0, y: 0, z: 0))
+                    
+                    let box = SCNBox(width:  boundingBox.max.x - boundingBox.min.x,
+                                     height: boundingBox.max.y - boundingBox.min.y,
+                                     length: boundingBox.max.z - boundingBox.min.z,
+                                     chamferRadius: 0)
+                    let boxNode = SCNNode(geometry: box)
+                    
+                    let verticalCenter = SCNVector3(0,
+                                                  (boundingBox.max.y - boundingBox.min.y)/2,
+                                                  0)
+                    boxNode.position = verticalCenter
+                    
+                    boxNode.geometry?.firstMaterial?.diffuse.contents = NSColor.green
+                    boxNode.geometry?.firstMaterial?.transparency = 0.6
+                    scene.rootNode.addChildNode(boxNode)
+                    
+                    func addSphere(_ position: SCNVector3) {
+                        let sphere = SCNSphere(radius: 0.005)
+                        let sphereNode = SCNNode(geometry: sphere)
+                        sphereNode.position = position
+                        //                        coneNode.transform = SCNMatrix4Translate(.init(), 0, -0.02, 0)
+                        //                        coneNode.look(at: SCNVector3(x: 0, y: 2, z: 0))
+                        sphereNode.geometry?.firstMaterial?.diffuse.contents = NSColor.red
+                        
+                        scene.rootNode.addChildNode(sphereNode)
+                    }
+                    
+                    addSphere(SCNVector3((boundingBox.max.x - boundingBox.min.x)/2,
+                                         (boundingBox.max.y - boundingBox.min.y)/2,
+                                         0))
+                    addSphere(SCNVector3(0,
+                                         boundingBox.max.y - boundingBox.min.y,
+                                         0))
+                    addSphere(SCNVector3(0,
+                                         (boundingBox.max.y - boundingBox.min.y)/2,
+                                         (boundingBox.max.z - boundingBox.min.z)/2))
+                   
+                    
+                    return scene
+                }(),
+                pointOfView: nil,
+                options: [
+                    .allowsCameraControl,
+                    .autoenablesDefaultLighting,
+                    .temporalAntialiasingEnabled
+                ]
+            )
         }
     }
 }
@@ -70,6 +200,8 @@ struct InputView: View {
     
     var body: some View {
         HStack() {
+            Text(title)
+            
             TextField(title, value: $value, formatter: formatter)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .frame(width: 100)
@@ -89,46 +221,4 @@ struct InputView: View {
                 min: Coord(x: -0.117, y: 0.11, z: -0.12),
                 max: Coord(x: 0.117, y: 0.13, z: 0.12)
               )))
-}
-
-func createLineNode(fromPos origin: SCNVector3, toPos destination: SCNVector3, color: NSColor) -> SCNNode {
-    let line = lineFrom(vector: origin, toVector: destination)
-    let lineNode = SCNNode(geometry: line)
-    let planeMaterial = SCNMaterial()
-    planeMaterial.diffuse.contents = color
-    line.materials = [planeMaterial]
-    
-    return lineNode
-}
-
-func lineFrom(vector vector1: SCNVector3, toVector vector2: SCNVector3) -> SCNGeometry {
-    let indices: [Int32] = [0, 1]
-    
-    let source = SCNGeometrySource(vertices: [vector1, vector2])
-    let element = SCNGeometryElement(indices: indices, primitiveType: .line)
-    
-    return SCNGeometry(sources: [source], elements: [element])
-}
-
-
-let kHighlightingNode = "someName"
-func highlightNode(_ node: SCNNode) {
-    let (min, max) = node.boundingBox
-    print(node.boundingBox)
-    let zCoord = node.position.z
-    let topLeft = SCNVector3Make(min.x, max.y, zCoord)
-    let bottomLeft = SCNVector3Make(min.x, min.y, zCoord)
-    let topRight = SCNVector3Make(max.x, max.y, zCoord)
-    let bottomRight = SCNVector3Make(max.x, min.y, zCoord)
-    
-    
-    let bottomSide = createLineNode(fromPos: bottomLeft, toPos: bottomRight, color: .yellow)
-    let leftSide = createLineNode(fromPos: bottomLeft, toPos: topLeft, color: .yellow)
-    let rightSide = createLineNode(fromPos: bottomRight, toPos: topRight, color: .yellow)
-    let topSide = createLineNode(fromPos: topLeft, toPos: topRight, color: .yellow)
-    
-    [bottomSide, leftSide, rightSide, topSide].forEach {
-        $0.name = kHighlightingNode // Whatever name you want so you can unhighlight later if needed
-        node.addChildNode($0)
-    }
 }

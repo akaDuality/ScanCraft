@@ -10,10 +10,18 @@ struct NavigationCell: View {
 
     @State var isPopover: Bool = false
     var body: some View {
-        HStack(spacing: 8) {
-            VStack {
-                Text(item.sourceFolder.pathTrailing)
-//                Text(item.destination.pathTrailing)
+        HStack(alignment: .top, spacing: 8) {
+            VStack(alignment: .leading) {
+                
+                PathView(url: item.sourceFolder)
+                
+                if item.mode != .processing {
+                    PathView(url: item.previewDestination)
+                }
+                
+                if item.mode == .result {
+                    PathView(url: item.resultDestination)
+                }
                 
                 if item.status == .processing {
                     if item.progress.fractionCompleted < 1 {
@@ -53,22 +61,23 @@ struct NavigationCell: View {
                     }
                 }
             case .finished:
+                Spacer()
+                
                 HStack {
-                    VStack {
-                        Button("Show in Finder", systemImage: "eye") {
-                            NSWorkspace.shared.activateFileViewerSelecting([item.resultDestination])
-                        }
-                        
-                        Button("Open file") {
+                    VStack(alignment: .trailing) {
+                        Button("Align model") {
 //                            openWindow(id: "openModel", value: item)
                             isPopover = true
                         }.popover(isPresented: self.$isPopover) {
-                            ModelView(url: item.previewDestination,
+                            ModelView(url: item.currentDestination,
                                       boundingBox: $item.boundingBox) // TODO: Remove !
                         }
                         
-                        Button("Render") {
-                            renderAction(item)
+                        // TODO: Make it available to rerender (and ask to rewrite file)
+                        if item.mode == .preview {
+                            Button("Render") {
+                                renderAction(item)
+                            }
                         }
                     }
                 }
@@ -77,6 +86,23 @@ struct NavigationCell: View {
     }
     
     let timeFormatter = RelativeDateTimeFormatter()
+}
+
+struct PathView: View {
+    
+    let url: URL
+    
+    var body: some View {
+        HStack(alignment: .firstTextBaseline) {
+            Button {
+                NSWorkspace.shared.activateFileViewerSelecting([url])
+            } label: {
+                Image(systemName: "eye")
+            }.controlSize(.small)
+            
+            Text(url.pathTrailing)
+        }
+    }
 }
 
 extension URL {

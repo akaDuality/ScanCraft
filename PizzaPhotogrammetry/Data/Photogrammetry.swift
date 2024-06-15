@@ -30,7 +30,9 @@ class Photogrammetry {
     }
     
     enum Mode: Codable {
-        case preview, result
+        case processing, preview, result
+        
+        static var `default`: Self = .processing
     }
     
     func run(_ task: Item, mode: Mode) async throws {
@@ -123,7 +125,7 @@ class Photogrammetry {
                 }
             }
             
-            let destinationURL = mode == .preview ? task.previewDestination : task.resultDestination
+            let destinationURL = task.currentDestination
             // Run the main process call on the request, then enter the main run
             // loop until you get the published completion event or error.
             guard destinationURL.startAccessingSecurityScopedResource() else {

@@ -32,7 +32,7 @@ final class Item: ObservableObject {
         self.sourceFolder = sourceFolder
         self.status = .waiting
         self.progress = Processing(stage: .preProcessing, fractionCompleted: 0, estimatedRemainingTime: 0)
-        self.mode = .preview 
+        self.mode = .default
     }
     
     enum Status: Codable {
@@ -93,6 +93,10 @@ final class Item: ObservableObject {
             .deletingLastPathComponent() // Add near incoming folder, not inside the folder
             .appending(path: "Result.usdz") // TODO: Generate names
         
+    }
+    
+    var currentDestination: URL {
+        mode == .preview ? previewDestination : resultDestination
     }
 }
 
