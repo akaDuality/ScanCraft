@@ -15,34 +15,25 @@ struct NavigationCell: View {
                 
                 PathView(url: item.sourceFolder)
                 
-                if item.mode != .processing {
-                    PathView(url: item.previewDestination)
-                }
-                
-                if item.mode == .result {
-                    PathView(url: item.resultDestination)
-                }
-                
-                if item.status == .processing {
-                    if item.progress.fractionCompleted < 1 {
-                        ProgressView(value: item.progress.fractionCompleted)
-                            .progressViewStyle(.linear)
-                            .controlSize(.small)
-                    }
-                }
-                
                 switch item.status {
                 case .waiting:
                     Text("In queue")
                 case .processing:
-                    HStack {
-                        if let remainingTime = item.progress.estimatedRemainingTime {
+                    if let stage = item.progress.stage?.description {
+                        Text("Stage: \(stage)")
+                    }
+                    
+                    if let remainingTime = item.progress.estimatedRemainingTime, remainingTime > 0 {
+                        HStack {
+                            ProgressView(value: item.progress.fractionCompleted)
+                                .progressViewStyle(.circular)
+                                .controlSize(.small)
+                                .padding(.horizontal, 8)
+                            
                             Text(timeFormatter.localizedString(fromTimeInterval: remainingTime))
                         }
-                        
-                        if let stage = item.progress.stage?.description {
-                            Text("Stage: \(stage)")
-                        }
+                    } else {
+                        ProgressView() // Infinity indicator
                     }
                     
                 case .failed, .finished:
@@ -64,14 +55,6 @@ struct NavigationCell: View {
                 
                 HStack {
                     VStack(alignment: .trailing) {
-                        Button("Align model") {
-//                            openWindow(id: "openModel", value: item)
-                            isPopover = true
-                        }.popover(isPresented: self.$isPopover) {
-                            ModelView(url: item.currentDestination,
-                                      boundingBox: $item.boundingBox) // TODO: Remove !
-                        }
-                        
                         // TODO: Make it available to rerender (and ask to rewrite file)
                         if item.mode == .preview {
                             Button("Render") {
@@ -85,6 +68,12 @@ struct NavigationCell: View {
     }
     
     let timeFormatter = RelativeDateTimeFormatter()
+}
+
+#Preview {
+    let url = URL(fileURLWithPath: "/Users/mikhail/Library/CloudStorage/GoogleDrive-m.rubanov@dodobrands.io/Shared drives/Photo Lab/2024/06-June/2024-06-13 — TR— 3D — Pesto/20/jpeg")
+    let item = Item(sourceFolder: url)
+    return NavigationCell(item: item, retryAction: { _ in }, renderAction: { _ in })
 }
 
 struct PathView: View {

@@ -6,6 +6,15 @@ struct Coord: Codable, Equatable {
     static var zero: Self { Self(x: 0, y: 0, z: 0) }
 }
 
+struct Coord4: Codable, Equatable {
+    var x: CGFloat
+    var y: CGFloat
+    var z: CGFloat
+    var r: CGFloat
+    
+    static var zero: Self { Self(x: 0, y: 0, z: 0, r: 0) }
+}
+
 struct BoundingBox: Codable, Equatable {
     var min: Coord
     var max: Coord
@@ -50,13 +59,19 @@ extension Coord {
     }
 }
 
+extension Coord4 {
+    var simd4: simd_quatf {
+        simd_quatf(ix: Float(x), iy: Float(y), iz: Float(z), r: Float(r))
+    }
+}
+
 // MARK: - Trasform
 
 extension Item {
-    struct Transform: Codable {
-        let translation: Coord
-        let rotation: Coord
-        let scale: Coord
+    struct Transform: Codable, Equatable {
+        var translation: Coord
+        var rotation: Coord4
+        var scale: Coord
         
         static var zero: Self {
             Self(translation: .zero, rotation: .zero, scale: .zero)

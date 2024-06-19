@@ -36,7 +36,6 @@ class Photogrammetry {
     }
     
     func run(_ task: Item, mode: Mode) async throws {
-        task.status = .processing
         isProcessing = true
         defer {
             isProcessing = false
@@ -62,6 +61,8 @@ class Photogrammetry {
         guard let session = maybeSession else {
             Foundation.exit(1)
         }
+        
+        task.progress.stage = .preProcessing
         
         try await withCheckedThrowingContinuation { continuation in
             
@@ -140,14 +141,12 @@ class Photogrammetry {
                 if task.boundingBox != .zero {
                     geometry = PhotogrammetrySession.Request.Geometry(
                         bounds: task.boundingBox.realityKitBoundingBox,
-                        transform: Transform(translation: SIMD3(x: 0,
-                                                                y: -Float(task.boundingBox.min.y),
-                                                                z: 0)))
+                        transform: task.transform.realityKit)
                 }
                 
                 let modelFileRequest = PhotogrammetrySession.Request.modelFile(
                     url: destinationURL,
-                    detail: mode == .preview ? .preview : .custom,
+                    detail: mode == .result ? .custom : .preview,
                     geometry: geometry)
                     
                 
@@ -155,7 +154,6 @@ class Photogrammetry {
                 try session.process(requests: [modelFileRequest, .bounds])
             } catch {
                 logger.critical("Process got error: \(String(describing: error))")
-                task.status = .failed
                 continuation.resume(throwing: error)
             }
         }
@@ -208,5 +206,13 @@ extension Item.ProcessingStage {
         @unknown default:
             return nil
         }
+    }
+}
+
+extension Item.Transform {
+    var realityKit: RealityKit.Transform {
+        .init(scale: scale.simd3,
+              rotation: rotation.simd4,
+              translation: translation.simd3)
     }
 }

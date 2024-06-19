@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ProcesssingView: View {
     
-    @State var status: Item.Processing
+    var status: Item.Processing
     
     var body: some View {
         

@@ -11,7 +11,7 @@ import SwiftData
 import RealityKit
 
 @Model
-final class Item: ObservableObject {
+final class Item {
     
     let id: UUID
     
@@ -24,6 +24,7 @@ final class Item: ObservableObject {
     var transform: Transform = Transform.zero
     
     var mode: Photogrammetry.Mode
+    
     var status: Status
     
     init(
@@ -97,7 +98,7 @@ final class Item: ObservableObject {
     }
     
     var currentDestination: URL {
-        mode == .preview ? previewDestination : resultDestination
+        mode == .result ? resultDestination: previewDestination 
     }
 }
 

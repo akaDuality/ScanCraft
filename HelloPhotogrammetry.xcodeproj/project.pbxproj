@@ -10,7 +10,7 @@
 		74467F302C1CB1B300CADD4A /* ModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74467F2F2C1CB1B300CADD4A /* ModelView.swift */; };
 		74467F322C1CB22D00CADD4A /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74467F312C1CB22D00CADD4A /* BoundingBox.swift */; };
 		745C3E842C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3E832C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift */; };
-		745C3E862C1927B300C0BE07 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3E852C1927B300C0BE07 /* ContentView.swift */; };
+		745C3E862C1927B300C0BE07 /* ItemsToModelSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3E852C1927B300C0BE07 /* ItemsToModelSplitView.swift */; };
 		745C3E882C1927B300C0BE07 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3E872C1927B300C0BE07 /* Item.swift */; };
 		745C3E8A2C1927B400C0BE07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 745C3E892C1927B400C0BE07 /* Assets.xcassets */; };
 		745C3E8D2C1927B400C0BE07 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 745C3E8C2C1927B400C0BE07 /* Preview Assets.xcassets */; };
@@ -19,7 +19,8 @@
 		745C3EA42C1927B500C0BE07 /* PizzaPhotogrammetryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3EA32C1927B500C0BE07 /* PizzaPhotogrammetryUITestsLaunchTests.swift */; };
 		745C3EAE2C1927BD00C0BE07 /* Photogrammetry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745060C32C18EBED009BAAD7 /* Photogrammetry.swift */; };
 		7463576F2C1C9DEF005E54E1 /* Model.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7463576E2C1C9DEF005E54E1 /* Model.usdz */; };
-		74E0D6332C19F676008E1E77 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E0D6322C19F676008E1E77 /* DetailView.swift */; };
+		746FCE5C2C22225900F5E4BC /* PizzaSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746FCE5B2C22225900F5E4BC /* PizzaSceneView.swift */; };
+		74E0D6332C19F676008E1E77 /* ModelProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E0D6322C19F676008E1E77 /* ModelProgressView.swift */; };
 		74E0D6352C19F681008E1E77 /* NavigationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E0D6342C19F681008E1E77 /* NavigationCell.swift */; };
 		74E0D6382C19F6CB008E1E77 /* ProcesssingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E0D6372C19F6CB008E1E77 /* ProcesssingView.swift */; };
 		7B35773B261560A700EC1A97 /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = 7B35773A261560A700EC1A97 /* ArgumentParser */; };
@@ -63,7 +64,7 @@
 		745060C32C18EBED009BAAD7 /* Photogrammetry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photogrammetry.swift; sourceTree = "<group>"; };
 		745C3E812C1927B300C0BE07 /* PizzaPhotogrammetry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PizzaPhotogrammetry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		745C3E832C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaPhotogrammetryApp.swift; sourceTree = "<group>"; };
-		745C3E852C1927B300C0BE07 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		745C3E852C1927B300C0BE07 /* ItemsToModelSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsToModelSplitView.swift; sourceTree = "<group>"; };
 		745C3E872C1927B300C0BE07 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		745C3E892C1927B400C0BE07 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		745C3E8C2C1927B400C0BE07 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -74,7 +75,8 @@
 		745C3EA12C1927B500C0BE07 /* PizzaPhotogrammetryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaPhotogrammetryUITests.swift; sourceTree = "<group>"; };
 		745C3EA32C1927B500C0BE07 /* PizzaPhotogrammetryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaPhotogrammetryUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7463576E2C1C9DEF005E54E1 /* Model.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Model.usdz; sourceTree = "<group>"; };
-		74E0D6322C19F676008E1E77 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		746FCE5B2C22225900F5E4BC /* PizzaSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaSceneView.swift; sourceTree = "<group>"; };
+		74E0D6322C19F676008E1E77 /* ModelProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelProgressView.swift; sourceTree = "<group>"; };
 		74E0D6342C19F681008E1E77 /* NavigationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCell.swift; sourceTree = "<group>"; };
 		74E0D6372C19F6CB008E1E77 /* ProcesssingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcesssingView.swift; sourceTree = "<group>"; };
 		7B35772F26155F6900EC1A97 /* HelloPhotogrammetry */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HelloPhotogrammetry; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,14 +182,23 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		746FCE5D2C2222A500F5E4BC /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				74467F2F2C1CB1B300CADD4A /* ModelView.swift */,
+				746FCE5B2C22225900F5E4BC /* PizzaSceneView.swift */,
+				74E0D6322C19F676008E1E77 /* ModelProgressView.swift */,
+				74E0D6372C19F6CB008E1E77 /* ProcesssingView.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		74E0D6362C19F6A1008E1E77 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				745C3E852C1927B300C0BE07 /* ContentView.swift */,
+				745C3E852C1927B300C0BE07 /* ItemsToModelSplitView.swift */,
 				74E0D6342C19F681008E1E77 /* NavigationCell.swift */,
-				74467F2F2C1CB1B300CADD4A /* ModelView.swift */,
-				74E0D6322C19F676008E1E77 /* DetailView.swift */,
-				74E0D6372C19F6CB008E1E77 /* ProcesssingView.swift */,
+				746FCE5D2C2222A500F5E4BC /* Detail */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -377,10 +388,11 @@
 			files = (
 				74E0D6382C19F6CB008E1E77 /* ProcesssingView.swift in Sources */,
 				745C3EAE2C1927BD00C0BE07 /* Photogrammetry.swift in Sources */,
-				745C3E862C1927B300C0BE07 /* ContentView.swift in Sources */,
+				745C3E862C1927B300C0BE07 /* ItemsToModelSplitView.swift in Sources */,
 				74467F322C1CB22D00CADD4A /* BoundingBox.swift in Sources */,
 				745C3E882C1927B300C0BE07 /* Item.swift in Sources */,
-				74E0D6332C19F676008E1E77 /* DetailView.swift in Sources */,
+				746FCE5C2C22225900F5E4BC /* PizzaSceneView.swift in Sources */,
+				74E0D6332C19F676008E1E77 /* ModelProgressView.swift in Sources */,
 				745C3E842C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift in Sources */,
 				74467F302C1CB1B300CADD4A /* ModelView.swift in Sources */,
 				74E0D6352C19F681008E1E77 /* NavigationCell.swift in Sources */,
