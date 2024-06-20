@@ -22,7 +22,7 @@ class Photogrammetry {
         config.customDetailSpecification.maximumTextureDimension = .twoK
         config.customDetailSpecification.textureFormat = .jpeg(compressionQuality: 0.51)
         config.customDetailSpecification.maximumPolygonCount = 50_000
-        config.customDetailSpecification.outputTextureMaps = .all//[.diffuseColor, .normal, .roughness]
+        config.customDetailSpecification.outputTextureMaps = [.diffuseColor, .normal, .roughness]
 //        config.checkpointDirectory = tempFolder // TODO: Need to remove in the end
         
         logger.log("Using configuration: \(String(describing: config))")
