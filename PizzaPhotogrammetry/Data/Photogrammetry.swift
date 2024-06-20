@@ -15,7 +15,7 @@ class Photogrammetry {
     
     private(set) var isProcessing = false
     
-    private func config() -> PhotogrammetrySession.Configuration {
+    private func config(tempFolder: URL) -> PhotogrammetrySession.Configuration {
         var config = PhotogrammetrySession.Configuration()
         config.sampleOrdering = .sequential
     
@@ -23,6 +23,7 @@ class Photogrammetry {
         config.customDetailSpecification.textureFormat = .jpeg(compressionQuality: 0.51)
         config.customDetailSpecification.maximumPolygonCount = 50_000
         config.customDetailSpecification.outputTextureMaps = .all//[.diffuseColor, .normal, .roughness]
+//        config.checkpointDirectory = tempFolder // TODO: Need to remove in the end
         
         logger.log("Using configuration: \(String(describing: config))")
         
@@ -47,12 +48,15 @@ class Photogrammetry {
             fatalError()
         }
         
-        task.progress.stage = .creatingSession
+        await MainActor.run {
+            task.progress.stage = .creatingSession
+        }
+        
         // Try to create the session, or else exit.
         var maybeSession: PhotogrammetrySession!
         do {
             maybeSession = try PhotogrammetrySession(input: task.sourceFolder,
-                                                     configuration: config())
+                                                     configuration: config(tempFolder: task.tempDirectory))
             logger.log("Successfully created session.")
         } catch {
             logger.error("Error creating session: \(String(describing: error))")
@@ -62,7 +66,7 @@ class Photogrammetry {
             Foundation.exit(1)
         }
         
-        task.progress.stage = .preProcessing
+        // TODO: Check that destination file not exists, will fail otherwise. Ask to remove it
         
         try await withCheckedThrowingContinuation { continuation in
             
@@ -75,7 +79,7 @@ class Photogrammetry {
                             
                         case .requestError(let request, let error):
                             logger.error("Request \(String(describing: request)) had an error: \(String(describing: error))")
-//                            continuation.resume(throwing: error)
+                            throw error
                             // TODO: Fail request
                         case .requestComplete(let request, let result):
                             if case .modelFile = request {
@@ -94,7 +98,7 @@ class Photogrammetry {
                             Photogrammetry.handleRequestProgress(request: request,
                                                                  fractionComplete: fractionComplete)
                             
-                        case .requestProgressInfo(let request, let progress):
+                        case .requestProgressInfo(_, let progress):
                             task.progress.stage = .from(progress.processingStage)
                             task.progress.estimatedRemainingTime = progress.estimatedRemainingTime
                             
@@ -139,9 +143,16 @@ class Photogrammetry {
             do {
                 var geometry: PhotogrammetrySession.Request.Geometry? = nil
                 if task.boundingBox != .zero {
+                    var transform = task.transform.realityKit
+                    
+                    // Invert axis because we use this transform to position bounding box
+                    // but here we should place pizza's bottom to zero coordinate,
+                    transform.translation.y = -transform.translation.y + Float(task.boundingBox.height) / 2
+                    
                     geometry = PhotogrammetrySession.Request.Geometry(
-                        bounds: task.boundingBox.realityKitBoundingBox,
-                        transform: task.transform.realityKit)
+                        bounds: task.boundingBox.realityKit
+//                        transform: transform
+                    )
                 }
                 
                 let modelFileRequest = PhotogrammetrySession.Request.modelFile(
@@ -151,7 +162,13 @@ class Photogrammetry {
                     
                 
                 logger.log("Using request: \(String(describing: modelFileRequest))")
-                try session.process(requests: [modelFileRequest, .bounds])
+                
+                var requests: [RealityKit.PhotogrammetrySession.Request] = [modelFileRequest]
+                if task.mode == .processing {
+                    requests.append(.bounds)
+                }
+                    
+                try session.process(requests: requests)
             } catch {
                 logger.critical("Process got error: \(String(describing: error))")
                 continuation.resume(throwing: error)
@@ -203,6 +220,8 @@ extension Item.ProcessingStage {
         case .meshGeneration: return .meshGeneration
         case .textureMapping: return .textureMapping
         case .optimization: return .textureMapping
+        case .none:
+            return nil
         @unknown default:
             return nil
         }

@@ -17,7 +17,8 @@ struct ModelProgressView: View {
             }
             
         case .processing:
-            ProcesssingView(status: item.progress)
+            ProgressDescription(progress: item.progress)
+                .frame(width: 300)
         case .waiting:
             Text("Waiting")
         }

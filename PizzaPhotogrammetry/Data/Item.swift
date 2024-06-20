@@ -33,7 +33,7 @@ final class Item {
         self.id = UUID()
         self.sourceFolder = sourceFolder
         self.status = .waiting
-        self.progress = Processing(stage: .preProcessing, fractionCompleted: 0, estimatedRemainingTime: 0)
+        self.progress = .empty
         self.mode = .default
     }
     
@@ -81,6 +81,16 @@ final class Item {
         var stage: ProcessingStage?
         var fractionCompleted: Double
         var estimatedRemainingTime: TimeInterval?
+        
+        mutating func reset() {
+            estimatedRemainingTime = 0
+            fractionCompleted = 0
+            stage = .preProcessing
+        }
+        
+        static var empty: Self {
+            Processing(stage: .preProcessing, fractionCompleted: 0, estimatedRemainingTime: 0)
+        }
     }
     
     var previewDestination: URL {
@@ -94,7 +104,12 @@ final class Item {
         sourceFolder
             .deletingLastPathComponent() // Add near incoming folder, not inside the folder
             .appending(path: "Result.usdz") // TODO: Generate names
-        
+    }
+    
+    var tempDirectory: URL {
+        sourceFolder
+            .deletingLastPathComponent() // Add near incoming folder, not inside the folder
+            .appending(path: "Temp") // TODO: Generate names
     }
     
     var currentDestination: URL {

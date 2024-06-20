@@ -19,12 +19,6 @@ struct PizzaSceneView: View {
         self._transform = transform
         self.cameraMode = cameraMode
         self.scene = Self.makeScene(url: url, cameraMode: cameraMode)
-        
-//        scene.rootNode.childNode(withName: "box", recursively: true)?.removeFromParentNode()
-//        let newScene = try! SCNScene(url: url)
-//        let model = newScene.rootNode.childNodes.first!
-//        model.name = "box"
-//        scene.rootNode.addChildNode(model)
     }
     
     var body: some View {
@@ -99,19 +93,19 @@ struct PizzaSceneView: View {
         let boxNode = SCNNode(geometry: box)
         boxNode.name = "BoundingBox"
         scene.rootNode.addChildNode(boxNode)
-//        let verticalCenter = SCNVector3(0,
-//                                        (boundingBox.max.y - boundingBox.min.y)/2,
-//                                        0)
-//        boxNode.position = verticalCenter
-        let translation = SCNMatrix4Translate(SCNMatrix4Identity,
-                                              transform.translation.x,
-                                              transform.translation.y,
-                                              transform.translation.z)
-        let rotation = SCNMatrix4MakeRotation(Double.pi,
-                                              transform.rotation.x,
-                                              transform.rotation.y,
-                                              transform.rotation.z)
-        boxNode.transform = SCNMatrix4Mult(translation, rotation)
+        let verticalCenter = SCNVector3(0,
+                                        (boundingBox.height)/2 + boundingBox.min.y,
+                                        0)
+        boxNode.position = verticalCenter
+//        let translation = SCNMatrix4Translate(SCNMatrix4Identity,
+//                                              transform.translation.x,
+//                                              transform.translation.y,
+//                                              transform.translation.z)
+//        let rotation = SCNMatrix4MakeRotation(Double.pi,
+//                                              transform.rotation.x,
+//                                              transform.rotation.y,
+//                                              transform.rotation.z)
+//        boxNode.transform = SCNMatrix4Mult(translation, rotation)
  
         boxNode.geometry?.firstMaterial?.diffuse.contents = NSColor.green
         boxNode.geometry?.firstMaterial?.transparency = 0.6

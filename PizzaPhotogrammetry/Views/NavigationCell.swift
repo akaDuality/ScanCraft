@@ -1,5 +1,33 @@
 import SwiftUI
 
+struct ProgressDescription: View {
+    
+    var progress: Item.Processing
+    
+    private let timeFormatter = RelativeDateTimeFormatter()
+    
+    var body: some View {
+        HStack {
+            if let stage = progress.stage?.description {
+                Text("Stage: \(stage)")
+                Spacer()
+            }
+            
+            if let remainingTime = progress.estimatedRemainingTime, remainingTime > 0 {
+                Text(timeFormatter.localizedString(fromTimeInterval: remainingTime))
+                
+                ProgressView(value: progress.fractionCompleted)
+                    .progressViewStyle(.circular)
+                    .controlSize(.small)
+                    .padding(.horizontal, 8)
+            } else {
+                ProgressView() // Infinity indicator
+                    .controlSize(.small)
+            }
+        }
+    }
+}
+
 struct NavigationCell: View {
     @State var item: Item
     
@@ -19,23 +47,7 @@ struct NavigationCell: View {
                 case .waiting:
                     Text("In queue")
                 case .processing:
-                    if let stage = item.progress.stage?.description {
-                        Text("Stage: \(stage)")
-                    }
-                    
-                    if let remainingTime = item.progress.estimatedRemainingTime, remainingTime > 0 {
-                        HStack {
-                            ProgressView(value: item.progress.fractionCompleted)
-                                .progressViewStyle(.circular)
-                                .controlSize(.small)
-                                .padding(.horizontal, 8)
-                            
-                            Text(timeFormatter.localizedString(fromTimeInterval: remainingTime))
-                        }
-                    } else {
-                        ProgressView() // Infinity indicator
-                    }
-                    
+                    ProgressDescription(progress: item.progress)
                 case .failed, .finished:
                     EmptyView()
                 }
@@ -66,8 +78,6 @@ struct NavigationCell: View {
             }
         }
     }
-    
-    let timeFormatter = RelativeDateTimeFormatter()
 }
 
 #Preview {

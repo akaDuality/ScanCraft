@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ModelView: View {
+struct DetaliView: View {
     let url: URL
     @Binding var boundingBox: BoundingBox
     @Binding var transform: Item.Transform
@@ -77,52 +77,54 @@ struct ConfigurationView: View {
 struct SizeChangeView: View {
     @Binding var boundingBox: BoundingBox
     
+    let step: CGFloat = 0.005
+    
     var body: some View {
         HStack {
             Text("Width")
             Button("+") {
-                boundingBox.min.x -= 0.01
-                boundingBox.max.x += 0.01
+                boundingBox.min.x -= step
+                boundingBox.max.x += step
             }
             
             Button("-") {
-                boundingBox.min.x += 0.01
-                boundingBox.max.x -= 0.01
+                boundingBox.min.x += step
+                boundingBox.max.x -= step
             }
         }
         
         HStack {
             Text("Heigth")
             Button("+") {
-                boundingBox.min.z -= 0.01
-                boundingBox.max.z += 0.01
+                boundingBox.min.z -= step
+                boundingBox.max.z += step
             }
             
             Button("-") {
-                boundingBox.min.z += 0.01
-                boundingBox.max.z -= 0.01
+                boundingBox.min.z += step
+                boundingBox.max.z -= step
             }
         }
         
         HStack {
             Text("Top")
             Button("+") {
-                boundingBox.max.y += 0.01
+                boundingBox.max.y += step
             }
             
             Button("-") {
-                boundingBox.max.y -= 0.01
+                boundingBox.max.y -= step
             }
         }
         
         HStack {
             Text("Bottom")
             Button("+") {
-                boundingBox.min.y += 0.01
+                boundingBox.min.y += step
             }
             
             Button("-") {
-                boundingBox.min.y -= 0.01
+                boundingBox.min.y -= step
             }
         }
     }
@@ -161,7 +163,7 @@ struct InputView: View {
 }
 
 #Preview {
-    ModelView(
+    DetaliView(
         url: Bundle.main.url(forResource: "Model", withExtension: "usdz")!,
         boundingBox: .constant(BoundingBox(
             min: Coord(x: -0.117, y: 0.11, z: -0.12),

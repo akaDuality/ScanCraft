@@ -33,25 +33,15 @@ struct PizzaPhotogrammetryApp: App {
             ItemsToModelSplitView()
         }
         .modelContainer(sharedModelContainer)
-        
-//        WindowGroup("3D Model", id: "openModel", for: URL.self) { $url in
-//            if let url, let item = item(for: url) {
-//                ModelView(
-//                    url: item.destination,
-//                    boundingBox: $item.boundingBox! // TODO: Remove !
-//                )
-//            } else {
-//                Text("Can't find model at \(url)")
-//            }
-//        }
     }
-    
-//    @Query
-//    private var items: [Item]
-//    
-//    func item(for url: URL) -> Item? {
-//        items.last { item in
-//            item.destination == url
-//        }
-//    }
+}
+
+extension ModelContext {
+    var sqliteCommand: String {
+        if let url = container.configurations.first?.url.path(percentEncoded: false) {
+            "sqlite3 \"\(url)\""
+        } else {
+            "No SQLite database found."
+        }
+    }
 }

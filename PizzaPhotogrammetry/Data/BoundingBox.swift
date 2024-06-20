@@ -22,6 +22,10 @@ struct BoundingBox: Codable, Equatable {
     static var zero: Self {
         Self(min: .zero, max: .zero)
     }
+    
+    var height: CGFloat {
+        max.y - min.y
+    }
 }
 
 import SceneKit
@@ -39,7 +43,7 @@ extension Coord {
 
 import RealityKit
 extension BoundingBox {
-    var realityKitBoundingBox: RealityKit.BoundingBox {
+    var realityKit: RealityKit.BoundingBox {
         .init(min: min.simd3, max: max.simd3)
     }
     
