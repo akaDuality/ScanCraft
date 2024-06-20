@@ -69,7 +69,8 @@ struct ConfigurationView: View {
             Button("Render") {
                 renderAction()
             }
-            
+            .controlSize(.large)
+            .buttonStyle(.borderedProminent)
         }
     }
 }

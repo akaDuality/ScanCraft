@@ -143,15 +143,12 @@ class Photogrammetry {
             do {
                 var geometry: PhotogrammetrySession.Request.Geometry? = nil
                 if task.boundingBox != .zero {
-                    var transform = task.transform.realityKit
-                    
-                    // Invert axis because we use this transform to position bounding box
-                    // but here we should place pizza's bottom to zero coordinate,
-                    transform.translation.y = -transform.translation.y + Float(task.boundingBox.height) / 2
+                    var transform = task.transform
+//                    transform.translation.y = -transform.translation.y
                     
                     geometry = PhotogrammetrySession.Request.Geometry(
-                        bounds: task.boundingBox.realityKit
-//                        transform: transform
+                        bounds: task.boundingBox.realityKit,
+                        transform: transform.realityKit
                     )
                 }
                 

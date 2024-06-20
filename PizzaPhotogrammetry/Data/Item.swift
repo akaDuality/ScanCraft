@@ -81,6 +81,8 @@ final class Item {
         var stage: ProcessingStage?
         var fractionCompleted: Double
         var estimatedRemainingTime: TimeInterval?
+//        var startDate: Date?
+//        var endDate: Date?
         
         mutating func reset() {
             estimatedRemainingTime = 0

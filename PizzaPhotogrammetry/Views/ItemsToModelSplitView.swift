@@ -47,7 +47,7 @@ struct ItemsToModelSplitView: View {
                 // TODO: Show 3d view if preview has been made
                 if selectedItem.status == .finished {
                     @Bindable var item = selectedItem
-                    DetaliView(url: item.currentDestination,
+                    DetaliView(url: item.previewDestination,
                               boundingBox: $item.boundingBox,
                               transform: $item.transform,
                               renderAction: {
@@ -76,6 +76,7 @@ struct ItemsToModelSplitView: View {
     private func render(item: Item) {
 //        item.progress.reset()
         item.mode = .result
+        item.status = .processing
         processIfSessionIsNotBusy(item)
     }
     

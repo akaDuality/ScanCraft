@@ -23,8 +23,16 @@ struct BoundingBox: Codable, Equatable {
         Self(min: .zero, max: .zero)
     }
     
+    var width: CGFloat {
+        max.x - min.x
+    }
+    
     var height: CGFloat {
         max.y - min.y
+    }
+    
+    var length: CGFloat {
+        max.z - min.z
     }
 }
 
@@ -78,7 +86,9 @@ extension Item {
         var scale: Coord
         
         static var zero: Self {
-            Self(translation: .zero, rotation: .zero, scale: .zero)
+            Self(translation: .zero,
+                 rotation: Coord4(x: 0, y: 0, z: 0, r: 1),
+                 scale: Coord(x: 1, y: 1, z: 1))
         }
     }
 }
