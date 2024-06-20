@@ -88,40 +88,45 @@ struct PizzaSceneView: View {
                          height: boundingBox.height,
                          length: boundingBox.length,
                          chamferRadius: 0)
+
+        let verticalCenter = SCNVector3(0,
+                                        boundingBox.min.y + boundingBox.height/2,
+                                        0)
         
-//        let box = SCNBox(width:  0.5,
-//                         height: 0.5,
-//                         length: 0.5,
-//                         chamferRadius: 0)
         let boxNode = SCNNode(geometry: box)
         boxNode.name = "BoundingBox"
         rootNode.addChildNode(boxNode)
-        let verticalCenter = SCNVector3(0,
-                                        boundingBox.max.y,
-                                        0)
+        
         boxNode.position = verticalCenter
         boxNode.geometry?.firstMaterial?.diffuse.contents = NSColor.green
         boxNode.geometry?.firstMaterial?.transparency = 0.6
         
-        let spheres: [SCNVector3] = [
-            SCNVector3((boundingBox.max.x - boundingBox.min.x)/2,
-                       (boundingBox.max.y - boundingBox.min.y)/2,
-                       0),
-            SCNVector3(boundingBox.max.x,
-                       0,
-                       boundingBox.max.z),
-            SCNVector3(0,
-                       (boundingBox.max.y - boundingBox.min.y)/2,
-                       (boundingBox.max.z - boundingBox.min.z)/2)
-        ]
-            
-        spheres.forEach { coord in
-            addSphere(coord, to: boxNode, color: .red)
-        }
+        addBoundingSpheres(to: boxNode, boundingBox: boundingBox)
     }
-
 }
 
+func addBoundingSpheres(to box: SCNNode, boundingBox: BoundingBox) {
+    let spheres: [SCNVector3] = [
+        SCNVector3(boundingBox.width/2,
+                   boundingBox.height/2,
+                   0),
+        SCNVector3(boundingBox.max.x,
+                   0,
+                   boundingBox.max.z),
+        SCNVector3(0,
+                   boundingBox.height/2,
+                   boundingBox.length/2),
+        
+        // Center on top
+        //            SCNVector3(boundingBox.width / 2,
+        //                       boundingBox.height,
+        //                       boundingBox.length / 2)
+    ]
+    
+    spheres.forEach { coord in
+        addSphere(coord, to: box, color: .red)
+    }
+}
 
 func addSphere(_ position: SCNVector3, to rootNode: SCNNode, color: NSColor) {
     let sphere = SCNSphere(radius: 0.005)
