@@ -75,6 +75,10 @@ extension Coord4 {
     var simd4: simd_quatf {
         simd_quatf(ix: Float(x), iy: Float(y), iz: Float(z), r: Float(r))
     }
+    
+    var quaternion: SCNQuaternion {
+        SCNVector4(x, y, z, r)
+    }
 }
 
 // MARK: - Trasform

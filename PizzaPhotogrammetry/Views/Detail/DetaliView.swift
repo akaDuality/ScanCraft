@@ -62,8 +62,9 @@ struct ConfigurationView: View {
             
             Text("Rotation")
                 .font(.headline)
-            InputView(title: "X", value: $transform.rotation.x)
+                .padding(.top, 20)
             InputView(title: "Y", value: $transform.rotation.y)
+            InputView(title: "X", value: $transform.rotation.x)
             InputView(title: "Z", value: $transform.rotation.z)
             
             Button("Render") {

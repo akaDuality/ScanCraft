@@ -54,13 +54,10 @@ struct PizzaSceneView: View {
                                               transform.translation.x,
                                               transform.translation.y,
                                               transform.translation.z)
-        //        let rotation = SCNMatrix4MakeRotation(Double.pi,
-        //                                              transform.rotation.x,
-        //                                              transform.rotation.y,
-        //                                              transform.rotation.z)
         
+        pizzaNode?.transform = translation
         
-        pizzaNode?.transform = translation//SCNMatrix4Mult(translation, rotation)
+        pizzaNode.orientation = transform.rotation.quaternion
     }
     
     static func makeScene(url: URL, cameraMode: CameraMode) -> SCNScene {
