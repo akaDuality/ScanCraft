@@ -27,7 +27,7 @@ class PizzaScene: SCNScene {
     
     func makeScene(url: URL) {
 
-        addZeroPlane(to: rootNode)
+        addZeroPlanes()
         
         let pizzaScene = try! SCNScene(url: url) // TODO: Remove !
         let pizzaNode = pizzaScene.rootNode
@@ -56,7 +56,7 @@ class PizzaScene: SCNScene {
             .removeFromParentNode()
     }
     
-    func addBox(to rootNode: SCNNode, boundingBox: BoundingBox) {
+    func addBox(to rootNode: SCNNode, boundingBox: BoundingBox, orientation: Coord4) {
         // Clear
         removeBox()
         
@@ -76,27 +76,50 @@ class PizzaScene: SCNScene {
         rootNode.addChildNode(boxNode)
         
         boxNode.position = verticalCenter
-        boxNode.geometry?.firstMaterial?.diffuse.contents = NSColor.green
-        boxNode.geometry?.firstMaterial?.transparency = 0.6
+        boxNode.orientation = orientation.quaternion
+        
+        let material = boxNode.geometry?.firstMaterial
+        material?.diffuse.contents = NSColor.green
+        material?.transparency = 0.6
         
         addBoundingSpheres(to: boxNode, boundingBox: boundingBox)
     }
     
     // MARK: Zero Plane
     
-    func addZeroPlane(to roodNode: SCNNode) {
-        let box = SCNPlane(width: 1, height: 1)
-        let planeNode = SCNNode(geometry: box)
-        planeNode.name = zeroPlaneName
-        planeNode.eulerAngles.x = -.pi / 2
-        planeNode.geometry?.firstMaterial?.diffuse.contents = NSColor.purple
-        planeNode.geometry?.firstMaterial?.transparency = 0.4
+    func addZeroPlanes() {
+        let node = SCNNode()
+        node.name = zeroPlaneName
         
-        roodNode.addChildNode(planeNode)
+        let plane1 = makeZeroPlane()
+        plane1.eulerAngles.x = -.pi / 2
+        node.addChildNode(plane1)
+        
+        let plane2 = makeZeroPlane()
+        plane2.eulerAngles.y = -.pi / 2
+        node.addChildNode(plane2)
+        
+        let plane3 = makeZeroPlane()
+        plane3.eulerAngles.z = -.pi / 2
+        node.addChildNode(plane3)
+        
+        rootNode.addChildNode(node)
+    }
+    
+    private func makeZeroPlane() -> SCNNode {
+        let box = SCNPlane(width: 0.5, height: 0.5)
+        let planeNode = SCNNode(geometry: box)
+        
+        let material = planeNode.geometry!.firstMaterial!
+        material.diffuse.contents = NSColor.purple
+        material.transparency = 0.4
+        material.isDoubleSided = true
+        
+        return planeNode
     }
     
     let zeroPlaneName = "ZeroPlane"
-    func removeZeroPlane(from rootNode: SCNNode) {
+    func removeZeroPlanes() {
         rootNode
             .childNode(withName: zeroPlaneName, recursively: true)?
             .removeFromParentNode()

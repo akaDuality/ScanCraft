@@ -21,6 +21,7 @@ final class Item {
     var progress: Processing
     
     var boundingBox: BoundingBox = BoundingBox.zero
+    var boundingBoxOrientation: Coord4 = Coord4.default
     var transform: Transform = Transform.zero
     
     var resultTransform: Transform = Transform.zero
@@ -123,6 +124,13 @@ final class Item {
     
     }
     
+    var previewAlignedDestination: URL {
+        sourceFolder
+            .deletingLastPathComponent() // Add near incoming folder, not inside the folder
+            .appending(path: "Preview Aligned.usdz") // TODO: Generate names
+        
+    }
+    
     var resultDestination: URL {
         sourceFolder
             .deletingLastPathComponent() // Add near incoming folder, not inside the folder
@@ -136,11 +144,20 @@ final class Item {
     }
     
     func url(for mode: Photogrammetry.Mode) -> URL {
-        mode == .result ? resultDestination: previewDestination
+        switch mode {
+        case .processing:
+            previewDestination
+        case .preview:
+            previewDestination
+        case .previewAligned:
+            previewAlignedDestination
+        case .result:
+            resultDestination
+        }
     }
     
     var currentDestination: URL {
-        mode == .result ? resultDestination: previewDestination 
+        url(for: mode)
     }
 }
 

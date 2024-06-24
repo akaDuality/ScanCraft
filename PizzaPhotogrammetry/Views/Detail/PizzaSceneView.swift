@@ -9,12 +9,12 @@ struct PizzaSceneGrid: View {
     var body: some View {
         VStack {
             HStack {
-                PizzaSceneView(scene: scene, cameraMode: .x, boundingBox: $item.boundingBox, transform: $item.transform)
-                PizzaSceneView(scene: scene, cameraMode: .y, boundingBox: $item.boundingBox, transform: $item.transform)
+                PizzaSceneView(scene: scene, cameraMode: .x, boundingBox: $item.boundingBox, boundingBoxOrientation: $item.boundingBoxOrientation, transform: $item.transform)
+                PizzaSceneView(scene: scene, cameraMode: .y, boundingBox: $item.boundingBox, boundingBoxOrientation: $item.boundingBoxOrientation,transform: $item.transform)
             }
             HStack {
-                PizzaSceneView(scene: scene, cameraMode: .z, boundingBox: $item.boundingBox, transform: $item.transform)
-                PizzaSceneView(scene: scene, cameraMode: .free, boundingBox: $item.boundingBox, transform: $item.transform)
+                PizzaSceneView(scene: scene, cameraMode: .z, boundingBox: $item.boundingBox, boundingBoxOrientation: $item.boundingBoxOrientation,transform: $item.transform)
+                PizzaSceneView(scene: scene, cameraMode: .free, boundingBox: $item.boundingBox, boundingBoxOrientation: $item.boundingBoxOrientation,transform: $item.transform)
             }
         }
     }
@@ -24,20 +24,22 @@ struct PizzaSceneGrid: View {
 struct PizzaSceneView: View {
     
     @Binding var boundingBox: BoundingBox
+    @Binding var boundingBoxOrientation: Coord4
     @Binding var transform: Item.Transform
     
     let scene: PizzaScene
-    let cameraNode: SCNNode
+    @State private var cameraNode: SCNNode
     
     init(scene: PizzaScene,
          cameraMode: CameraMode,
          boundingBox: Binding<BoundingBox>,
+         boundingBoxOrientation: Binding<Coord4>,
          transform: Binding<Item.Transform>
          ) {
         self.scene = scene
         self._boundingBox = boundingBox
         self._transform = transform
-        
+        self._boundingBoxOrientation = boundingBoxOrientation
         self.cameraNode = createCamera(mode: cameraMode)
         
         transformPizzaNode()
@@ -48,7 +50,7 @@ struct PizzaSceneView: View {
     }
     
     func updateBox() {
-        scene.addBox(to: scene.pizzaNode, boundingBox: boundingBox)
+        scene.addBox(to: scene.pizzaNode, boundingBox: boundingBox, orientation: boundingBoxOrientation)
     }
     
     var body: some View {
@@ -64,6 +66,8 @@ struct PizzaSceneView: View {
             ).onAppear {
                 updateBox()
             }.onChange(of: boundingBox) { oldValue, newValue in
+                updateBox()
+            }.onChange(of: boundingBoxOrientation) { oldValue, newValue in
                 updateBox()
             }.onChange(of: transform) { oldValue, newValue in
                 transformPizzaNode()

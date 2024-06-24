@@ -49,6 +49,8 @@ struct ItemsToModelSplitView: View {
                     DetailView(item: $item,
                                renderAction: {
                         render(item: selectedItem)
+                    }, previewAction: {
+                        makePreview(item: selectedItem)
                     })
                 } else {
                     ModelProgressView(item: selectedItem, retryAction: { _ in })
@@ -73,6 +75,15 @@ struct ItemsToModelSplitView: View {
     private func render(item: Item) {
 //        item.progress.reset()
         item.mode = .result
+        item.status = .processing
+        processIfSessionIsNotBusy(item)
+    }
+    
+    private func makePreview(item: Item) {
+        //        item.progress.reset()
+        try? FileManager.default.removeItem(at: item.url(for: .previewAligned))
+        
+        item.mode = .previewAligned
         item.status = .processing
         processIfSessionIsNotBusy(item)
     }

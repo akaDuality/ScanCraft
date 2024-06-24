@@ -22,6 +22,7 @@ struct PizzaPhotogrammetryApp: App {
         
         do {
             let container = try ModelContainer(for: schema, configurations: [modelConfiguration])
+            
             return container
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
@@ -33,6 +34,16 @@ struct PizzaPhotogrammetryApp: App {
             ItemsToModelSplitView()
         }
         .modelContainer(sharedModelContainer)
+    }
+}
+
+extension ModelContainer {
+    @MainActor
+    func removeLastItem() throws {
+        let lastItem = try mainContext.fetch(FetchDescriptor<Item>()).last!
+        
+        mainContext.delete(lastItem)
+        try mainContext.save()
     }
 }
 

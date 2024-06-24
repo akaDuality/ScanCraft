@@ -12,7 +12,7 @@ struct Coord4: Codable, Equatable {
     var z: CGFloat
     var r: CGFloat
     
-    static var zero: Self { Self(x: 0, y: 0, z: 0, r: 0) }
+    static var `default`: Self { Self(x: 0, y: 0, z: 0, r: 1) }
 }
 
 struct BoundingBox: Codable, Equatable {
@@ -76,7 +76,7 @@ extension Coord4 {
         simd_quatf(ix: Float(x), iy: Float(y), iz: Float(z), r: Float(r))
     }
     
-    var quaternion: SCNQuaternion {
+    var quaternion: SCNVector4 {
         SCNVector4(x, y, z, r)
     }
 }
@@ -91,7 +91,7 @@ extension Item {
         
         static var zero: Self {
             Self(translation: .zero,
-                 rotation: Coord4(x: 0, y: 0, z: 0, r: 1),
+                 rotation: .default,
                  scale: Coord(x: 1, y: 1, z: 1))
         }
     }

@@ -31,7 +31,7 @@ class Photogrammetry {
     }
     
     enum Mode: Codable, CaseIterable {
-        case processing, preview, result
+        case processing, preview, previewAligned, result
         
         static var `default`: Self = .processing
         
@@ -41,6 +41,8 @@ class Photogrammetry {
                 return "Processing"
             case .preview:
                 return "Preview"
+            case .previewAligned:
+                return "Preview Aligned"
             case .result:
                 return "Result"
             }
@@ -156,12 +158,10 @@ class Photogrammetry {
             do {
                 var geometry: PhotogrammetrySession.Request.Geometry? = nil
                 if task.boundingBox != .zero {
-                    var transform = task.transform
-//                    transform.translation.y = -transform.translation.y
-                    
                     geometry = PhotogrammetrySession.Request.Geometry(
-                        bounds: task.boundingBox.realityKit,
-                        transform: transform.realityKit
+                        orientedBounds: OrientedBoundingBox(orientation: task.boundingBoxOrientation.simd4,
+                                                            boundingBox: task.boundingBox.realityKit),
+                        transform: task.transform.realityKit
                     )
                 }
                 
