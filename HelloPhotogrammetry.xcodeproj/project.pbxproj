@@ -20,6 +20,7 @@
 		745C3EAE2C1927BD00C0BE07 /* Photogrammetry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745060C32C18EBED009BAAD7 /* Photogrammetry.swift */; };
 		7463576F2C1C9DEF005E54E1 /* Model.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7463576E2C1C9DEF005E54E1 /* Model.usdz */; };
 		746FCE5C2C22225900F5E4BC /* PizzaSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746FCE5B2C22225900F5E4BC /* PizzaSceneView.swift */; };
+		74C64C582C28F92C00A81DB5 /* PizzaScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C64C572C28F92C00A81DB5 /* PizzaScene.swift */; };
 		74E0D6332C19F676008E1E77 /* ModelProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E0D6322C19F676008E1E77 /* ModelProgressView.swift */; };
 		74E0D6352C19F681008E1E77 /* NavigationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E0D6342C19F681008E1E77 /* NavigationCell.swift */; };
 		74E0D6382C19F6CB008E1E77 /* ProcesssingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E0D6372C19F6CB008E1E77 /* ProcesssingView.swift */; };
@@ -76,6 +77,7 @@
 		745C3EA32C1927B500C0BE07 /* PizzaPhotogrammetryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaPhotogrammetryUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7463576E2C1C9DEF005E54E1 /* Model.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Model.usdz; sourceTree = "<group>"; };
 		746FCE5B2C22225900F5E4BC /* PizzaSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaSceneView.swift; sourceTree = "<group>"; };
+		74C64C572C28F92C00A81DB5 /* PizzaScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaScene.swift; sourceTree = "<group>"; };
 		74E0D6322C19F676008E1E77 /* ModelProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelProgressView.swift; sourceTree = "<group>"; };
 		74E0D6342C19F681008E1E77 /* NavigationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCell.swift; sourceTree = "<group>"; };
 		74E0D6372C19F6CB008E1E77 /* ProcesssingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcesssingView.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			children = (
 				74467F2F2C1CB1B300CADD4A /* DetaliView.swift */,
 				746FCE5B2C22225900F5E4BC /* PizzaSceneView.swift */,
+				74C64C572C28F92C00A81DB5 /* PizzaScene.swift */,
 				74E0D6322C19F676008E1E77 /* ModelProgressView.swift */,
 				74E0D6372C19F6CB008E1E77 /* ProcesssingView.swift */,
 			);
@@ -395,6 +398,7 @@
 				74E0D6332C19F676008E1E77 /* ModelProgressView.swift in Sources */,
 				745C3E842C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift in Sources */,
 				74467F302C1CB1B300CADD4A /* DetaliView.swift in Sources */,
+				74C64C582C28F92C00A81DB5 /* PizzaScene.swift in Sources */,
 				74E0D6352C19F681008E1E77 /* NavigationCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
