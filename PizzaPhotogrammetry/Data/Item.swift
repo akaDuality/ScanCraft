@@ -23,6 +23,8 @@ final class Item {
     var boundingBox: BoundingBox = BoundingBox.zero
     var transform: Transform = Transform.zero
     
+    var resultTransform: Transform = Transform.zero
+    
     var mode: Photogrammetry.Mode
     
     var status: Status
@@ -35,6 +37,25 @@ final class Item {
         self.status = .waiting
         self.progress = .empty
         self.mode = .default
+        
+        // TODO: Add info about bounding box
+        if previewExists {
+            self.status = .finished
+            self.mode = .preview
+        }
+        
+        if resultExists {
+            self.status = .finished
+            self.mode = .result
+        }
+    }
+    
+    var previewExists: Bool {
+        FileManager.default.fileExists(atPath: previewDestination.path)
+    }
+    
+    var resultExists: Bool {
+        FileManager.default.fileExists(atPath: resultDestination.path)
     }
     
     enum Status: Codable {

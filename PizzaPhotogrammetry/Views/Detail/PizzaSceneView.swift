@@ -1,12 +1,31 @@
 import SwiftUI
 import SceneKit
 
+struct PizzaSceneGrid: View {
+    
+    let url: URL
+    @Binding var item: Item
+        
+    var body: some View {
+        VStack {
+            HStack {
+                PizzaSceneView(url: url, cameraMode: .x, boundingBox: $item.boundingBox, transform: $item.transform)
+                PizzaSceneView(url: url, cameraMode: .y, boundingBox: $item.boundingBox, transform: $item.transform)
+            }
+            HStack {
+                PizzaSceneView(url: url, cameraMode: .z, boundingBox: $item.boundingBox, transform: $item.transform)
+                PizzaSceneView(url: url, cameraMode: .free, boundingBox: $item.boundingBox, transform: $item.transform)
+            }
+        }
+    }
+}
+
+
 struct PizzaSceneView: View {
     
     @Binding var boundingBox: BoundingBox
     @Binding var transform: Item.Transform
     @State private var scene: PizzaScene
-
     
     var url: URL
     let cameraMode: CameraMode

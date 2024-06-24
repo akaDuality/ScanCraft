@@ -24,26 +24,21 @@ struct DetaliView: View {
     
     var body: some View {
         HStack {
-            VStack {
-                if mode == .result {
-                    PizzaSceneView(url: url, cameraMode: .free, boundingBox: $item.boundingBox, transform: $item.transform)
-                } else {
-                    HStack {
-                        PizzaSceneView(url: url, cameraMode: .x, boundingBox: $item.boundingBox, transform: $item.transform)
-                        PizzaSceneView(url: url, cameraMode: .y, boundingBox: $item.boundingBox, transform: $item.transform)
-                    }
-                    HStack {
-                        PizzaSceneView(url: url, cameraMode: .z, boundingBox: $item.boundingBox, transform: $item.transform)
-                        PizzaSceneView(url: url, cameraMode: .free, boundingBox: $item.boundingBox, transform: $item.transform)
-                    }
+            if mode == .result {
+                HStack {
+                    PizzaSceneView(url: url, cameraMode: .free, boundingBox: .constant(.zero), transform: $item.resultTransform)
+                    TransformSetupView(transform: $item.resultTransform)
                 }
-            }.frame(minWidth: 800, minHeight: 500)
-                .padding(.bottom, 20)
-            
-            ConfigurationView(boundingBox: $item.boundingBox,
-                              transform: $item.transform,
-                              renderAction: renderAction)
-            .padding()
+            } else {
+                PizzaSceneGrid(url: url, item: $item)
+                    .frame(minWidth: 800, minHeight: 500)
+                    .padding(.bottom, 20)
+                
+                ConfigurationView(boundingBox: $item.boundingBox,
+                                  transform: $item.transform,
+                                  renderAction: renderAction)
+                .padding()
+            }
         }.toolbar {
             ToolbarItem(placement: .principal) {
                 Picker("Preview mode", selection: $mode) {
@@ -72,21 +67,22 @@ struct ConfigurationView: View {
         VStack(alignment: .leading) {
             Text("Box")
                 .font(.headline)
-            SizeChangeView(boundingBox: $boundingBox)
+            BoundingBoxSetupView(boundingBox: $boundingBox)
+            TransformSetupView(transform: $transform)
             
-            //                Text("Minimum")
-            //                InputView(title: "Min X", value: $boundingBox.min.x)
-            //                InputView(title: "Min Y", value: $boundingBox.min.y)
-            //                InputView(title: "Min Z", value: $boundingBox.min.z)
-            //                    .padding(.bottom, 20)
-            //
-            //                Text("Maximum")
-            //                InputView(title: "Max X", value: $boundingBox.max.x)
-            //                InputView(title: "Max Y", value: $boundingBox.max.y)
-            //                InputView(title: "Max Z", value: $boundingBox.max.z)
-            
-            
-            // TODO: Add Tranform
+            Button("Render") {
+                renderAction()
+            }
+            .controlSize(.large)
+            .buttonStyle(.borderedProminent)
+        }
+    }
+}
+
+struct TransformSetupView: View {
+    @Binding var transform: Item.Transform
+    var body: some View {
+        VStack(alignment: .leading) {
             Text("Translation")
                 .font(.headline)
             InputView(title: "X", value: $transform.translation.x)
@@ -99,17 +95,11 @@ struct ConfigurationView: View {
             InputView(title: "Y", value: $transform.rotation.y)
             InputView(title: "X", value: $transform.rotation.x)
             InputView(title: "Z", value: $transform.rotation.z)
-            
-            Button("Render") {
-                renderAction()
-            }
-            .controlSize(.large)
-            .buttonStyle(.borderedProminent)
         }
     }
 }
 
-struct SizeChangeView: View {
+struct BoundingBoxSetupView: View {
     @Binding var boundingBox: BoundingBox
     
     let step: CGFloat = 0.005
@@ -162,6 +152,18 @@ struct SizeChangeView: View {
                 boundingBox.min.y -= step
             }
         }
+        
+//                Text("Minimum")
+//                InputView(title: "Min X", value: $boundingBox.min.x)
+//                InputView(title: "Min Y", value: $boundingBox.min.y)
+//                InputView(title: "Min Z", value: $boundingBox.min.z)
+//                    .padding(.bottom, 20)
+//
+//                Text("Maximum")
+//                InputView(title: "Max X", value: $boundingBox.max.x)
+//                InputView(title: "Max Y", value: $boundingBox.max.y)
+//                InputView(title: "Max Z", value: $boundingBox.max.z)
+        
     }
 }
 

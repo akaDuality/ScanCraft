@@ -31,6 +31,7 @@ class PizzaScene: SCNScene {
         
         let pizzaScene = try! SCNScene(url: url) // TODO: Remove !
         let pizzaNode = pizzaScene.rootNode
+//        pizzaNode.castsShadow = true
         pizzaNode.name = pizzaNodeName
         
         rootNode.addChildNode(pizzaNode)

@@ -89,7 +89,7 @@ struct ItemsToModelSplitView: View {
         let newItem = Item(sourceFolder: url)
         modelContext.insert(newItem)
         
-        processIfSessionIsNotBusy(newItem)
+        processNextItem() // Item can be in `.ready` mode and no need to process
     }
     
     private func failProcessingItem() {

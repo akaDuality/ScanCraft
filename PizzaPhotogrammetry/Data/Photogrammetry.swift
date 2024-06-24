@@ -53,6 +53,8 @@ class Photogrammetry {
             isProcessing = false
         }
         
+        // TODO: Load files by NSFileCoordinator().coordinate(readingItemAt
+        
         guard PhotogrammetrySession.isSupported else {
             logger.error("Program terminated early because the hardware doesn't support Object Capture.")
             print("Object Capture is not available on this computer.")
