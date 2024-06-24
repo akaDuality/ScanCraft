@@ -9,10 +9,10 @@
 import SceneKit
 
 class PizzaScene: SCNScene {
-    init(url: URL, cameraMode: CameraMode) {
+    init(url: URL) {
         super.init()
         
-        makeScene(url: url, cameraMode: cameraMode)
+        makeScene(url: url)
     }
     
     required init?(coder: NSCoder) {
@@ -25,8 +25,8 @@ class PizzaScene: SCNScene {
         rootNode.childNode(withName: pizzaNodeName, recursively: true)
     }
     
-    func makeScene(url: URL, cameraMode: CameraMode) {
-        addCamera(to: self, cameraMode: cameraMode)
+    func makeScene(url: URL) {
+
         addZeroPlane(to: rootNode)
         
         let pizzaScene = try! SCNScene(url: url) // TODO: Remove !
@@ -139,18 +139,16 @@ func addSphere(_ position: SCNVector3, to rootNode: SCNNode, color: NSColor) {
 }
 
 let cameraOffset: CGFloat = 0.5
-func addCamera(to scene: SCNScene, cameraMode: CameraMode) {
+func createCamera(mode: CameraMode) -> SCNNode {
     let camera = SCNCamera()
     camera.automaticallyAdjustsZRange = true
-    camera.usesOrthographicProjection = cameraMode != .free
+    camera.usesOrthographicProjection = mode != .free
     camera.orthographicScale = 0.15
     
     let cameraNode = SCNNode()
     cameraNode.camera = camera
-    scene.rootNode.addChildNode(cameraNode)
-    //                    scene.pointOfView = cameraNode
     
-    switch cameraMode {
+    switch mode {
     case .x:
         cameraNode.worldPosition = SCNVector3(x: cameraOffset, y: 0, z: 0)
     case .y:
@@ -163,4 +161,6 @@ func addCamera(to scene: SCNScene, cameraMode: CameraMode) {
     
     // TODO: Pass object center
     cameraNode.look(at: SCNVector3(x: 0, y: 0, z: 0))
+    
+    return cameraNode
 }

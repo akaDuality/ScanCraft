@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		74467F302C1CB1B300CADD4A /* DetaliView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74467F2F2C1CB1B300CADD4A /* DetaliView.swift */; };
+		74467F302C1CB1B300CADD4A /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74467F2F2C1CB1B300CADD4A /* DetailView.swift */; };
 		74467F322C1CB22D00CADD4A /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74467F312C1CB22D00CADD4A /* BoundingBox.swift */; };
 		745C3E842C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3E832C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift */; };
 		745C3E862C1927B300C0BE07 /* ItemsToModelSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3E852C1927B300C0BE07 /* ItemsToModelSplitView.swift */; };
@@ -60,7 +60,7 @@
 		3AACFD8D2CBD36EDA66607F9 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		662F77A0D8C65CF208ABB917 /* ACKNOWLEDGEMENTS.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = ACKNOWLEDGEMENTS.txt; sourceTree = "<group>"; };
 		7365C4E25C9381B7EBEE3701 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
-		74467F2F2C1CB1B300CADD4A /* DetaliView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetaliView.swift; sourceTree = "<group>"; };
+		74467F2F2C1CB1B300CADD4A /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		74467F312C1CB22D00CADD4A /* BoundingBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
 		745060C32C18EBED009BAAD7 /* Photogrammetry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photogrammetry.swift; sourceTree = "<group>"; };
 		745C3E812C1927B300C0BE07 /* PizzaPhotogrammetry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PizzaPhotogrammetry.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,7 +187,7 @@
 		746FCE5D2C2222A500F5E4BC /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				74467F2F2C1CB1B300CADD4A /* DetaliView.swift */,
+				74467F2F2C1CB1B300CADD4A /* DetailView.swift */,
 				746FCE5B2C22225900F5E4BC /* PizzaSceneView.swift */,
 				74C64C572C28F92C00A81DB5 /* PizzaScene.swift */,
 				74E0D6322C19F676008E1E77 /* ModelProgressView.swift */,
@@ -397,7 +397,7 @@
 				746FCE5C2C22225900F5E4BC /* PizzaSceneView.swift in Sources */,
 				74E0D6332C19F676008E1E77 /* ModelProgressView.swift in Sources */,
 				745C3E842C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift in Sources */,
-				74467F302C1CB1B300CADD4A /* DetaliView.swift in Sources */,
+				74467F302C1CB1B300CADD4A /* DetailView.swift in Sources */,
 				74C64C582C28F92C00A81DB5 /* PizzaScene.swift in Sources */,
 				74E0D6352C19F681008E1E77 /* NavigationCell.swift in Sources */,
 			);

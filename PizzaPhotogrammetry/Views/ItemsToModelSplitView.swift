@@ -46,7 +46,7 @@ struct ItemsToModelSplitView: View {
             if let selectedItem {
                 if FileManager.default.fileExists(atPath: selectedItem.previewDestination.path(percentEncoded: false)) {
                     @State var item = selectedItem
-                    DetaliView(item: $item,
+                    DetailView(item: $item,
                                renderAction: {
                         render(item: selectedItem)
                     })

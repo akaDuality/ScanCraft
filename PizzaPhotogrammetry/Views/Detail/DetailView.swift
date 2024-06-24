@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct DetaliView: View {
+struct DetailView: View {
     @Binding var item: Item
     
     var renderAction: () -> Void
@@ -12,6 +12,8 @@ struct DetaliView: View {
     }
     
     @State private var url: URL
+    @State private var preview: PizzaScene
+    @State private var result: PizzaScene
     
     init(item: Binding<Item>, renderAction: @escaping () -> Void) {
         self._item = item
@@ -20,17 +22,20 @@ struct DetaliView: View {
         self.mode = mode
         self.url = item.wrappedValue.url(for: mode)
         self.renderAction = renderAction
+        
+        self.preview = PizzaScene(url: item.wrappedValue.previewDestination)
+        self.result = PizzaScene(url: item.wrappedValue.resultDestination)
     }
     
     var body: some View {
         HStack {
             if mode == .result {
                 HStack {
-                    PizzaSceneView(url: url, cameraMode: .free, boundingBox: .constant(.zero), transform: $item.resultTransform)
+                    PizzaSceneView(scene: result, cameraMode: .free, boundingBox: .constant(.zero), transform: $item.resultTransform)
                     TransformSetupView(transform: $item.resultTransform)
                 }
             } else {
-                PizzaSceneGrid(url: url, item: $item)
+                PizzaSceneGrid(scene: preview, item: $item)
                     .frame(minWidth: 800, minHeight: 500)
                     .padding(.bottom, 20)
                 
