@@ -53,7 +53,13 @@ struct PizzaSceneView: View {
                     .appending(path: "Export.usdz")
                 
                 // TODO: Potential bug: https://forums.developer.apple.com/forums/thread/704590
+                
+                removeBox()
+                removeZeroPlane(from: scene.rootNode)
                 let isSuccess = scene.write(to: url, delegate: nil)
+                
+                addBox(to: pizzaNode)
+                addZeroPlane(to: scene.rootNode)
                 
                 print("Did finish export. Success? \(isSuccess)")
             }
@@ -88,9 +94,13 @@ struct PizzaSceneView: View {
         return rootScene
     }
     
+    private func removeBox() {
+        pizzaNode.childNode(withName: "BoundingBox", recursively: false)?.removeFromParentNode()
+    }
+    
     func addBox(to rootNode: SCNNode) {
         // Clear
-        rootNode.childNode(withName: "BoundingBox", recursively: false)?.removeFromParentNode()
+        removeBox()
         
         // Create new
         
@@ -179,9 +189,17 @@ func addCamera(to scene: SCNScene, cameraMode: CameraMode) {
 func addZeroPlane(to roodNode: SCNNode) {
     let box = SCNPlane(width: 1, height: 1)
     let planeNode = SCNNode(geometry: box)
+    planeNode.name = zeroPlaneName
     planeNode.eulerAngles.x = -.pi / 2
     planeNode.geometry?.firstMaterial?.diffuse.contents = NSColor.purple
     planeNode.geometry?.firstMaterial?.transparency = 0.4
     
     roodNode.addChildNode(planeNode)
+}
+
+let zeroPlaneName = "ZeroPlane"
+func removeZeroPlane(from rootNode: SCNNode) {
+    rootNode
+        .childNode(withName: zeroPlaneName, recursively: true)?
+        .removeFromParentNode()
 }

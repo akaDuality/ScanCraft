@@ -24,23 +24,26 @@ struct DetaliView: View {
     
     var body: some View {
         HStack {
-            // TODO: Keep camera position on change
             VStack {
-                HStack {
-                    PizzaSceneView(url: url, cameraMode: .x, boundingBox: $item.boundingBox, transform: $item.transform)
-                    PizzaSceneView(url: url, cameraMode: .y, boundingBox: $item.boundingBox, transform: $item.transform)
-                }
-                HStack {
-                    PizzaSceneView(url: url, cameraMode: .z, boundingBox: $item.boundingBox, transform: $item.transform)
+                if mode == .result {
                     PizzaSceneView(url: url, cameraMode: .free, boundingBox: $item.boundingBox, transform: $item.transform)
+                } else {
+                    HStack {
+                        PizzaSceneView(url: url, cameraMode: .x, boundingBox: $item.boundingBox, transform: $item.transform)
+                        PizzaSceneView(url: url, cameraMode: .y, boundingBox: $item.boundingBox, transform: $item.transform)
+                    }
+                    HStack {
+                        PizzaSceneView(url: url, cameraMode: .z, boundingBox: $item.boundingBox, transform: $item.transform)
+                        PizzaSceneView(url: url, cameraMode: .free, boundingBox: $item.boundingBox, transform: $item.transform)
+                    }
                 }
             }.frame(minWidth: 800, minHeight: 500)
                 .padding(.bottom, 20)
             
-            ConfigurationView(boundingBox: $item.boundingBox, 
+            ConfigurationView(boundingBox: $item.boundingBox,
                               transform: $item.transform,
                               renderAction: renderAction)
-                .padding()
+            .padding()
         }.toolbar {
             ToolbarItem(placement: .principal) {
                 Picker("Preview mode", selection: $mode) {
@@ -49,6 +52,9 @@ struct DetaliView: View {
                     }
                 }
                 .pickerStyle(.segmented)
+                .onChange(of: mode) { oldValue, newValue in
+                    url = $item.wrappedValue.url(for: mode)
+                }
 
             }
         }
