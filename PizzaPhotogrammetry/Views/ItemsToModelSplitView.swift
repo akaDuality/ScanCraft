@@ -44,13 +44,10 @@ struct ItemsToModelSplitView: View {
             }.navigationSplitViewColumnWidth(350)
         } detail: {
             if let selectedItem {
-                // TODO: Show 3d view if preview has been made
-                if selectedItem.status == .finished {
-                    @Bindable var item = selectedItem
-                    DetaliView(url: item.previewDestination,
-                              boundingBox: $item.boundingBox,
-                              transform: $item.transform,
-                              renderAction: {
+                if FileManager.default.fileExists(atPath: selectedItem.previewDestination.path(percentEncoded: false)) {
+                    @State var item = selectedItem
+                    DetaliView(item: $item,
+                               renderAction: {
                         render(item: selectedItem)
                     })
                 } else {

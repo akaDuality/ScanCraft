@@ -27,7 +27,7 @@ struct PizzaSceneView: View {
     }
     
     var body: some View {
-        HStack {
+        ZStack(alignment: .bottomTrailing) {
             SceneView(
                 scene: scene,
                 pointOfView: nil,
@@ -46,6 +46,19 @@ struct PizzaSceneView: View {
             }.onChange(of: transform) { oldValue, newValue in
                 transformPizzaNode()
             }
+           
+            Button("Export") {
+                let url = self.url
+                    .deletingLastPathComponent()
+                    .appending(path: "Export.usdz")
+                
+                // TODO: Potential bug: https://forums.developer.apple.com/forums/thread/704590
+                let isSuccess = scene.write(to: url, delegate: nil)
+                
+                print("Did finish export. Success? \(isSuccess)")
+            }
+            .padding(.trailing, 16)
+            .padding(.bottom, 16)
         }
     }
     
@@ -63,7 +76,7 @@ struct PizzaSceneView: View {
     static func makeScene(url: URL, cameraMode: CameraMode) -> SCNScene {
         let rootScene = SCNScene()
         
-        addCameraMode(to: rootScene, cameraMode: cameraMode)
+        addCamera(to: rootScene, cameraMode: cameraMode)
         addZeroPlane(to: rootScene.rootNode)
         
         let pizzaScene = try! SCNScene(url: url) // TODO: Remove !
@@ -137,7 +150,7 @@ func addSphere(_ position: SCNVector3, to rootNode: SCNNode, color: NSColor) {
 }
 
 let cameraOffset: CGFloat = 0.5
-func addCameraMode(to scene: SCNScene, cameraMode: CameraMode) {
+func addCamera(to scene: SCNScene, cameraMode: CameraMode) {
     let camera = SCNCamera()
     camera.automaticallyAdjustsZRange = true
     camera.usesOrthographicProjection = cameraMode != .free

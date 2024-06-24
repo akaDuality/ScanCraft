@@ -114,6 +114,10 @@ final class Item {
             .appending(path: "Temp") // TODO: Generate names
     }
     
+    func url(for mode: Photogrammetry.Mode) -> URL {
+        mode == .result ? resultDestination: previewDestination
+    }
+    
     var currentDestination: URL {
         mode == .result ? resultDestination: previewDestination 
     }

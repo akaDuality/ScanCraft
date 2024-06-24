@@ -30,10 +30,21 @@ class Photogrammetry {
         return config
     }
     
-    enum Mode: Codable {
+    enum Mode: Codable, CaseIterable {
         case processing, preview, result
         
         static var `default`: Self = .processing
+        
+        var name: String {
+            switch self {
+            case .processing:
+                return "Processing"
+            case .preview:
+                return "Preview"
+            case .result:
+                return "Result"
+            }
+        }
     }
     
     func run(_ task: Item, mode: Mode) async throws {

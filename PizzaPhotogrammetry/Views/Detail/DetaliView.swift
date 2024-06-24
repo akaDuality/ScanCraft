@@ -1,29 +1,56 @@
 import SwiftUI
 
 struct DetaliView: View {
-    let url: URL
-    @Binding var boundingBox: BoundingBox
-    @Binding var transform: Item.Transform
+    @Binding var item: Item
     
     var renderAction: () -> Void
+    
+    @State var mode: Photogrammetry.Mode {
+        didSet {
+            url = item.url(for: mode)
+        }
+    }
+    
+    @State private var url: URL
+    
+    init(item: Binding<Item>, renderAction: @escaping () -> Void) {
+        self._item = item
+        
+        let mode = item.wrappedValue.mode
+        self.mode = mode
+        self.url = item.wrappedValue.url(for: mode)
+        self.renderAction = renderAction
+    }
     
     var body: some View {
         HStack {
             // TODO: Keep camera position on change
             VStack {
                 HStack {
-                    PizzaSceneView(url: url, cameraMode: .x, boundingBox: $boundingBox, transform: $transform)
-                    PizzaSceneView(url: url, cameraMode: .y, boundingBox: $boundingBox, transform: $transform)
+                    PizzaSceneView(url: url, cameraMode: .x, boundingBox: $item.boundingBox, transform: $item.transform)
+                    PizzaSceneView(url: url, cameraMode: .y, boundingBox: $item.boundingBox, transform: $item.transform)
                 }
                 HStack {
-                    PizzaSceneView(url: url, cameraMode: .z, boundingBox: $boundingBox, transform: $transform)
-                    PizzaSceneView(url: url, cameraMode: .free, boundingBox: $boundingBox, transform: $transform)
+                    PizzaSceneView(url: url, cameraMode: .z, boundingBox: $item.boundingBox, transform: $item.transform)
+                    PizzaSceneView(url: url, cameraMode: .free, boundingBox: $item.boundingBox, transform: $item.transform)
                 }
             }.frame(minWidth: 800, minHeight: 500)
                 .padding(.bottom, 20)
             
-            ConfigurationView(boundingBox: $boundingBox, transform: $transform, renderAction: renderAction)
+            ConfigurationView(boundingBox: $item.boundingBox, 
+                              transform: $item.transform,
+                              renderAction: renderAction)
                 .padding()
+        }.toolbar {
+            ToolbarItem(placement: .principal) {
+                Picker("Preview mode", selection: $mode) {
+                    ForEach(Photogrammetry.Mode.allCases, id: \.self) { mode in
+                        Text(mode.name)
+                    }
+                }
+                .pickerStyle(.segmented)
+
+            }
         }
     }
 }
@@ -164,11 +191,11 @@ struct InputView: View {
     }
 }
 
-#Preview {
-    DetaliView(
-        url: Bundle.main.url(forResource: "Model", withExtension: "usdz")!,
-        boundingBox: .constant(BoundingBox(
-            min: Coord(x: -0.117, y: 0.11, z: -0.12),
-            max: Coord(x: 0.117, y: 0.13, z: 0.12)
-        )), transform: .constant(.zero), renderAction: {})
-}
+//#Preview {
+//    DetaliView(
+//        url: Bundle.main.url(forResource: "Model", withExtension: "usdz")!,
+//        boundingBox: .constant(BoundingBox(
+//            min: Coord(x: -0.117, y: 0.11, z: -0.12),
+//            max: Coord(x: 0.117, y: 0.13, z: 0.12)
+//        )), transform: .constant(.zero), renderAction: {})
+//}
