@@ -70,8 +70,9 @@ class Photogrammetry {
         // Try to create the session, or else exit.
         var maybeSession: PhotogrammetrySession!
         do {
-            maybeSession = try PhotogrammetrySession(input: task.sourceFolder,
-                                                     configuration: config(tempFolder: task.tempDirectory))
+            maybeSession = try PhotogrammetrySession(
+                input: task.sourceFolder,
+                configuration: config(tempFolder: task.tempDirectory))
             logger.log("Successfully created session.")
         } catch {
             logger.error("Error creating session: \(String(describing: error))")

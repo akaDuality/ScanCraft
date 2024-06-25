@@ -36,15 +36,9 @@ struct DetailView: View {
     var body: some View {
         HStack {
             switch mode {
-            case .previewAligned:
-                PizzaSceneView(scene: previewAligned, cameraMode: .free, boundingBox: .constant(.zero), boundingBoxOrientation: .constant(.default), transform: $item.resultTransform)
-            case .result:
-                HStack {
-                    PizzaSceneView(scene: result, cameraMode: .free, boundingBox: .constant(.zero), boundingBoxOrientation: .constant(.default), transform: $item.resultTransform)
-                    
-                    TransformSetupView(transform: $item.resultTransform)
-                        .padding()
-                }
+            case .processing:
+                ModelProgressView(item: item, retryAction: { _ in })
+                
             case .preview:
                 PizzaSceneGrid(scene: preview, item: $item)
                     .frame(minWidth: 800, minHeight: 500)
@@ -56,9 +50,19 @@ struct DetailView: View {
                                   renderAction: renderAction,
                                   previewAction: previewAction)
                 .padding()
-            case .processing:
-                ModelProgressView(item: item, retryAction: { _ in })
+                
+            case .previewAligned:
+                PizzaSceneView(scene: previewAligned, cameraMode: .free, boundingBox: .constant(.zero), boundingBoxOrientation: .constant(.default), transform: $item.resultTransform)
+                
+            case .result:
+                HStack {
+                    PizzaSceneView(scene: result, cameraMode: .free, boundingBox: .constant(.zero), boundingBoxOrientation: .constant(.default), transform: $item.resultTransform)
+                    
+                    TransformSetupView(transform: $item.resultTransform)
+                        .padding()
+                }
             }
+            
         }.toolbar {
             ToolbarItem(placement: .principal) {
                 Picker("Preview mode", selection: $mode) {
