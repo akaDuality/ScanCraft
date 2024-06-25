@@ -14,6 +14,7 @@ struct DetailView: View {
     
     @State private var url: URL
     @State private var preview: PizzaScene
+    @State private var previewAligned: PizzaScene
     @State private var result: PizzaScene
     
     init(item: Binding<Item>,
@@ -28,21 +29,23 @@ struct DetailView: View {
         self.previewAction = previewAction
         
         self.preview = PizzaScene(url: item.wrappedValue.previewDestination)
+        self.previewAligned = PizzaScene(url: item.wrappedValue.previewAlignedDestination)
         self.result = PizzaScene(url: item.wrappedValue.resultDestination)
     }
     
     var body: some View {
         HStack {
-            if mode == .previewAligned {
-                PizzaSceneView(scene: result, cameraMode: .free, boundingBox: .constant(.zero), boundingBoxOrientation: .constant(.default), transform: $item.resultTransform)
-            } else if mode == .result {
+            switch mode {
+            case .previewAligned:
+                PizzaSceneView(scene: previewAligned, cameraMode: .free, boundingBox: .constant(.zero), boundingBoxOrientation: .constant(.default), transform: $item.resultTransform)
+            case .result:
                 HStack {
                     PizzaSceneView(scene: result, cameraMode: .free, boundingBox: .constant(.zero), boundingBoxOrientation: .constant(.default), transform: $item.resultTransform)
                     
                     TransformSetupView(transform: $item.resultTransform)
                         .padding()
                 }
-            } else {
+            case .preview:
                 PizzaSceneGrid(scene: preview, item: $item)
                     .frame(minWidth: 800, minHeight: 500)
                     .padding(.bottom, 20)
@@ -53,6 +56,8 @@ struct DetailView: View {
                                   renderAction: renderAction,
                                   previewAction: previewAction)
                 .padding()
+            case .processing:
+                ModelProgressView(item: item, retryAction: { _ in })
             }
         }.toolbar {
             ToolbarItem(placement: .principal) {

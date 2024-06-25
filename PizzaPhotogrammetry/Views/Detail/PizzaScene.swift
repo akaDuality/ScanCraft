@@ -26,15 +26,18 @@ class PizzaScene: SCNScene {
     }
     
     func makeScene(url: URL) {
-
-        addZeroPlanes()
         
-        let pizzaScene = try! SCNScene(url: url) // TODO: Remove !
-        let pizzaNode = pizzaScene.rootNode
-//        pizzaNode.castsShadow = true
-        pizzaNode.name = pizzaNodeName
         
-        rootNode.addChildNode(pizzaNode)
+        if let pizzaScene = try? SCNScene(url: url) {
+            // TODO: How to handle it? Show error?
+            let pizzaNode = pizzaScene.rootNode
+            //        pizzaNode.castsShadow = true
+            pizzaNode.name = pizzaNodeName
+            
+            rootNode.addChildNode(pizzaNode)
+            
+            addZeroPlanes()
+        }
     }
     
     func transformPizzaNode(by transform: Item.Transform) {
@@ -107,7 +110,7 @@ class PizzaScene: SCNScene {
     }
     
     private func makeZeroPlane() -> SCNNode {
-        let box = SCNPlane(width: 0.5, height: 0.5)
+        let box = SCNPlane(width: 0.25, height: 0.25)
         let planeNode = SCNNode(geometry: box)
         
         let material = planeNode.geometry!.firstMaterial!

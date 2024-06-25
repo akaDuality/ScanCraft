@@ -45,6 +45,16 @@ extension ModelContainer {
         mainContext.delete(lastItem)
         try mainContext.save()
     }
+    
+    @MainActor
+    func printLastItem() throws {
+        let lastItem = try mainContext.fetch(FetchDescriptor<Item>()).last!
+        
+        print(lastItem.boundingBox)
+        print(lastItem.boundingBoxOrientation)
+        print(lastItem.transform)
+        try mainContext.save()
+    }
 }
 
 extension ModelContext {

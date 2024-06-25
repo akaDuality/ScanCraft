@@ -44,7 +44,7 @@ struct ItemsToModelSplitView: View {
             }.navigationSplitViewColumnWidth(350)
         } detail: {
             if let selectedItem {
-                if FileManager.default.fileExists(atPath: selectedItem.previewDestination.path(percentEncoded: false)) {
+                
                     @State var item = selectedItem
                     DetailView(item: $item,
                                renderAction: {
@@ -52,9 +52,6 @@ struct ItemsToModelSplitView: View {
                     }, previewAction: {
                         makePreview(item: selectedItem)
                     })
-                } else {
-                    ModelProgressView(item: selectedItem, retryAction: { _ in })
-                }
             } else {
                 Text("Select an item") 
             }
@@ -88,12 +85,14 @@ struct ItemsToModelSplitView: View {
         processIfSessionIsNotBusy(item)
     }
     
+    @MainActor
     private func add(_ urls: [URL]) {
         for url in urls {
             add(url)
         }
     }
 
+    @MainActor
     private func add(_ url: URL) {
         // TODO: Check is folder
         
@@ -141,6 +140,10 @@ struct ItemsToModelSplitView: View {
                 try await session.run(item, mode: item.mode)
                 await MainActor.run {
                     item.status = .finished
+                    
+                    if selectedItem == nil {
+                        selectedItem = item
+                    }
                 }
             } catch {
                 await MainActor.run {
