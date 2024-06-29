@@ -87,40 +87,6 @@ struct DetailView: View {
     }
 }
 
-struct ConfigurationView: View {
-    
-    @Binding var boundingBox: BoundingBox
-    @Binding var transform: Item.Transform
-    @Binding var boundingBoxOrientation: Coord4
-    
-    var renderAction: () -> Void
-    var previewAction: () -> Void
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            BoundingBoxSetupView(
-                boundingBox: $boundingBox,
-                boundingBoxOrientation: $boundingBoxOrientation)
-            
-            TransformSetupView(transform: $transform)
-                .padding(.bottom, 40)
-            
-            Button(action: previewAction) {
-                Text("Preview")
-                    .frame(width: 160)
-            }
-            .controlSize(.extraLarge)
-            .buttonStyle(.borderedProminent)
-            
-            Button(action: renderAction) {
-                Text("Render")
-                    .frame(width: 160)
-            }
-            .controlSize(.extraLarge)
-            .buttonStyle(.borderedProminent)
-        }
-    }
-}
 
 struct TransformSetupView: View {
     @Binding var transform: Item.Transform
@@ -143,117 +109,9 @@ struct TransformSetupView: View {
     }
 }
 
-struct BoundingBoxSetupView: View {
-    @Binding var boundingBox: BoundingBox
-    @Binding var boundingBoxOrientation: Coord4
-    
-    let step: CGFloat = 0.005
-    
-    var body: some View {
-        Text("Box")
-            .font(.headline)
-        
-        VStack(alignment: .trailing) {
-            InputView(
-                title: "Top",
-                value: $boundingBox.max.y,
-                increaseValue: {
-                    boundingBox.max.y += step
-                }, decreaseValue: {
-                    boundingBox.max.y -= step
-                })
-            
-            InputView(
-                title: "Bottom",
-                value: $boundingBox.min.y,
-                increaseValue: {
-                    boundingBox.min.y += step
-                }, decreaseValue: {
-                    boundingBox.min.y -= step
-                })
-            
-            InputView(
-                title: "Width",
-                value: .constant(boundingBox.width),
-                increaseValue: {
-                    boundingBox.min.x -= step
-                    boundingBox.max.x += step
-                }, decreaseValue: {
-                    boundingBox.min.x += step
-                    boundingBox.max.x -= step
-                })
-            
-            InputView(
-                title: "Length",
-                value: .constant(boundingBox.length),
-                increaseValue: {
-                    boundingBox.min.z -= step
-                    boundingBox.max.z += step
-                }, decreaseValue: {
-                    boundingBox.min.z += step
-                    boundingBox.max.z -= step
-                })
-            
-            Text("Rotation")
-                .font(.headline)
-                .padding(.top, 20)
-            SingleValueView(title: "X", value: $boundingBoxOrientation.x)
-            SingleValueView(title: "Y", value: $boundingBoxOrientation.y)
-            SingleValueView(title: "Z", value: $boundingBoxOrientation.z)
-            
-        }.padding(.bottom, 40)
-    }
-}
 
 enum CameraMode {
     case x, y, z, free
-}
-
-struct SingleValueView: View {
-    let title: String
-    @Binding var value: CGFloat
-    
-    var body: some View {
-        InputView(
-            title: title,
-            value: $value,
-            increaseValue: {
-                value += 0.01
-            }, decreaseValue: {
-                value -= 0.01
-            })
-    }
-}
-
-struct InputView: View {
-    let title: String
-    @Binding var value: CGFloat
-    
-    var increaseValue: () -> Void
-    var decreaseValue: () -> Void
-    
-    let formatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        return formatter
-    }()
-    
-    var body: some View {
-        HStack() {
-            Text(title)
-            
-            TextField(title, value: $value, formatter: formatter)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .frame(width: 100)
-            
-            Button("+") {
-                increaseValue()
-            }
-            Button("-") {
-                decreaseValue()
-            }
-        }
-    }
 }
 
 //#Preview {

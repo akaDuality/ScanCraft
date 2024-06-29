@@ -14,15 +14,11 @@ import Observation
 struct ItemsToModelSplitView: View {
     @Environment(\.modelContext) private var modelContext
     
-    @Query 
-    private var items: [Item]
-    
-    @State var progress: Processing?
-    func progress(for item: Item) -> Processing? {
-        return nil
-    }
-    
+    @Query private var items: [Item]
     @State private var selectedItem: Item?
+    
+    @MainActor
+    private let queue = RenderQueue()
     
     var body: some View {
         NavigationSplitView {
@@ -31,13 +27,13 @@ struct ItemsToModelSplitView: View {
                     NavigationLink(value: item) {
                         NavigationCell(
                             item: item,
-                            progress: progress(for: item),
+                            progress: queue.progress(for: item),
                             retryAction: { item in
                                 // TODO: Ask permission for url
                                 item.status = .waiting
-                                processIfSessionIsNotBusy(item)
+                                queue.processIfSessionIsNotBusy(item)
                             }, renderAction: { item in
-                                render(item: item)
+                                queue.render(item: item)
                             })
                         .contextMenu {
                             Button("Remove task") {
@@ -49,14 +45,13 @@ struct ItemsToModelSplitView: View {
                 }
             }.navigationSplitViewColumnWidth(350)
         } detail: {
-            if let selectedItem {
-                @State var item = selectedItem
-                DetailView(item: $item,
-                           progress: progress(for: item),
+            if let selectedItem = Binding($selectedItem) {
+                DetailView(item: selectedItem,
+                           progress: queue.progress(for: selectedItem.wrappedValue),
                            renderAction: {
-                    render(item: selectedItem)
+                    queue.render(item: selectedItem.wrappedValue)
                 }, previewAction: {
-                    makePreview(item: selectedItem)
+                    queue.makePreview(item: selectedItem.wrappedValue)
                 })
             } else {
                 Text("Select an item")
@@ -68,29 +63,15 @@ struct ItemsToModelSplitView: View {
             }
             return true
         }.onAppear {
+            queue.nextItem = {
+                self.items.first(where: { $0.status ==  .waiting } )
+            }
+            
             Task {
-                failProcessingItem()
-                processNextItem()
+                queue.failProcessingItem(items: items)
+                queue.processNextItem()
             }
         }
-    }
-    
-    @MainActor
-    private func render(item: Item) {
-//        item.progress.reset()
-        item.mode = .result
-        item.status = .processing
-        processIfSessionIsNotBusy(item)
-    }
-    
-    @MainActor
-    private func makePreview(item: Item) {
-        //        item.progress.reset()
-        try? FileManager.default.removeItem(at: item.url(for: .previewAligned))
-        
-        item.mode = .previewAligned
-        item.status = .processing
-        processIfSessionIsNotBusy(item)
     }
     
     @MainActor
@@ -99,7 +80,7 @@ struct ItemsToModelSplitView: View {
             add(url)
         }
     }
-
+    
     @MainActor
     private func add(_ url: URL) {
         // TODO: Check is folder
@@ -107,67 +88,8 @@ struct ItemsToModelSplitView: View {
         let newItem = Item(sourceFolder: url)
         modelContext.insert(newItem)
         
-        processNextItem() // Item can be in `.ready` mode and no need to process
+        queue.processNextItem() // Item can be in `.ready` mode and no need to process
     }
-    
-    @MainActor
-    private func failProcessingItem() {
-        for item in items {
-            if item.status == .processing {
-                item.status = .failed
-            }
-            
-            // TODO: Remove and rework detail view
-            if item.status == .failed, item.mode == .result {
-                item.mode = .preview
-                item.status = .finished
-            }
-        }
-    }
-    
-    @MainActor
-    private func processNextItem() {
-        guard let item = items.first(where: { $0.status ==  .waiting } )
-        else {
-            print("Can't find next item")
-            return
-        }
-        
-        processIfSessionIsNotBusy(item)
-        
-        // TODO: Recursively take next task
-    }
-    
-    @MainActor
-    private func processIfSessionIsNotBusy(_ item: Item) {
-        guard !session.isProcessing else {
-            print("Can't start processing because arleady processing another item")
-            return
-        }
-        
-        progress = Processing(url: item.sourceFolder)
-        item.status = .processing
-        Task {
-            do {
-                try await session.run(item, mode: item.mode, taskProgress: progress!)
-                await MainActor.run {
-                    item.status = .finished
-                    
-                    if selectedItem == nil {
-                        selectedItem = item
-                    }
-                }
-            } catch {
-                await MainActor.run {
-                    item.status = .failed
-                }
-            }
-            
-            processNextItem()
-        }
-    }
-    
-    var session = Photogrammetry()
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
