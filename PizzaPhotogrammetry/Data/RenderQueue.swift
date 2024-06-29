@@ -49,7 +49,10 @@ class RenderQueue {
         // TODO: Recursively take next task
     }
     
+    @MainActor
     func processIfSessionIsNotBusy(_ item: Item) {
+        notificationCenter.requestPermission()
+        
         guard !session.isProcessing else {
             print("Can't start processing because arleady processing another item")
             return
@@ -62,10 +65,12 @@ class RenderQueue {
                 try await session.run(item, mode: item.mode, taskProgress: progress!)
                 await MainActor.run {
                     item.status = .finished
+                    notificationCenter.showCompletePush(item.sourceFolder)
                 }
             } catch {
                 await MainActor.run {
                     item.status = .failed
+                    notificationCenter.showFailurePush(item.sourceFolder)
                 }
             }
             
@@ -74,4 +79,6 @@ class RenderQueue {
     }
     
     var session = Photogrammetry()
+    
+    let notificationCenter = NotificationCenter()
 }

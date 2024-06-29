@@ -13,6 +13,7 @@
 		74521B342C305E820047E82E /* ConfigurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74521B332C305E820047E82E /* ConfigurationView.swift */; };
 		74521B362C305E8F0047E82E /* BoundingBoxSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74521B352C305E8F0047E82E /* BoundingBoxSetupView.swift */; };
 		74521B382C305EAB0047E82E /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74521B372C305EAB0047E82E /* InputView.swift */; };
+		74521B3D2C3067560047E82E /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74521B3C2C3067560047E82E /* NotificationCenter.swift */; };
 		745C3E842C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3E832C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift */; };
 		745C3E862C1927B300C0BE07 /* ItemsToModelSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3E852C1927B300C0BE07 /* ItemsToModelSplitView.swift */; };
 		745C3E882C1927B300C0BE07 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3E872C1927B300C0BE07 /* Item.swift */; };
@@ -71,6 +72,7 @@
 		74521B332C305E820047E82E /* ConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationView.swift; sourceTree = "<group>"; };
 		74521B352C305E8F0047E82E /* BoundingBoxSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBoxSetupView.swift; sourceTree = "<group>"; };
 		74521B372C305EAB0047E82E /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		74521B3C2C3067560047E82E /* NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
 		745C3E812C1927B300C0BE07 /* PizzaPhotogrammetry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PizzaPhotogrammetry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		745C3E832C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaPhotogrammetryApp.swift; sourceTree = "<group>"; };
 		745C3E852C1927B300C0BE07 /* ItemsToModelSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsToModelSplitView.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				74521B312C30576E0047E82E /* RenderQueue.swift */,
+				74521B3C2C3067560047E82E /* NotificationCenter.swift */,
 				745060C32C18EBED009BAAD7 /* Photogrammetry.swift */,
 				745C3E872C1927B300C0BE07 /* Item.swift */,
 				74467F312C1CB22D00CADD4A /* BoundingBox.swift */,
@@ -436,6 +439,7 @@
 				745C3E842C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift in Sources */,
 				74467F302C1CB1B300CADD4A /* DetailView.swift in Sources */,
 				74521B322C3057820047E82E /* RenderQueue.swift in Sources */,
+				74521B3D2C3067560047E82E /* NotificationCenter.swift in Sources */,
 				74521B342C305E820047E82E /* ConfigurationView.swift in Sources */,
 				74521B382C305EAB0047E82E /* InputView.swift in Sources */,
 				74C64C582C28F92C00A81DB5 /* PizzaScene.swift in Sources */,
