@@ -37,7 +37,7 @@ class NotificationCenter {
     
     func showFailurePush(_ url: URL) {
         let content = UNMutableNotificationContent()
-        content.title = "Complete processing"
+        content.title = "Fail processing"
         content.subtitle = url.pathTrailing
         content.sound = UNNotificationSound.defaultCritical
         
