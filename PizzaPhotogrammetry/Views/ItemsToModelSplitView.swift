@@ -11,13 +11,13 @@ import SwiftData
 import RealityKit
 import Observation
 
+@MainActor
 struct ItemsToModelSplitView: View {
     @Environment(\.modelContext) private var modelContext
     
     @Query private var items: [Item]
     @State private var selectedItem: Item?
     
-    @MainActor
     private let queue = RenderQueue()
     
     var body: some View {
