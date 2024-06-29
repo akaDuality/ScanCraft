@@ -20,6 +20,9 @@ struct ConfigurationView: View {
             
             TransformSetupView(transform: $transform)
                 .padding(.bottom, 40)
+                .onChange(of: transform) { oldValue, newValue in
+                    boundingBox.min.y = -newValue.translation.y
+                }
             
             Button(action: previewAction) {
                 Text("Preview")
