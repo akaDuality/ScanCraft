@@ -25,9 +25,10 @@ class PizzaScene: SCNScene {
         rootNode.childNode(withName: pizzaNodeName, recursively: true)
     }
     
+    var boxNode: SCNNode!
+    let box: SCNBox = SCNBox()
+    
     func makeScene(url: URL) {
-        
-        
         if let pizzaScene = try? SCNScene(url: url) {
             // TODO: How to handle it? Show error?
             let pizzaNode = pizzaScene.rootNode
@@ -38,6 +39,13 @@ class PizzaScene: SCNScene {
             
             addZeroPlanes()
         }
+        
+        boxNode = SCNNode(geometry: box)
+        pizzaNode.addChildNode(boxNode)
+        
+        let material = boxNode.geometry?.firstMaterial
+        material?.diffuse.contents = NSColor.green
+        material?.transparency = 0.6
     }
     
     func transformPizzaNode(by transform: Item.Transform) {
@@ -51,41 +59,18 @@ class PizzaScene: SCNScene {
         pizzaNode.orientation = transform.rotation.quaternion
     }
     
-    private let boundingBoxNodeName = "BoundingBox"
-    func removeBox() {
-        pizzaNode
-            .childNode(withName: boundingBoxNodeName,
-                       recursively: false)?
-            .removeFromParentNode()
-    }
-    
-    func addBox(to rootNode: SCNNode, boundingBox: BoundingBox, orientation: Coord4) {
-        // Clear
-        removeBox()
-        
-        // Create new
-        
-        let box = SCNBox(width:  boundingBox.width,
-                         height: boundingBox.height,
-                         length: boundingBox.length,
-                         chamferRadius: 0)
-        
+    func updateBox(boundingBox: BoundingBox, orientation: Coord4) {
+        box.width = boundingBox.width
+        box.height = boundingBox.height
+        box.length = boundingBox.length
+
         let verticalCenter = SCNVector3(0,
                                         boundingBox.min.y + boundingBox.height/2,
                                         0)
-        
-        let boxNode = SCNNode(geometry: box)
-        boxNode.name = boundingBoxNodeName
-        rootNode.addChildNode(boxNode)
-        
         boxNode.position = verticalCenter
         boxNode.orientation = orientation.quaternion
         
-        let material = boxNode.geometry?.firstMaterial
-        material?.diffuse.contents = NSColor.green
-        material?.transparency = 0.6
-        
-        addBoundingSpheres(to: boxNode, boundingBox: boundingBox)
+//        addBoundingSpheres(to: boxNode, boundingBox: boundingBox)
     }
     
     // MARK: Zero Plane

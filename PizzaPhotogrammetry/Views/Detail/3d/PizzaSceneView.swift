@@ -50,7 +50,7 @@ struct PizzaSceneView: View {
     }
     
     func updateBox() {
-        scene.addBox(to: scene.pizzaNode, boundingBox: boundingBox, orientation: boundingBoxOrientation)
+        scene.updateBox(boundingBox: boundingBox, orientation: boundingBoxOrientation)
     }
     
     var body: some View {
