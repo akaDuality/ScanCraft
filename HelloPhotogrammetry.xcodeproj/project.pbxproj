@@ -14,6 +14,7 @@
 		74521B362C305E8F0047E82E /* BoundingBoxSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74521B352C305E8F0047E82E /* BoundingBoxSetupView.swift */; };
 		74521B382C305EAB0047E82E /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74521B372C305EAB0047E82E /* InputView.swift */; };
 		74521B3D2C3067560047E82E /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74521B3C2C3067560047E82E /* NotificationCenter.swift */; };
+		74521B432C30BDD90047E82E /* Photogrammetry in Frameworks */ = {isa = PBXBuildFile; productRef = 74521B422C30BDD90047E82E /* Photogrammetry */; };
 		745C3E842C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3E832C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift */; };
 		745C3E862C1927B300C0BE07 /* ItemsToModelSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3E852C1927B300C0BE07 /* ItemsToModelSplitView.swift */; };
 		745C3E882C1927B300C0BE07 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3E872C1927B300C0BE07 /* Item.swift */; };
@@ -73,6 +74,7 @@
 		74521B352C305E8F0047E82E /* BoundingBoxSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBoxSetupView.swift; sourceTree = "<group>"; };
 		74521B372C305EAB0047E82E /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 		74521B3C2C3067560047E82E /* NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
+		74521B402C30BD9C0047E82E /* Photogrammetry */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Photogrammetry; sourceTree = "<group>"; };
 		745C3E812C1927B300C0BE07 /* PizzaPhotogrammetry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PizzaPhotogrammetry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		745C3E832C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaPhotogrammetryApp.swift; sourceTree = "<group>"; };
 		745C3E852C1927B300C0BE07 /* ItemsToModelSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsToModelSplitView.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74521B432C30BDD90047E82E /* Photogrammetry in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,6 +174,13 @@
 				74E0D6372C19F6CB008E1E77 /* ProcesssingView.swift */,
 			);
 			path = Progress;
+			sourceTree = "<group>";
+		};
+		74521B412C30BDD90047E82E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		745C3E822C1927B300C0BE07 /* PizzaPhotogrammetry */ = {
@@ -248,6 +258,7 @@
 		7B35772626155F6900EC1A97 = {
 			isa = PBXGroup;
 			children = (
+				74521B402C30BD9C0047E82E /* Photogrammetry */,
 				7B357763261566B200EC1A97 /* README.md */,
 				745C3E822C1927B300C0BE07 /* PizzaPhotogrammetry */,
 				745C3E962C1927B400C0BE07 /* PizzaPhotogrammetryTests */,
@@ -255,6 +266,7 @@
 				7B35773026155F6900EC1A97 /* Products */,
 				3FA622068595B839DAC9BC34 /* Configuration */,
 				13329AE4E82D15B3A35CBB4C /* LICENSE */,
+				74521B412C30BDD90047E82E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -285,6 +297,9 @@
 			dependencies = (
 			);
 			name = PizzaPhotogrammetry;
+			packageProductDependencies = (
+				74521B422C30BDD90047E82E /* Photogrammetry */,
+			);
 			productName = PizzaPhotogrammetry;
 			productReference = 745C3E812C1927B300C0BE07 /* PizzaPhotogrammetry.app */;
 			productType = "com.apple.product-type.application";
@@ -865,6 +880,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		74521B422C30BDD90047E82E /* Photogrammetry */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Photogrammetry;
+		};
 		7B35773A261560A700EC1A97 /* ArgumentParser */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7B357739261560A700EC1A97 /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
