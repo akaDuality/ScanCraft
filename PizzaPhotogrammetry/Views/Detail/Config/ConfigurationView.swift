@@ -14,6 +14,9 @@ struct ConfigurationView: View {
             BoundingBoxSetupView(
                 boundingBox: $boundingBox,
                 boundingBoxOrientation: $boundingBoxOrientation)
+            .onChange(of: boundingBox) { oldValue, newValue in
+                transform.translation.y = -newValue.min.y
+            }
             
             TransformSetupView(transform: $transform)
                 .padding(.bottom, 40)
