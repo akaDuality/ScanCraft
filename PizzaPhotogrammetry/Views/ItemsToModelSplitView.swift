@@ -17,6 +17,11 @@ struct ItemsToModelSplitView: View {
     @Query 
     private var items: [Item]
     
+    @State var progress: Processing?
+    func progress(for item: Item) -> Processing? {
+        return nil
+    }
+    
     @State private var selectedItem: Item?
     
     var body: some View {
@@ -26,6 +31,7 @@ struct ItemsToModelSplitView: View {
                     NavigationLink(value: item) {
                         NavigationCell(
                             item: item,
+                            progress: progress(for: item),
                             retryAction: { item in
                                 // TODO: Ask permission for url
                                 item.status = .waiting
@@ -44,16 +50,16 @@ struct ItemsToModelSplitView: View {
             }.navigationSplitViewColumnWidth(350)
         } detail: {
             if let selectedItem {
-                
-                    @State var item = selectedItem
-                    DetailView(item: $item,
-                               renderAction: {
-                        render(item: selectedItem)
-                    }, previewAction: {
-                        makePreview(item: selectedItem)
-                    })
+                @State var item = selectedItem
+                DetailView(item: $item,
+                           progress: progress(for: item),
+                           renderAction: {
+                    render(item: selectedItem)
+                }, previewAction: {
+                    makePreview(item: selectedItem)
+                })
             } else {
-                Text("Select an item") 
+                Text("Select an item")
             }
         }.navigationSplitViewColumnWidth(350)
         .dropDestination(for: URL.self) { items, location in
@@ -69,6 +75,7 @@ struct ItemsToModelSplitView: View {
         }
     }
     
+    @MainActor
     private func render(item: Item) {
 //        item.progress.reset()
         item.mode = .result
@@ -76,6 +83,7 @@ struct ItemsToModelSplitView: View {
         processIfSessionIsNotBusy(item)
     }
     
+    @MainActor
     private func makePreview(item: Item) {
         //        item.progress.reset()
         try? FileManager.default.removeItem(at: item.url(for: .previewAligned))
@@ -102,6 +110,7 @@ struct ItemsToModelSplitView: View {
         processNextItem() // Item can be in `.ready` mode and no need to process
     }
     
+    @MainActor
     private func failProcessingItem() {
         for item in items {
             if item.status == .processing {
@@ -116,6 +125,7 @@ struct ItemsToModelSplitView: View {
         }
     }
     
+    @MainActor
     private func processNextItem() {
         guard let item = items.first(where: { $0.status ==  .waiting } )
         else {
@@ -128,16 +138,18 @@ struct ItemsToModelSplitView: View {
         // TODO: Recursively take next task
     }
     
+    @MainActor
     private func processIfSessionIsNotBusy(_ item: Item) {
         guard !session.isProcessing else {
             print("Can't start processing because arleady processing another item")
             return
         }
         
+        progress = Processing(url: item.sourceFolder)
         item.status = .processing
         Task {
             do {
-                try await session.run(item, mode: item.mode)
+                try await session.run(item, mode: item.mode, taskProgress: progress!)
                 await MainActor.run {
                     item.status = .finished
                     

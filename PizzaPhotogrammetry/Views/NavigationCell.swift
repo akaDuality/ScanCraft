@@ -2,18 +2,18 @@ import SwiftUI
 
 struct ProgressDescription: View {
     
-    var progress: Item.Processing
+    var progress: Processing?
     
     private let timeFormatter = RelativeDateTimeFormatter()
     
     var body: some View {
         HStack {
-            if let stage = progress.stage?.description {
+            if let stage = progress?.stage?.description {
                 Text("Stage: \(stage)")
                 Spacer()
             }
             
-            if let remainingTime = progress.estimatedRemainingTime, remainingTime > 0 {
+            if let progress, let remainingTime = progress.estimatedRemainingTime, remainingTime > 0 {
                 Text(timeFormatter.localizedString(fromTimeInterval: remainingTime))
                 
                 ProgressView(value: progress.fractionCompleted)
@@ -30,7 +30,7 @@ struct ProgressDescription: View {
 
 struct NavigationCell: View {
     @State var item: Item
-    
+    var progress: Processing?
     var retryAction: (_ item: Item) -> Void
     var renderAction: (_ item: Item) -> Void
     
@@ -47,7 +47,7 @@ struct NavigationCell: View {
                 case .waiting:
                     Text("In queue")
                 case .processing:
-                    ProgressDescription(progress: item.progress)
+                    ProgressDescription(progress: progress)
                 case .failed, .finished:
                     EmptyView()
                 }
@@ -80,11 +80,11 @@ struct NavigationCell: View {
     }
 }
 
-#Preview {
-    let url = URL(fileURLWithPath: "/Users/mikhail/Library/CloudStorage/GoogleDrive-m.rubanov@dodobrands.io/Shared drives/Photo Lab/2024/06-June/2024-06-13 — TR— 3D — Pesto/20/jpeg")
-    let item = Item(sourceFolder: url)
-    return NavigationCell(item: item, retryAction: { _ in }, renderAction: { _ in })
-}
+//#Preview {
+//    let url = URL(fileURLWithPath: "/Users/mikhail/Library/CloudStorage/GoogleDrive-m.rubanov@dodobrands.io/Shared drives/Photo Lab/2024/06-June/2024-06-13 — TR— 3D — Pesto/20/jpeg")
+//    let item = Item(sourceFolder: url)
+//    return NavigationCell(item: item, retryAction: { _ in }, renderAction: { _ in })
+//}
 
 struct PathView: View {
     

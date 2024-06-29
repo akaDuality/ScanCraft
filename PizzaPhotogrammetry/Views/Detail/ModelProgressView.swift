@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ModelProgressView: View {
     var item: Item
+    var progress: Processing
     
     var retryAction: (_ item: Item) -> Void
     
@@ -17,7 +18,7 @@ struct ModelProgressView: View {
             }
             
         case .processing:
-            ProgressDescription(progress: item.progress)
+            ProgressDescription(progress: progress)
                 .frame(width: 350)
         case .waiting:
             Text("Waiting")

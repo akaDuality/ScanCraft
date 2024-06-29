@@ -31,7 +31,10 @@ class Photogrammetry {
     }
     
     enum Mode: Codable, CaseIterable {
-        case processing, preview, previewAligned, result
+        case processing,
+             preview,
+             previewAligned,
+             result
         
         static var `default`: Self = .processing
         
@@ -49,7 +52,7 @@ class Photogrammetry {
         }
     }
     
-    func run(_ task: Item, mode: Mode) async throws {
+    func run(_ task: Item, mode: Mode, taskProgress: Processing) async throws {
         isProcessing = true
         defer {
             isProcessing = false
@@ -64,7 +67,7 @@ class Photogrammetry {
         }
         
         await MainActor.run {
-            task.progress.stage = .creatingSession
+            taskProgress.stage = .creatingSession
         }
         
         // Try to create the session, or else exit.
@@ -87,7 +90,7 @@ class Photogrammetry {
         try await withCheckedThrowingContinuation { continuation in
             
             Task { @MainActor in
-                task.progress.stage = .preProcessing
+                taskProgress.stage = .preProcessing
                 
                 do {
                     for try await output in session.outputs {
@@ -106,17 +109,19 @@ class Photogrammetry {
                                 task.boundingBox = .from(box)
                                 
                                 print("Bounds result: \(result)")
+                            } else if case .pointCloud(let pointCloud) = result {
+                                print(pointCloud)
                             }
                             
                         case .requestProgress(let request, let fractionComplete):
-                            task.progress.fractionCompleted = fractionComplete
+                            taskProgress.fractionCompleted = fractionComplete
                             
                             Photogrammetry.handleRequestProgress(request: request,
                                                                  fractionComplete: fractionComplete)
                             
                         case .requestProgressInfo(_, let progress):
-                            task.progress.stage = .from(progress.processingStage)
-                            task.progress.estimatedRemainingTime = progress.estimatedRemainingTime
+                            taskProgress.stage = Processing.Stage.from(progress.processingStage)
+                            taskProgress.estimatedRemainingTime = progress.estimatedRemainingTime
                             
                             logger.warning("Progress stage \(String(describing: progress.processingStage)), time: \(String(describing: progress.estimatedRemainingTime)).")
                             
@@ -222,7 +227,7 @@ private enum IllegalOption: Swift.Error {
     case invalidFeatureSensitivity(String)
 }
 
-extension Item.ProcessingStage {
+extension Processing.Stage {
     static func from(_ processing: PhotogrammetrySession.Output.ProcessingStage?) -> Self? {
         switch processing {
         case .preProcessing: return .preProcessing

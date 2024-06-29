@@ -17,36 +17,28 @@ final class Item {
     
     let sourceFolder: URL
     
-    @Attribute(.ephemeral)
-    var progress: Processing
-    
     var boundingBox: BoundingBox = BoundingBox.zero
     var boundingBoxOrientation: Coord4 = Coord4.default
     var transform: Transform = Transform.zero
     
     var resultTransform: Transform = Transform.zero
     
+    var status: Status = Status.waiting
     var mode: Photogrammetry.Mode
-    
-    var status: Status
     
     init(
         sourceFolder: URL
     ) {
         self.id = UUID()
         self.sourceFolder = sourceFolder
-        self.status = .waiting
-        self.progress = .empty
         self.mode = .default
         
         // TODO: Add info about bounding box
         if previewExists {
-            self.status = .finished
             self.mode = .preview
         }
         
         if resultExists {
-            self.status = .finished
             self.mode = .result
         }
     }
@@ -58,65 +50,7 @@ final class Item {
     var resultExists: Bool {
         FileManager.default.fileExists(atPath: resultDestination.path)
     }
-    
-    enum Status: Codable {
-        case waiting, processing, failed, finished
-        
-        var description: String {
-            switch self {
-            case .waiting:
-                return "waiting"
-            case .processing:
-                return "processing"
-            case .failed:
-                return "failed"
-            case .finished:
-                return "finished"
-            }
-        }
-    }
-    
-    /// Like PhotogrammetrySession.Output.ProcessingStage
-    enum ProcessingStage: Codable {
-        case creatingSession
-        case preProcessing
-        case imageAlignment
-        case pointCloudGeneration
-        case meshGeneration
-        case textureMapping
-        case optimization
-        
-        var description: String {
-            switch self {
-            case .creatingSession: "creating session"
-            case .preProcessing: "pre processing"
-            case .imageAlignment: "image alignment"
-            case .pointCloudGeneration: "point cloud generation"
-            case .meshGeneration: "mesh generation"
-            case .textureMapping: "texture mapping"
-            case .optimization: "optimization"
-            }
-        }
-    }
-    
-    struct Processing: Codable {
-        var stage: ProcessingStage?
-        var fractionCompleted: Double
-        var estimatedRemainingTime: TimeInterval?
-//        var startDate: Date?
-//        var endDate: Date?
-        
-        mutating func reset() {
-            estimatedRemainingTime = 0
-            fractionCompleted = 0
-            stage = .preProcessing
-        }
-        
-        static var empty: Self {
-            Processing(stage: .preProcessing, fractionCompleted: 0, estimatedRemainingTime: 0)
-        }
-    }
-    
+
     var previewDestination: URL {
         sourceFolder
             .deletingLastPathComponent() // Add near incoming folder, not inside the folder
@@ -158,6 +92,81 @@ final class Item {
     
     var currentDestination: URL {
         url(for: mode)
+    }
+}
+
+
+enum Status: Codable {
+    case waiting, processing, failed, finished
+    
+    var description: String {
+        switch self {
+        case .waiting:
+            return "waiting"
+        case .processing:
+            return "processing"
+        case .failed:
+            return "failed"
+        case .finished:
+            return "finished"
+        }
+    }
+}
+
+@Observable
+@MainActor
+final class Processing {
+    init(url: URL) {
+        self.url = url
+        self.stage = .creatingSession
+        self.fractionCompleted = 0
+        self.estimatedRemainingTime = nil
+        
+    }
+    
+    var url: URL
+    
+    var stage: Stage?
+    var fractionCompleted: Double
+    var estimatedRemainingTime: TimeInterval?
+    //        var startDate: Date?
+    //        var endDate: Date?
+    
+
+    
+    func reset() {
+        estimatedRemainingTime = 0
+        fractionCompleted = 0
+        stage = .preProcessing
+    }
+    
+//    static var empty: Processing {
+//        Processing(stage: .preProcessing,
+//                   fractionCompleted: 0,
+//                   estimatedRemainingTime: 0)
+//    }
+    
+    /// Like PhotogrammetrySession.Output.ProcessingStage
+    enum Stage: Codable {
+        case creatingSession
+        case preProcessing
+        case imageAlignment
+        case pointCloudGeneration
+        case meshGeneration
+        case textureMapping
+        case optimization
+        
+        var description: String {
+            switch self {
+            case .creatingSession: "creating session"
+            case .preProcessing: "pre processing"
+            case .imageAlignment: "image alignment"
+            case .pointCloudGeneration: "point cloud generation"
+            case .meshGeneration: "mesh generation"
+            case .textureMapping: "texture mapping"
+            case .optimization: "optimization"
+            }
+        }
     }
 }
 

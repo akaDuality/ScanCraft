@@ -2,6 +2,7 @@ import SwiftUI
 
 struct DetailView: View {
     @Binding var item: Item
+    var progress: Processing?
     
     var renderAction: () -> Void
     var previewAction: () -> Void
@@ -18,9 +19,11 @@ struct DetailView: View {
     @State private var result: PizzaScene
     
     init(item: Binding<Item>,
+         progress: Processing?,
          renderAction: @escaping () -> Void,
          previewAction: @escaping () -> Void) {
         self._item = item
+        self.progress = progress
         
         let mode = item.wrappedValue.mode
         self.mode = mode
@@ -37,7 +40,11 @@ struct DetailView: View {
         HStack {
             switch mode {
             case .processing:
-                ModelProgressView(item: item, retryAction: { _ in })
+                if let progress {
+                    ModelProgressView(item: item, progress: progress, retryAction: { _ in })
+                } else {
+                    EmptyView()
+                }
                 
             case .preview:
                 PizzaSceneGrid(scene: preview, item: $item)
