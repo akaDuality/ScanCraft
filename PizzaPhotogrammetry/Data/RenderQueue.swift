@@ -7,10 +7,6 @@ class RenderQueue {
     
     @Published var progress: Processing?
     
-    func progress(for item: Item) -> Processing? {
-        return nil
-    }
-    
     func render(item: Item) {
         //        item.progress.reset()
         item.mode = .result

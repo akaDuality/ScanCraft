@@ -27,7 +27,7 @@ struct ItemsToModelSplitView: View {
                     NavigationLink(value: item) {
                         NavigationCell(
                             item: item,
-                            progress: queue.progress(for: item),
+                            progress: progress(for: item),
                             retryAction: { item in
                                 // TODO: Ask permission for url
                                 item.status = .waiting
@@ -47,7 +47,7 @@ struct ItemsToModelSplitView: View {
         } detail: {
             if let selectedItem = Binding($selectedItem) {
                 DetailView(item: selectedItem,
-                           progress: queue.progress(for: selectedItem.wrappedValue),
+                           progress: progress(for: selectedItem.wrappedValue),
                            renderAction: {
                     queue.render(item: selectedItem.wrappedValue)
                 }, previewAction: {
@@ -71,6 +71,15 @@ struct ItemsToModelSplitView: View {
                 queue.failProcessingItem(items: items)
                 queue.processNextItem()
             }
+        }
+    }
+    
+    @MainActor
+    func progress(for item: Item) -> Processing? {
+        if queue.progress?.url == item.sourceFolder {
+            return queue.progress
+        } else {
+            return nil
         }
     }
     
