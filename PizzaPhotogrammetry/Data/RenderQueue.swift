@@ -3,27 +3,27 @@ import Foundation
 @MainActor
 class RenderQueue {
     
-    var nextItem: (() -> Item?)!
+    var nextItem: (() -> PhotogrammetryFolder?)!
     
     @Published var progress: Processing?
     
-    func render(item: Item) {
+    func render(item: PhotogrammetryFolder) {
         //        item.progress.reset()
         item.mode = .result
-        item.status = .processing
+        item.status = .waiting
         processIfSessionIsNotBusy(item)
     }
     
-    func makePreview(item: Item) {
+    func makePreview(item: PhotogrammetryFolder) {
         //        item.progress.reset()
         try? FileManager.default.removeItem(at: item.url(for: .previewAligned))
         
         item.mode = .previewAligned
-        item.status = .processing
+        item.status = .waiting
         processIfSessionIsNotBusy(item)
     }
     
-    func failProcessingItem(items: [Item]) {
+    func failProcessingItem(items: [PhotogrammetryFolder]) {
         for item in items {
             if item.status == .processing {
                 item.status = .failed
@@ -45,12 +45,10 @@ class RenderQueue {
         }
         
         processIfSessionIsNotBusy(item)
-        
-        // TODO: Recursively take next task
     }
     
     @MainActor
-    func processIfSessionIsNotBusy(_ item: Item) {
+    func processIfSessionIsNotBusy(_ item: PhotogrammetryFolder) {
         notificationCenter.requestPermission()
         
         guard !session.isProcessing else {

@@ -14,7 +14,7 @@ import SceneKit
 struct PizzaPhotogrammetryApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            PhotogrammetryFolder.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -40,7 +40,7 @@ struct PizzaPhotogrammetryApp: App {
 extension ModelContainer {
     @MainActor
     func removeLastItem() throws {
-        let lastItem = try mainContext.fetch(FetchDescriptor<Item>()).last!
+        let lastItem = try mainContext.fetch(FetchDescriptor<PhotogrammetryFolder>()).last!
         
         mainContext.delete(lastItem)
         try mainContext.save()
@@ -48,11 +48,11 @@ extension ModelContainer {
     
     @MainActor
     func printLastItem() throws {
-        let lastItem = try mainContext.fetch(FetchDescriptor<Item>()).last!
+        let lastItem = try mainContext.fetch(FetchDescriptor<PhotogrammetryFolder>()).last!
         
-        print(lastItem.boundingBox)
-        print(lastItem.boundingBoxOrientation)
-        print(lastItem.transform)
+        print(lastItem.position.boundingBox)
+        print(lastItem.position.boundingBoxOrientation)
+        print(lastItem.position.transform)
         try mainContext.save()
     }
 }

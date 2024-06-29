@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct DetailView: View {
-    @Binding var item: Item
+    @Binding var item: PhotogrammetryFolder
     var progress: Processing?
     
     var renderAction: () -> Void
@@ -18,7 +18,7 @@ struct DetailView: View {
     @State private var previewAligned: PizzaScene
     @State private var result: PizzaScene
     
-    init(item: Binding<Item>,
+    init(item: Binding<PhotogrammetryFolder>,
          progress: Processing?,
          renderAction: @escaping () -> Void,
          previewAction: @escaping () -> Void) {
@@ -51,21 +51,27 @@ struct DetailView: View {
                     .frame(minWidth: 800, minHeight: 500)
                     .padding(.bottom, 20)
                 
-                ConfigurationView(boundingBox: $item.boundingBox,
-                                  transform: $item.transform,
-                                  boundingBoxOrientation: $item.boundingBoxOrientation,
+                ConfigurationView(position: $item.position,
                                   renderAction: renderAction,
                                   previewAction: previewAction)
                 .padding()
                 
             case .previewAligned:
-                PizzaSceneView(scene: previewAligned, cameraMode: .free, boundingBox: .constant(.zero), boundingBoxOrientation: .constant(.default), transform: $item.resultTransform)
+                PizzaSceneView(
+                    scene: previewAligned,
+                    cameraMode: .free,
+                    modelPosition: $item.position)
+                // TODO: Pass resultTranform
                 
             case .result:
                 HStack {
-                    PizzaSceneView(scene: result, cameraMode: .free, boundingBox: .constant(.zero), boundingBoxOrientation: .constant(.default), transform: $item.resultTransform)
+                    PizzaSceneView(
+                        scene: result,
+                        cameraMode: .free,
+                        modelPosition: $item.position)
+                    // TODO: Pass resultTranform
                     
-                    TransformSetupView(transform: $item.resultTransform)
+                    TransformSetupView(transform: $item.position.resultTransform)
                         .padding()
                 }
             }
@@ -89,7 +95,7 @@ struct DetailView: View {
 
 
 struct TransformSetupView: View {
-    @Binding var transform: Item.Transform
+    @Binding var transform: PhotogrammetryFolder.Transform
     var body: some View {
         VStack(alignment: .leading) {
             Text("Translation")

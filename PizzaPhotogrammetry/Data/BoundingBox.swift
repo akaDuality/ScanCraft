@@ -83,7 +83,7 @@ extension Coord4 {
 
 // MARK: - Trasform
 
-extension Item {
+extension PhotogrammetryFolder {
     struct Transform: Codable, Equatable {
         var translation: Coord
         var rotation: Coord4

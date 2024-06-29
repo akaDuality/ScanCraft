@@ -48,7 +48,7 @@ class PizzaScene: SCNScene {
         material?.transparency = 0.6
     }
     
-    func transformPizzaNode(by transform: Item.Transform) {
+    func transformPizzaNode(by transform: PhotogrammetryFolder.Transform) {
         let translation = SCNMatrix4Translate(SCNMatrix4Identity,
                                               transform.translation.x,
                                               transform.translation.y,

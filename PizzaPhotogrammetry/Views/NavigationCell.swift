@@ -29,10 +29,10 @@ struct ProgressDescription: View {
 }
 
 struct NavigationCell: View {
-    @State var item: Item
+    @State var item: PhotogrammetryFolder
     var progress: Processing?
-    var retryAction: (_ item: Item) -> Void
-    var renderAction: (_ item: Item) -> Void
+    var retryAction: (_ item: PhotogrammetryFolder) -> Void
+    var renderAction: (_ item: PhotogrammetryFolder) -> Void
     
     @Environment(\.openWindow) var openWindow
 

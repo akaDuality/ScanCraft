@@ -2,9 +2,7 @@ import SwiftUI
 
 struct ConfigurationView: View {
     
-    @Binding var boundingBox: BoundingBox
-    @Binding var transform: Item.Transform
-    @Binding var boundingBoxOrientation: Coord4
+    @Binding var position: PhotogrammetryFolder.ModelPosition
     
     var renderAction: () -> Void
     var previewAction: () -> Void
@@ -12,16 +10,16 @@ struct ConfigurationView: View {
     var body: some View {
         VStack(alignment: .leading) {
             BoundingBoxSetupView(
-                boundingBox: $boundingBox,
-                boundingBoxOrientation: $boundingBoxOrientation)
-            .onChange(of: boundingBox) { oldValue, newValue in
-                transform.translation.y = -newValue.min.y
+                boundingBox: $position.boundingBox,
+                boundingBoxOrientation: $position.boundingBoxOrientation)
+            .onChange(of: position.boundingBox) { oldValue, newValue in
+                position.transform.translation.y = -newValue.min.y
             }
             
-            TransformSetupView(transform: $transform)
+            TransformSetupView(transform: $position.transform)
                 .padding(.bottom, 40)
-                .onChange(of: transform) { oldValue, newValue in
-                    boundingBox.min.y = -newValue.translation.y
+                .onChange(of: position.transform) { oldValue, newValue in
+                    position.boundingBox.min.y = -newValue.translation.y
                 }
             
             Button(action: previewAction) {

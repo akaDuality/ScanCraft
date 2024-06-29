@@ -4,53 +4,74 @@ import SceneKit
 struct PizzaSceneGrid: View {
     
     let scene: PizzaScene
-    @Binding var item: Item
+    @Binding var item: PhotogrammetryFolder
         
     var body: some View {
         VStack {
             HStack {
-                PizzaSceneView(scene: scene, cameraMode: .x, boundingBox: $item.boundingBox, boundingBoxOrientation: $item.boundingBoxOrientation, transform: $item.transform)
-                PizzaSceneView(scene: scene, cameraMode: .y, boundingBox: $item.boundingBox, boundingBoxOrientation: $item.boundingBoxOrientation,transform: $item.transform)
+                ZStack(alignment: .topLeading) {
+                    PizzaSceneView(
+                        scene: scene,
+                        cameraMode: .x,
+                        modelPosition: $item.position)
+                    
+                    HStack {
+                        Button("Left") {
+                            
+                        }
+                        
+                        Button("Right") {
+                            
+                        }
+                    }.offset(x: 16, y: 16)
+                }
+                
+                PizzaSceneView(
+                    scene: scene,
+                    cameraMode: .y,
+                    modelPosition: $item.position)
             }
             HStack {
-                PizzaSceneView(scene: scene, cameraMode: .z, boundingBox: $item.boundingBox, boundingBoxOrientation: $item.boundingBoxOrientation,transform: $item.transform)
-                PizzaSceneView(scene: scene, cameraMode: .free, boundingBox: $item.boundingBox, boundingBoxOrientation: $item.boundingBoxOrientation,transform: $item.transform)
+                PizzaSceneView(
+                    scene: scene,
+                    cameraMode: .z,
+                    modelPosition: $item.position)
+                
+                PizzaSceneView(
+                    scene: scene,
+                    cameraMode: .free,
+                    modelPosition: $item.position)
             }
         }
     }
 }
 
-
 struct PizzaSceneView: View {
     
-    @Binding var boundingBox: BoundingBox
-    @Binding var boundingBoxOrientation: Coord4
-    @Binding var transform: Item.Transform
+    @Binding var modelPosition: PhotogrammetryFolder.ModelPosition
     
     let scene: PizzaScene
     @State private var cameraNode: SCNNode
     
     init(scene: PizzaScene,
          cameraMode: CameraMode,
-         boundingBox: Binding<BoundingBox>,
-         boundingBoxOrientation: Binding<Coord4>,
-         transform: Binding<Item.Transform>
+         modelPosition: Binding<PhotogrammetryFolder.ModelPosition>
          ) {
         self.scene = scene
-        self._boundingBox = boundingBox
-        self._transform = transform
-        self._boundingBoxOrientation = boundingBoxOrientation
+        self._modelPosition = modelPosition
         self.cameraNode = createCamera(mode: cameraMode)
         
         transformPizzaNode()
     }
     
     func transformPizzaNode() {
-        scene.transformPizzaNode(by: $transform.wrappedValue)
+        scene.transformPizzaNode(by: $modelPosition.transform.wrappedValue)
     }
     
     func updateBox() {
-        scene.updateBox(boundingBox: boundingBox, orientation: boundingBoxOrientation)
+        scene.updateBox(
+            boundingBox: modelPosition.boundingBox,
+            orientation: modelPosition.boundingBoxOrientation)
     }
     
     var body: some View {
@@ -65,11 +86,9 @@ struct PizzaSceneView: View {
                 ]
             ).onAppear {
                 updateBox()
-            }.onChange(of: boundingBox) { oldValue, newValue in
+                transformPizzaNode()
+            }.onChange(of: modelPosition) { oldValue, newValue in
                 updateBox()
-            }.onChange(of: boundingBoxOrientation) { oldValue, newValue in
-                updateBox()
-            }.onChange(of: transform) { oldValue, newValue in
                 transformPizzaNode()
             }
            

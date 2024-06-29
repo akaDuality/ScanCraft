@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct ModelProgressView: View {
-    var item: Item
+    var item: PhotogrammetryFolder
     var progress: Processing
     
-    var retryAction: (_ item: Item) -> Void
+    var retryAction: (_ item: PhotogrammetryFolder) -> Void
     
     var body: some View {
         switch item.status {

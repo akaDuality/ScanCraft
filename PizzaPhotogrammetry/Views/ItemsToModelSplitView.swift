@@ -15,8 +15,8 @@ import Observation
 struct ItemsToModelSplitView: View {
     @Environment(\.modelContext) private var modelContext
     
-    @Query private var items: [Item]
-    @State private var selectedItem: Item?
+    @Query private var items: [PhotogrammetryFolder]
+    @State private var selectedItem: PhotogrammetryFolder?
     
     private let queue = RenderQueue()
     
@@ -75,7 +75,7 @@ struct ItemsToModelSplitView: View {
     }
     
     @MainActor
-    func progress(for item: Item) -> Processing? {
+    func progress(for item: PhotogrammetryFolder) -> Processing? {
         if queue.progress?.url == item.sourceFolder {
             return queue.progress
         } else {
@@ -94,7 +94,7 @@ struct ItemsToModelSplitView: View {
     private func add(_ url: URL) {
         // TODO: Check is folder
         
-        let newItem = Item(sourceFolder: url)
+        let newItem = PhotogrammetryFolder(sourceFolder: url)
         modelContext.insert(newItem)
         
         queue.processNextItem() // Item can be in `.ready` mode and no need to process
@@ -108,7 +108,7 @@ struct ItemsToModelSplitView: View {
         }
     }
     
-    private func delete(item: Item) {
+    private func delete(item: PhotogrammetryFolder) {
         // TODO: Stop current task
         
         withAnimation {
@@ -125,5 +125,5 @@ struct ItemsToModelSplitView: View {
 //        Item(sourceFolder: URL(string: "/Users/mikhail/Library/CloudStorage/GoogleDrive-m.rubanov@dodobrands.io/Shared drives/Photo Lab /2024/06-June/2024-06-11 TR — 3D — Sujuk/35 thin/jpeg")!,
 //             destination: URL(string: "/Users/mikhail/Desktop/3D/Pizzas/Sujuk/Sujuk 35 thin.usdz")!)]
     )
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: PhotogrammetryFolder.self, inMemory: true)
 }

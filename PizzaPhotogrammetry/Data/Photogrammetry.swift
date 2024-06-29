@@ -52,7 +52,7 @@ class Photogrammetry {
         }
     }
     
-    func run(_ task: Item, mode: Mode, taskProgress: Processing) async throws {
+    func run(_ task: PhotogrammetryFolder, mode: Mode, taskProgress: Processing) async throws {
         isProcessing = true
         defer {
             isProcessing = false
@@ -106,7 +106,7 @@ class Photogrammetry {
                                 Photogrammetry.handleRequestComplete(request: request, result: result)
                                 continuation.resume(returning: ())
                             } else if case .bounds = request, case .bounds(let box) = result {
-                                task.boundingBox = .from(box)
+                                task.position.boundingBox = .from(box)
                                 
                                 print("Bounds result: \(result)")
                             } else if case .pointCloud(let pointCloud) = result {
@@ -162,19 +162,10 @@ class Photogrammetry {
                 destinationURL.stopAccessingSecurityScopedResource()
             }
             do {
-                var geometry: PhotogrammetrySession.Request.Geometry? = nil
-                if task.boundingBox != .zero {
-                    geometry = PhotogrammetrySession.Request.Geometry(
-                        orientedBounds: OrientedBoundingBox(orientation: task.boundingBoxOrientation.simd4,
-                                                            boundingBox: task.boundingBox.realityKit),
-                        transform: task.transform.realityKit
-                    )
-                }
-                
                 let modelFileRequest = PhotogrammetrySession.Request.modelFile(
                     url: destinationURL,
                     detail: mode == .result ? .custom : .preview,
-                    geometry: geometry)
+                    geometry: task.position.geometry)
                     
                 
                 logger.log("Using request: \(String(describing: modelFileRequest))")
@@ -244,7 +235,7 @@ extension Processing.Stage {
     }
 }
 
-extension Item.Transform {
+extension PhotogrammetryFolder.Transform {
     var realityKit: RealityKit.Transform {
         .init(scale: scale.simd3,
               rotation: rotation.simd4,

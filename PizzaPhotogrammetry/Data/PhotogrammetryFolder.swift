@@ -11,20 +11,27 @@ import SwiftData
 import RealityKit
 
 @Model
-final class Item {
+final class PhotogrammetryFolder {
     
     let id: UUID
-    
     let sourceFolder: URL
-    
-    var boundingBox: BoundingBox = BoundingBox.zero
-    var boundingBoxOrientation: Coord4 = Coord4.default
-    var transform: Transform = Transform.zero
-    
-    var resultTransform: Transform = Transform.zero
-    
     var status: Status = Status.waiting
     var mode: Photogrammetry.Mode
+    
+    // TODO: Extract to config type
+    
+    struct ModelPosition: Codable, Equatable {
+        var boundingBox: BoundingBox = BoundingBox.zero
+        var boundingBoxOrientation: Coord4 = Coord4.default
+        var transform: Transform = Transform.zero
+        var resultTransform: Transform = Transform.zero
+        
+        static var zero: Self {
+            Self(boundingBox: .zero, boundingBoxOrientation: .default, transform: .zero, resultTransform: .zero)
+        }
+    }
+    
+    var position: ModelPosition = ModelPosition.zero
     
     init(
         sourceFolder: URL
@@ -170,3 +177,18 @@ final class Processing {
     }
 }
 
+import RealityKit
+extension PhotogrammetryFolder.ModelPosition {
+    var geometry: PhotogrammetrySession.Request.Geometry? {
+        guard boundingBox != .zero else {
+            return nil
+        }
+        
+        return PhotogrammetrySession.Request.Geometry(
+            orientedBounds: OrientedBoundingBox(
+                orientation: boundingBoxOrientation.simd4,
+                boundingBox: boundingBox.realityKit),
+            transform: transform.realityKit
+        )
+    }
+}
