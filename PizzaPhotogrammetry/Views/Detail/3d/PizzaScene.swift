@@ -178,7 +178,7 @@ func createCamera(mode: CameraMode) -> SCNNode {
     case .x:
         cameraNode.worldPosition = SCNVector3(x: cameraOffset, y: 0, z: 0)
     case .y:
-        cameraNode.worldPosition = SCNVector3(x: 0, y: cameraOffset, z: 0)
+        cameraNode.worldPosition = SCNVector3(x: 0, y: -cameraOffset, z: 0)
     case .z:
         cameraNode.worldPosition = SCNVector3(x: 0, y: 0, z: cameraOffset)
     case .free:
