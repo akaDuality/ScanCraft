@@ -47,7 +47,8 @@ struct ItemsToModelSplitView: View {
         } detail: {
             if let selectedItem = Binding($selectedItem) {
                 DetailView(item: selectedItem,
-                           progress: progress(for: selectedItem.wrappedValue),
+                           progress: progress(for: selectedItem.wrappedValue), 
+                           scenes: pizzaScenesCache.scenes(for: selectedItem.wrappedValue),
                            renderAction: {
                     queue.render(item: selectedItem.wrappedValue)
                 }, previewAction: {
@@ -73,6 +74,8 @@ struct ItemsToModelSplitView: View {
             }
         }
     }
+    
+    private let pizzaScenesCache = PizzaScenesCache()
     
     @MainActor
     func progress(for item: PhotogrammetryFolder) -> Processing? {
