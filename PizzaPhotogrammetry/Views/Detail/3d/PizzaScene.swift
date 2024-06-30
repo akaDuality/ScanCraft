@@ -45,7 +45,7 @@ class PizzaScene: SCNScene {
         
         let material = boxNode.geometry?.firstMaterial
         material?.diffuse.contents = NSColor.green
-        material?.transparency = 0.6
+        material?.transparency = 0.5
     }
     
     func transformPizzaNode(by transform: PhotogrammetryFolder.Transform) {
@@ -79,23 +79,25 @@ class PizzaScene: SCNScene {
         let node = SCNNode()
         node.name = zeroPlaneName
         
-        let plane1 = makeZeroPlane()
+        let width: CGFloat = 0.25
+        let height: CGFloat = 0.1
+        let plane1 = makeZeroPlane(width: width, height: width)
         plane1.eulerAngles.x = -.pi / 2
         node.addChildNode(plane1)
         
-        let plane2 = makeZeroPlane()
+        let plane2 = makeZeroPlane(width: width, height: height)
         plane2.eulerAngles.y = -.pi / 2
         node.addChildNode(plane2)
         
-        let plane3 = makeZeroPlane()
+        let plane3 = makeZeroPlane(width: height, height: width)
         plane3.eulerAngles.z = -.pi / 2
         node.addChildNode(plane3)
         
         rootNode.addChildNode(node)
     }
     
-    private func makeZeroPlane() -> SCNNode {
-        let box = SCNPlane(width: 0.25, height: 0.25)
+    private func makeZeroPlane(width: CGFloat, height: CGFloat) -> SCNNode {
+        let box = SCNPlane(width: width, height: height)
         let planeNode = SCNNode(geometry: box)
         
         let material = planeNode.geometry!.firstMaterial!
