@@ -77,7 +77,7 @@ def main(usdzFileName = sys.argv[-1], usdzFileDir = os.getcwd()):
     # (匯出GLB) https://docs.blender.org/api/current/bpy.ops.export_scene.html?highlight=glb#bpy.ops.export_scene.gltf
     fileName, fileType = usdzFileName.split('.')
     oFile = "%s.glb" % os.path.join(usdzFileDir, fileName)
-    bpy.ops.export_scene.gltf(filepath=oFile)
+    bpy.ops.export_scene.gltf(filepath=oFile, export_image_format="JPEG", export_jpeg_quality=51)
     print("\t\tFY-輸出: ",oFile,os.path.getsize(oFile),"Bytes")
     return oFile
 
