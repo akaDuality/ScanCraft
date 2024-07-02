@@ -47,7 +47,7 @@ struct ItemsToModelSplitView: View {
         } detail: {
             if let selectedItem = Binding($selectedItem) {
                 DetailView(item: selectedItem,
-                           progress: progress(for: selectedItem.wrappedValue), 
+                           progress: progress(for: self.selectedItem!),
                            scenes: pizzaScenesCache.scenes(for: selectedItem.wrappedValue),
                            renderAction: {
                     queue.render(item: selectedItem.wrappedValue)

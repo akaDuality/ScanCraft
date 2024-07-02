@@ -13,7 +13,11 @@ struct NavigationCell: View {
         HStack(alignment: .top, spacing: 8) {
             VStack(alignment: .leading) {
                 
-                PathView(url: item.sourceFolder)
+                VStack(alignment: .leading) {
+                    PathView(url: item.sourceFolder)
+                    Text("Mode: \(item.mode.name)")
+                        .font(.footnote)
+                }
                 
                 switch item.status {
                 case .waiting:
