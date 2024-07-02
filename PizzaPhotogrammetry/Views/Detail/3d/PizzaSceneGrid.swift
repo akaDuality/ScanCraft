@@ -28,33 +28,16 @@ struct PizzaSceneGrid: View {
                     
                     HStack(spacing: 24) {
                         HStack {
-                            Text("Model")
-                            
                             Button(action: {
                                 item.position.transform.rotation.x += step
+                                item.position.boundingBoxOrientation.x -= step
                             }, label: {
                                 Image(systemName: "arrow.counterclockwise")
                             }).buttonStyle(.borderedProminent)
                             
                             Button(action: {
                                 item.position.transform.rotation.x -= step
-                            }, label: {
-                                Image(systemName: "arrow.clockwise")
-                            }).buttonStyle(.borderedProminent)
-                            
-                        }
-                        
-                        HStack {
-                            Text("Box")
-                            
-                            Button(action: {
                                 item.position.boundingBoxOrientation.x += step
-                            }, label: {
-                                Image(systemName: "arrow.counterclockwise")
-                            }).buttonStyle(.borderedProminent)
-                            
-                            Button(action: {
-                                item.position.boundingBoxOrientation.x -= step
                             }, label: {
                                 Image(systemName: "arrow.clockwise")
                             }).buttonStyle(.borderedProminent)
@@ -101,36 +84,19 @@ struct PizzaSceneGrid: View {
                     
                     HStack(spacing: 24) {
                         HStack {
-                            Text("Model")
-                            
                             Button(action: {
                                 item.position.transform.rotation.z += step
+                                item.position.boundingBoxOrientation.z -= step
                             }, label: {
                                 Image(systemName: "arrow.counterclockwise")
                             }).buttonStyle(.borderedProminent)
                             
                             Button(action: {
                                 item.position.transform.rotation.z -= step
-                            }, label: {
-                                Image(systemName: "arrow.clockwise")
-                            }).buttonStyle(.borderedProminent)
-                        }
-                        
-                        HStack {
-                            Text("Box")
-                            
-                            Button(action: {
                                 item.position.boundingBoxOrientation.z += step
                             }, label: {
-                                Image(systemName: "arrow.counterclockwise")
-                            }).buttonStyle(.borderedProminent)
-                            
-                            Button(action: {
-                                item.position.boundingBoxOrientation.z -= step
-                            }, label: {
                                 Image(systemName: "arrow.clockwise")
                             }).buttonStyle(.borderedProminent)
-                            
                         }
                     }
                     .padding(12)
