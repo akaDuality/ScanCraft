@@ -107,6 +107,7 @@ class Photogrammetry {
                                 continuation.resume(returning: ())
                             } else if case .bounds = request, case .bounds(let box) = result {
                                 task.position.boundingBox = .from(box)
+                                task.position.transform.translation.y = task.position.boundingBox.min.y
                                 
                                 print("Bounds result: \(result)")
                             } else if case .pointCloud(let pointCloud) = result {
