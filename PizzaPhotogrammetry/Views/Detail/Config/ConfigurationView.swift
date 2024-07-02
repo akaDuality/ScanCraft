@@ -16,7 +16,9 @@ struct ConfigurationView: View {
                 position.transform.translation.y = -newValue.min.y
             }
             
-            TransformSetupView(transform: $position.transform)
+            TransformSetupView(transform: $position.transform, exportAction: {
+                // TODO: Add export action
+            })
                 .padding(.bottom, 40)
                 .onChange(of: position.transform) { oldValue, newValue in
                     position.boundingBox.min.y = -newValue.translation.y

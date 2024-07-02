@@ -53,19 +53,37 @@ struct DetailView: View {
                 PizzaSceneView(
                     scene: scenes.previewAligned,
                     cameraMode: .free,
-                    modelPosition: $item.position)
-                // TODO: Pass resultTranform
+                    modelPosition: $item.position, 
+                    transform: $item.position.resultTransform)
                 
             case .result:
                 HStack {
                     PizzaSceneView(
                         scene: scenes.result,
                         cameraMode: .free,
-                        modelPosition: $item.position)
-                    // TODO: Pass resultTranform
+                        modelPosition: $item.position,
+                        transform: $item.position.resultTransform)
                     
-                    TransformSetupView(transform: $item.position.resultTransform)
-                        .padding()
+                    TransformSetupView(
+                        transform: $item.position.resultTransform,
+                        exportAction: {
+                            let url = self.item.sourceFolder
+                                .deletingLastPathComponent()
+                                .appending(path: "Export.usdz")
+                            
+                            // TODO: Potential bug: https://forums.developer.apple.com/forums/thread/704590
+                            
+                            let scene = scenes.result
+                            scene.hideBox()
+                            scene.removeZeroPlanes()
+                            let isSuccess = scene.write(to: url, delegate: nil)
+                            
+                            scene.addBox()
+                            scene.addZeroPlanes()
+                            
+                            print("Did finish export. Success? \(isSuccess)")
+                        }
+                    ).padding()
                 }
             }
             

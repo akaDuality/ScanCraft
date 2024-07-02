@@ -24,7 +24,9 @@ struct PizzaSceneGrid: View {
                     PizzaSceneView(
                         scene: scene,
                         cameraMode: .x,
-                        modelPosition: $item.position)
+                        modelPosition: $item.position,
+                        transform: $item.position.transform
+                    )
                     
                     HStack(spacing: 24) {
                         HStack {
@@ -54,7 +56,9 @@ struct PizzaSceneGrid: View {
                     PizzaSceneView(
                         scene: scene,
                         cameraMode: .y,
-                        modelPosition: $item.position)
+                        modelPosition: $item.position,
+                        transform: $item.position.transform
+                    )
                     
                     HStack {
                         Text("Bottom")
@@ -80,7 +84,9 @@ struct PizzaSceneGrid: View {
                     PizzaSceneView(
                         scene: scene,
                         cameraMode: .z,
-                        modelPosition: $item.position)
+                        modelPosition: $item.position,
+                        transform: $item.position.transform
+                    )
                     
                     HStack(spacing: 24) {
                         HStack {
@@ -109,7 +115,9 @@ struct PizzaSceneGrid: View {
                     PizzaSceneView(
                         scene: scene,
                         cameraMode: .free,
-                        modelPosition: $item.position)
+                        modelPosition: $item.position,
+                        transform: $item.position.transform
+                    )
                     
                     HStack {
                         Button(action: {

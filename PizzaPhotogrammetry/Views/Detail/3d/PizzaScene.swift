@@ -41,7 +41,7 @@ class PizzaScene: SCNScene {
         }
         
         boxNode = SCNNode(geometry: box)
-        pizzaNode.addChildNode(boxNode)
+        addBox()
         
         let material = boxNode.geometry?.firstMaterial
         material?.diffuse.contents = NSColor.green
@@ -106,6 +106,14 @@ class PizzaScene: SCNScene {
         material.isDoubleSided = true
         
         return planeNode
+    }
+    
+    func hideBox() {
+        boxNode.removeFromParentNode()
+    }
+    
+    func addBox() {
+        pizzaNode.addChildNode(boxNode)
     }
     
     let zeroPlaneName = "ZeroPlane"
