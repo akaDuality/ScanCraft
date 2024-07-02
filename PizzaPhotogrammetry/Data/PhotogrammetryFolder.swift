@@ -42,10 +42,12 @@ final class PhotogrammetryFolder {
         
         // TODO: Add info about bounding box
         if previewExists {
+            self.status = .finished
             self.mode = .preview
         }
         
         if resultExists {
+            self.status = .finished
             self.mode = .result
         }
     }
