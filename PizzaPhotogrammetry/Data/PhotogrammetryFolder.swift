@@ -103,7 +103,8 @@ final class PhotogrammetryFolder {
         url(for: mode)
     }
     
-    var possibleModes: [Photogrammetry.Mode] {
+    @MainActor 
+    func possibleModes(processing: Processing?) -> [Photogrammetry.Mode] {
         var resultTransform = [Photogrammetry.Mode]()
         
         if previewExists {
@@ -118,7 +119,8 @@ final class PhotogrammetryFolder {
             resultTransform.append(.result)
         }
         
-        if resultTransform.isEmpty {
+        // Add name of last 
+        if let processing, processing.url == sourceFolder {
             resultTransform.append(.processing)
         }
         
@@ -128,96 +130,5 @@ final class PhotogrammetryFolder {
     func fileExists(for mode: Photogrammetry.Mode) -> Bool {
         let url = url(for: mode)
         return FileManager.default.fileExists(atPath: url.path)
-    }
-}
-
-
-enum Status: Codable {
-    case waiting, processing, failed, finished
-    
-    var description: String {
-        switch self {
-        case .waiting:
-            return "waiting"
-        case .processing:
-            return "processing"
-        case .failed:
-            return "failed"
-        case .finished:
-            return "finished"
-        }
-    }
-}
-
-@Observable
-@MainActor
-final class Processing {
-    init(url: URL) {
-        self.url = url
-        self.stage = .creatingSession
-        self.fractionCompleted = 0
-        self.estimatedRemainingTime = nil
-        
-    }
-    
-    var url: URL
-    
-    var stage: Stage?
-    var fractionCompleted: Double
-    var estimatedRemainingTime: TimeInterval?
-    //        var startDate: Date?
-    //        var endDate: Date?
-    
-
-    
-    func reset() {
-        estimatedRemainingTime = 0
-        fractionCompleted = 0
-        stage = .preProcessing
-    }
-    
-//    static var empty: Processing {
-//        Processing(stage: .preProcessing,
-//                   fractionCompleted: 0,
-//                   estimatedRemainingTime: 0)
-//    }
-    
-    /// Like PhotogrammetrySession.Output.ProcessingStage
-    enum Stage: Codable {
-        case creatingSession
-        case preProcessing
-        case imageAlignment
-        case pointCloudGeneration
-        case meshGeneration
-        case textureMapping
-        case optimization
-        
-        var description: String {
-            switch self {
-            case .creatingSession: "creating session"
-            case .preProcessing: "pre processing"
-            case .imageAlignment: "image alignment"
-            case .pointCloudGeneration: "point cloud generation"
-            case .meshGeneration: "mesh generation"
-            case .textureMapping: "texture mapping"
-            case .optimization: "optimization"
-            }
-        }
-    }
-}
-
-import RealityKit
-extension PhotogrammetryFolder.ModelPosition {
-    var geometry: PhotogrammetrySession.Request.Geometry? {
-        guard boundingBox != .zero else {
-            return nil
-        }
-        
-        return PhotogrammetrySession.Request.Geometry(
-            orientedBounds: OrientedBoundingBox(
-                orientation: boundingBoxOrientation.simd4,
-                boundingBox: boundingBox.realityKit),
-            transform: transform.realityKit
-        )
     }
 }

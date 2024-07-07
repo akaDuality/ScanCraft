@@ -83,7 +83,7 @@ struct DetailView: View {
         }.toolbar {
             ToolbarItem(placement: .principal) {
                 Picker("Preview mode", selection: $mode) {
-                    ForEach(item.possibleModes, id: \.self) { mode in
+                    ForEach(item.possibleModes(processing: progress), id: \.self) { mode in
                         HStack(spacing: 8) {
                             Text(mode.name)
                             if item.mode == mode, let percent = progress?.fractionCompleted {

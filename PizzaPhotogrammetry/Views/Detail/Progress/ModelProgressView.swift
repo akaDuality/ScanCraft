@@ -8,18 +8,17 @@ struct ModelProgressView: View {
     
     var body: some View {
         switch item.status {
-        case .finished:
-            Text("Here is should be 3d view :D")
-            
         case .failed:
             Text("Failed")
             Button("Retry") {
                 retryAction(item)
             }
             
-        case .processing:
-            ProgressDescription(progress: progress)
-                .frame(width: 350)
+        case .processing, .finished:
+            MetricsDescriptionView(progress: progress, retryAction: {
+               retryAction(item) // TODO: no retain cycle?
+            })
+            .frame(width: 350)
         case .waiting:
             Text("Waiting")
         }

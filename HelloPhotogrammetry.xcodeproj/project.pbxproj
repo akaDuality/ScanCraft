@@ -30,6 +30,8 @@
 		7463576F2C1C9DEF005E54E1 /* Model.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7463576E2C1C9DEF005E54E1 /* Model.usdz */; };
 		746FCE5C2C22225900F5E4BC /* PizzaSceneGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746FCE5B2C22225900F5E4BC /* PizzaSceneGrid.swift */; };
 		747B26502C3ABFCF007A8E0A /* TerminalCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747B264F2C3ABFCF007A8E0A /* TerminalCommand.swift */; };
+		747B26522C3ADD30007A8E0A /* Processing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747B26512C3ADD30007A8E0A /* Processing.swift */; };
+		747B26542C3ADDAF007A8E0A /* MetricsDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747B26532C3ADDAF007A8E0A /* MetricsDescriptionView.swift */; };
 		74C64C582C28F92C00A81DB5 /* PizzaScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C64C572C28F92C00A81DB5 /* PizzaScene.swift */; };
 		74E0D6332C19F676008E1E77 /* ModelProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E0D6322C19F676008E1E77 /* ModelProgressView.swift */; };
 		74E0D6352C19F681008E1E77 /* NavigationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E0D6342C19F681008E1E77 /* NavigationCell.swift */; };
@@ -97,6 +99,8 @@
 		7463576E2C1C9DEF005E54E1 /* Model.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Model.usdz; sourceTree = "<group>"; };
 		746FCE5B2C22225900F5E4BC /* PizzaSceneGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaSceneGrid.swift; sourceTree = "<group>"; };
 		747B264F2C3ABFCF007A8E0A /* TerminalCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalCommand.swift; sourceTree = "<group>"; };
+		747B26512C3ADD30007A8E0A /* Processing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Processing.swift; sourceTree = "<group>"; };
+		747B26532C3ADDAF007A8E0A /* MetricsDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsDescriptionView.swift; sourceTree = "<group>"; };
 		74C64C572C28F92C00A81DB5 /* PizzaScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaScene.swift; sourceTree = "<group>"; };
 		74E0D6322C19F676008E1E77 /* ModelProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelProgressView.swift; sourceTree = "<group>"; };
 		74E0D6342C19F681008E1E77 /* NavigationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationCell.swift; sourceTree = "<group>"; };
@@ -181,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				74521B492C30E1B80047E82E /* ProgressDescription.swift */,
+				747B26532C3ADDAF007A8E0A /* MetricsDescriptionView.swift */,
 				74E0D6322C19F676008E1E77 /* ModelProgressView.swift */,
 				74E0D6372C19F6CB008E1E77 /* ProcesssingView.swift */,
 			);
@@ -241,6 +246,7 @@
 				745060C32C18EBED009BAAD7 /* Photogrammetry.swift */,
 				747B264F2C3ABFCF007A8E0A /* TerminalCommand.swift */,
 				745C3E872C1927B300C0BE07 /* PhotogrammetryFolder.swift */,
+				747B26512C3ADD30007A8E0A /* Processing.swift */,
 				74467F312C1CB22D00CADD4A /* BoundingBox.swift */,
 			);
 			path = Data;
@@ -456,12 +462,14 @@
 			files = (
 				74E0D6382C19F6CB008E1E77 /* ProcesssingView.swift in Sources */,
 				747B26502C3ABFCF007A8E0A /* TerminalCommand.swift in Sources */,
+				747B26522C3ADD30007A8E0A /* Processing.swift in Sources */,
 				745C3EAE2C1927BD00C0BE07 /* Photogrammetry.swift in Sources */,
 				74521B362C305E8F0047E82E /* BoundingBoxSetupView.swift in Sources */,
 				745C3E862C1927B300C0BE07 /* ItemsToModelSplitView.swift in Sources */,
 				74467F322C1CB22D00CADD4A /* BoundingBox.swift in Sources */,
 				745C3E882C1927B300C0BE07 /* PhotogrammetryFolder.swift in Sources */,
 				746FCE5C2C22225900F5E4BC /* PizzaSceneGrid.swift in Sources */,
+				747B26542C3ADDAF007A8E0A /* MetricsDescriptionView.swift in Sources */,
 				74E0D6332C19F676008E1E77 /* ModelProgressView.swift in Sources */,
 				745C3E842C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift in Sources */,
 				74467F302C1CB1B300CADD4A /* DetailView.swift in Sources */,

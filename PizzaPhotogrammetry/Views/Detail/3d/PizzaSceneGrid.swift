@@ -1,7 +1,7 @@
 import SwiftUI
 
 extension CGFloat {
-    var step: Self {
+    static var step: Self {
         if NSEvent.modifierFlags.contains(.command) {
             return 0.001
         } else {
