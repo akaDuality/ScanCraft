@@ -102,6 +102,33 @@ final class PhotogrammetryFolder {
     var currentDestination: URL {
         url(for: mode)
     }
+    
+    var possibleModes: [Photogrammetry.Mode] {
+        var resultTransform = [Photogrammetry.Mode]()
+        
+        if previewExists {
+            resultTransform.append(.preview)
+        }
+        
+        if fileExists(for: .previewAligned) {
+            resultTransform.append(.previewAligned)
+        }
+        
+        if resultExists {
+            resultTransform.append(.result)
+        }
+        
+        if resultTransform.isEmpty {
+            resultTransform.append(.processing)
+        }
+        
+        return resultTransform
+    }
+    
+    func fileExists(for mode: Photogrammetry.Mode) -> Bool {
+        let url = url(for: mode)
+        return FileManager.default.fileExists(atPath: url.path)
+    }
 }
 
 

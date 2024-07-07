@@ -71,17 +71,10 @@ struct DetailView: View {
                                 .deletingLastPathComponent()
                                 .appending(path: "Export.usdz")
                             
-                            // TODO: Potential bug: https://forums.developer.apple.com/forums/thread/704590
+                            scenes.result.export(to: url)
                             
-                            let scene = scenes.result
-                            scene.hideBox()
-                            scene.removeZeroPlanes()
-                            let isSuccess = scene.write(to: url, delegate: nil)
-                            
-                            scene.addBox()
-                            scene.addZeroPlanes()
-                            
-                            print("Did finish export. Success? \(isSuccess)")
+                        }, convertToGlbAction: {
+                            BlenderToGlbConverter().convertToGlb(url: item.sourceFolder.deletingLastPathComponent())
                         }
                     ).padding()
                 }
@@ -90,8 +83,16 @@ struct DetailView: View {
         }.toolbar {
             ToolbarItem(placement: .principal) {
                 Picker("Preview mode", selection: $mode) {
-                    ForEach(Photogrammetry.Mode.allCases, id: \.self) { mode in
-                        Text(mode.name)
+                    ForEach(item.possibleModes, id: \.self) { mode in
+                        HStack(spacing: 8) {
+                            Text(mode.name)
+                            if item.mode == mode, let percent = progress?.fractionCompleted {
+                                ProgressView(value: percent)
+                                    .progressViewStyle(.circular)
+                                    .controlSize(.small)
+                            }
+                        }
+                        
                     }
                 }
                 .pickerStyle(.segmented)

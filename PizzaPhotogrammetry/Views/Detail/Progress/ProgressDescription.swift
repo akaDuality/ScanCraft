@@ -9,7 +9,7 @@ struct ProgressDescription: View {
     var body: some View {
         HStack {
             if let stage = progress?.stage?.description {
-                Text("Stage: \(stage)")
+                Text(stage)
                 Spacer()
             }
             

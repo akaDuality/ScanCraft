@@ -185,3 +185,18 @@ func createCamera(mode: CameraMode) -> SCNNode {
     
     return cameraNode
 }
+
+extension PizzaScene {
+    func export(to url: URL) {
+        // TODO: Potential bug: https://forums.developer.apple.com/forums/thread/704590
+        
+        hideBox()
+        removeZeroPlanes()
+        let isSuccess = write(to: url, delegate: nil)
+        
+        addBox()
+        addZeroPlanes()
+        
+        print("Did finish export. Success? \(isSuccess)")
+    }
+}

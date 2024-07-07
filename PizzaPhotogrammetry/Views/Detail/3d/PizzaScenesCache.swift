@@ -27,3 +27,11 @@ struct PizzaScenes {
         self.result = PizzaScene(url: folder.resultDestination)
     }
 }
+
+
+extension PizzaScenesCache: RenderQueueDelegate {
+    func didFinishItem(item: PhotogrammetryFolder, mode: Photogrammetry.Mode) {
+        scenes[item.sourceFolder] = nil
+    }
+}
+

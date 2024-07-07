@@ -1,13 +1,19 @@
 import Foundation
 
+protocol RenderQueueDelegate: AnyObject {
+    func didFinishItem(item: PhotogrammetryFolder, mode: Photogrammetry.Mode)
+}
+
 @MainActor
 class RenderQueue {
     
     var nextItem: (() -> PhotogrammetryFolder?)!
+    weak var delegate: RenderQueueDelegate?
     
     @Published var progress: Processing?
     
     func render(item: PhotogrammetryFolder) {
+        // TODO: Check that item not exists
         //        item.progress.reset()
         item.mode = .result
         item.status = .waiting
@@ -64,7 +70,10 @@ class RenderQueue {
                 await MainActor.run {
                     item.status = .finished
                     notificationCenter.showCompletePush(item.sourceFolder)
+                    delegate?.didFinishItem(item: item, mode: item.mode)
                 }
+                
+                // TODO: Invalidate scene
             } catch {
                 await MainActor.run {
                     item.status = .failed

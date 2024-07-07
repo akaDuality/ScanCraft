@@ -53,17 +53,19 @@ struct ItemsToModelSplitView: View {
                     queue.render(item: selectedItem.wrappedValue)
                 }, previewAction: {
                     queue.makePreview(item: selectedItem.wrappedValue)
-                })
+                })//.navigationTitle(Text(selectedItem.sourceFolder.pathTrailing))
             } else {
                 Text("Select an item")
             }
-        }.navigationSplitViewColumnWidth(350)
+        }.navigationSplitViewColumnWidth(400)
         .dropDestination(for: URL.self) { items, location in
             withAnimation {
                 add(items)
             }
             return true
         }.onAppear {
+            queue.delegate = pizzaScenesCache // TODO: this scene
+            
             queue.nextItem = {
                 self.items.first(where: { $0.status ==  .waiting } )
             }

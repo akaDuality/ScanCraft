@@ -12,44 +12,35 @@ struct NavigationCell: View {
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
             VStack(alignment: .leading) {
-                
-                VStack(alignment: .leading) {
+                HStack() {
                     PathView(url: item.sourceFolder)
-                    Text("Mode: \(item.mode.name)")
-                        .font(.footnote)
+                    Spacer()
+                    
+                    // Show that we need action
+                    if item.mode != .result // non final
+                        && progress?.url != item.sourceFolder // not current
+                    {
+                        Text(item.mode.name)
+                    }
                 }
                 
                 switch item.status {
                 case .waiting:
                     Text("In queue")
+                        .font(.footnote)
+                        .foregroundStyle(.yellow)
                 case .processing:
                     ProgressDescription(progress: progress)
+                        .font(.footnote)
+                        .foregroundStyle(.green)
                 case .failed, .finished:
                     EmptyView()
                 }
             }
             
-            switch item.status {
-            case .waiting, .processing:
-                EmptyView()
-            case .failed:
-                HStack {
-                    Button("Retry", systemImage: "exclamationmark.triangle") {
-                        retryAction(item)
-                    }
-                }
-            case .finished:
-                Spacer()
-                
-                HStack {
-                    VStack(alignment: .trailing) {
-                        // TODO: Make it available to rerender (and ask to rewrite file)
-                        if item.mode == .preview {
-                            Button("Render") {
-                                renderAction(item)
-                            }
-                        }
-                    }
+            if item.status == .failed {
+                Button("Retry", systemImage: "exclamationmark.triangle") {
+                    retryAction(item)
                 }
             }
         }
