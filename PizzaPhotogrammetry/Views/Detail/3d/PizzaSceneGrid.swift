@@ -1,18 +1,21 @@
 import SwiftUI
 
-struct PizzaSceneGrid: View {
-    
-    let scene: PizzaScene
-    @Binding var item: PhotogrammetryFolder
-        
-    private let offset: CGFloat = 2
-    private var step: CGFloat {
+extension CGFloat {
+    var step: Self {
         if NSEvent.modifierFlags.contains(.command) {
             return 0.001
         } else {
             return 0.005
         }
     }
+}
+
+struct PizzaSceneGrid: View {
+    
+    let scene: PizzaScene
+    @Binding var item: PhotogrammetryFolder
+        
+    private let offset: CGFloat = 2
     
     var renderAction: () -> Void
     var previewAction: () -> Void
@@ -31,15 +34,15 @@ struct PizzaSceneGrid: View {
                     HStack(spacing: 24) {
                         HStack {
                             Button(action: {
-                                item.position.transform.rotation.x += step
-                                item.position.boundingBoxOrientation.x -= step
+                                item.position.transform.rotation.x += .step
+                                item.position.boundingBoxOrientation.x -= .step
                             }, label: {
                                 Image(systemName: "arrow.counterclockwise")
                             }).buttonStyle(.borderedProminent)
                             
                             Button(action: {
-                                item.position.transform.rotation.x -= step
-                                item.position.boundingBoxOrientation.x += step
+                                item.position.transform.rotation.x -= .step
+                                item.position.boundingBoxOrientation.x += .step
                             }, label: {
                                 Image(systemName: "arrow.clockwise")
                             }).buttonStyle(.borderedProminent)
@@ -64,12 +67,12 @@ struct PizzaSceneGrid: View {
                         Text("Bottom")
                         
                         Button("Upper") {
-                            item.position.boundingBox.min.y -= step
+                            item.position.boundingBox.min.y -= .step
                             item.position.transform.translation.y = -item.position.boundingBox.min.y
                         }.buttonStyle(.borderedProminent)
                         
                         Button("Lower") {
-                            item.position.boundingBox.min.y += step
+                            item.position.boundingBox.min.y += .step
                             item.position.transform.translation.y = -item.position.boundingBox.min.y
                         }.buttonStyle(.borderedProminent)
                     }
@@ -91,15 +94,15 @@ struct PizzaSceneGrid: View {
                     HStack(spacing: 24) {
                         HStack {
                             Button(action: {
-                                item.position.transform.rotation.z += step
-                                item.position.boundingBoxOrientation.z -= step
+                                item.position.transform.rotation.z += .step
+                                item.position.boundingBoxOrientation.z -= .step
                             }, label: {
                                 Image(systemName: "arrow.counterclockwise")
                             }).buttonStyle(.borderedProminent)
                             
                             Button(action: {
-                                item.position.transform.rotation.z -= step
-                                item.position.boundingBoxOrientation.z += step
+                                item.position.transform.rotation.z -= .step
+                                item.position.boundingBoxOrientation.z += .step
                             }, label: {
                                 Image(systemName: "arrow.clockwise")
                             }).buttonStyle(.borderedProminent)

@@ -9,9 +9,9 @@ struct SingleValueView: View {
             title: title,
             value: $value,
             increaseValue: {
-                value += 0.01
+                value += .step
             }, decreaseValue: {
-                value -= 0.01
+                value -= .step
             })
     }
 }

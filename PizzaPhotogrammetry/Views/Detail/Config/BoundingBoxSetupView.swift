@@ -4,8 +4,6 @@ struct BoundingBoxSetupView: View {
     @Binding var boundingBox: BoundingBox
     @Binding var boundingBoxOrientation: Coord4
     
-    let step: CGFloat = 0.005
-    
     var body: some View {
         Text("Box")
             .font(.headline)
@@ -15,40 +13,40 @@ struct BoundingBoxSetupView: View {
                 title: "Top",
                 value: $boundingBox.max.y,
                 increaseValue: {
-                    boundingBox.max.y += step
+                    boundingBox.max.y += .step
                 }, decreaseValue: {
-                    boundingBox.max.y -= step
+                    boundingBox.max.y -= .step
                 })
             
             InputView(
                 title: "Bottom",
                 value: $boundingBox.min.y,
                 increaseValue: {
-                    boundingBox.min.y += step
+                    boundingBox.min.y += .step
                 }, decreaseValue: {
-                    boundingBox.min.y -= step
+                    boundingBox.min.y -= .step
                 })
             
             InputView(
                 title: "Width",
                 value: .constant(boundingBox.width),
                 increaseValue: {
-                    boundingBox.min.x -= step
-                    boundingBox.max.x += step
+                    boundingBox.min.x -= .step
+                    boundingBox.max.x += .step
                 }, decreaseValue: {
-                    boundingBox.min.x += step
-                    boundingBox.max.x -= step
+                    boundingBox.min.x += .step
+                    boundingBox.max.x -= .step
                 })
             
             InputView(
                 title: "Length",
                 value: .constant(boundingBox.length),
                 increaseValue: {
-                    boundingBox.min.z -= step
-                    boundingBox.max.z += step
+                    boundingBox.min.z -= .step
+                    boundingBox.max.z += .step
                 }, decreaseValue: {
-                    boundingBox.min.z += step
-                    boundingBox.max.z -= step
+                    boundingBox.min.z += .step
+                    boundingBox.max.z -= .step
                 })
             
             Text("Rotation")
