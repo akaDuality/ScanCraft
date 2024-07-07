@@ -30,11 +30,11 @@ struct MetricsDescriptionView: View {
                     }
                     
                     if let remainingTime = progress.estimatedRemainingTime {
-                        Text("\(timeFormatter.localizedString(fromTimeInterval: progress.metrics.totalDuration())) from \(timeFormatter.localizedString(fromTimeInterval: remainingTime))")
+                        Text("\(formatted(progress.metrics.totalDuration())), estimated \(formatted(remainingTime))")
                             .bold()
                             .padding(.top, 24)
                     } else {
-                        Text(timeFormatter.localizedString(fromTimeInterval: progress.metrics.totalDuration()))
+                        Text(formatted(progress.metrics.totalDuration()))
                             .bold()
                             .padding(.top, 24)
                     }
@@ -47,5 +47,9 @@ struct MetricsDescriptionView: View {
                 retryAction()
             }
         }
+    }
+    
+    func formatted(_ interval: TimeInterval) -> String {
+        timeFormatter.localizedString(fromTimeInterval: interval)
     }
 }

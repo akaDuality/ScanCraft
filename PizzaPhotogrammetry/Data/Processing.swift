@@ -15,15 +15,26 @@ final class Processing {
     var metrics: [Metric] = []
     var stage: Stage? {
         didSet {
-            if let stage = (stage ?? oldValue) { // Sometimes can send nil in the middle of the proccess
-                if let oldMetric = metrics.first(where: { metric in
-                    metric.stage == oldValue
-                }) {
-                    oldMetric.updateEndTime()
-                } else {
-                    let newMetric = Metric(stage: stage)
-                    metrics.append(newMetric)
-                }
+            updateMetric(oldValue: oldValue, newValue: stage)
+        }
+    }
+    
+    private func updateMetric(oldValue: Stage?, newValue: Stage?) {
+        if let stage = (newValue ?? oldValue) {
+            if let oldMetric = metrics.first(where: { metric in
+                metric.stage == stage
+            }) {
+                oldMetric.updateEndTime()
+            } else {
+                let newMetric = Metric(stage: stage)
+                metrics.append(newMetric)
+            }
+        } else {
+            // Sometimes can send nil in the middle of the proccess
+            if let oldMetric = metrics.first(where: { metric in
+                metric.stage == oldValue
+            }) {
+                oldMetric.updateEndTime()
             }
         }
     }
