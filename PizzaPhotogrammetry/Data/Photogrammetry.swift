@@ -23,7 +23,7 @@ class Photogrammetry {
         config.customDetailSpecification.textureFormat = .jpeg(compressionQuality: 0.51)
         config.customDetailSpecification.maximumPolygonCount = 50_000
         config.customDetailSpecification.outputTextureMaps = [.diffuseColor, .normal, .roughness]
-//        config.checkpointDirectory = tempFolder // TODO: Need to remove in the end
+        config.checkpointDirectory = tempFolder
         
         logger.log("Using configuration: \(String(describing: config))")
         
@@ -56,6 +56,7 @@ class Photogrammetry {
         isProcessing = true
         defer {
             isProcessing = false
+            try? FileManager.default.removeItem(at: task.tempDirectory)
         }
         
         // TODO: Load files by NSFileCoordinator().coordinate(readingItemAt

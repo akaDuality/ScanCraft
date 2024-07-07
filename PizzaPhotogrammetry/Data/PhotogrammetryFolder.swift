@@ -81,9 +81,9 @@ final class PhotogrammetryFolder {
     }
     
     var tempDirectory: URL {
-        sourceFolder
-            .deletingLastPathComponent() // Add near incoming folder, not inside the folder
-            .appending(path: "Temp") // TODO: Generate names
+        URL(fileURLWithPath: NSTemporaryDirectory(),
+            isDirectory: true)
+        .appendingPathComponent("PhotogrammetryProcessing")
     }
     
     func url(for mode: Photogrammetry.Mode) -> URL {
