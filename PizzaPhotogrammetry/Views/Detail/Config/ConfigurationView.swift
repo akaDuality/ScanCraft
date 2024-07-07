@@ -18,6 +18,8 @@ struct ConfigurationView: View {
             
             TransformSetupView(transform: $position.transform, exportAction: {
                 // TODO: Add export action
+            }, convertToGlbAction: {
+                // TODO: Add action
             })
                 .padding(.bottom, 40)
                 .onChange(of: position.transform) { oldValue, newValue in

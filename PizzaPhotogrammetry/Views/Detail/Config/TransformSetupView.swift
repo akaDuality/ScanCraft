@@ -4,7 +4,9 @@ struct TransformSetupView: View {
     @Binding var transform: PhotogrammetryFolder.Transform
     
     var exportAction: () -> Void
+    var convertToGlbAction: () -> Void
     
+    @State private var isConvertingGlb = false
     var body: some View {
         VStack(alignment: .leading) {
             Text("Translation")
@@ -21,11 +23,33 @@ struct TransformSetupView: View {
             SingleValueView(title: "Y", value: $transform.rotation.y)
             SingleValueView(title: "Z", value: $transform.rotation.z)
             
-            Button("Export") {
-                exportAction()
+            HStack {
+                Button("Export") {
+                    exportAction()
+                }
+                .padding(.trailing, 16)
+                .padding(.bottom, 16)
+                
+                Button {
+                    isConvertingGlb = true
+                    Task {
+                        convertToGlbAction()
+                        await MainActor.run {
+                            isConvertingGlb = false
+                        }
+                    }
+                } label: {
+                    if isConvertingGlb {
+                         ProgressView()
+                            .progressViewStyle(.circular)
+                            .controlSize(.small)
+                    } else {
+                        Text("Convert to Glb")
+                    }
+                }
+                .padding(.trailing, 16)
+                .padding(.bottom, 16)
             }
-            .padding(.trailing, 16)
-            .padding(.bottom, 16)
         }
     }
 }
