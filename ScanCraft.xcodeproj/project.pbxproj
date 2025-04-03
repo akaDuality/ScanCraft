@@ -23,9 +23,6 @@
 		745C3E882C1927B300C0BE07 /* PhotogrammetryFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3E872C1927B300C0BE07 /* PhotogrammetryFolder.swift */; };
 		745C3E8A2C1927B400C0BE07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 745C3E892C1927B400C0BE07 /* Assets.xcassets */; };
 		745C3E8D2C1927B400C0BE07 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 745C3E8C2C1927B400C0BE07 /* Preview Assets.xcassets */; };
-		745C3E982C1927B400C0BE07 /* PizzaPhotogrammetryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3E972C1927B400C0BE07 /* PizzaPhotogrammetryTests.swift */; };
-		745C3EA22C1927B500C0BE07 /* PizzaPhotogrammetryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3EA12C1927B500C0BE07 /* PizzaPhotogrammetryUITests.swift */; };
-		745C3EA42C1927B500C0BE07 /* PizzaPhotogrammetryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C3EA32C1927B500C0BE07 /* PizzaPhotogrammetryUITestsLaunchTests.swift */; };
 		745C3EAE2C1927BD00C0BE07 /* Photogrammetry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745060C32C18EBED009BAAD7 /* Photogrammetry.swift */; };
 		7463576F2C1C9DEF005E54E1 /* Model.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 7463576E2C1C9DEF005E54E1 /* Model.usdz */; };
 		746CB9112C7E9E3E0010B2CA /* ZeroPlanes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746CB9102C7E9E3C0010B2CA /* ZeroPlanes.swift */; };
@@ -41,23 +38,6 @@
 		74E0D6352C19F681008E1E77 /* NavigationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E0D6342C19F681008E1E77 /* NavigationCell.swift */; };
 		74E0D6382C19F6CB008E1E77 /* ProcesssingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E0D6372C19F6CB008E1E77 /* ProcesssingView.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		745C3E942C1927B400C0BE07 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7B35772726155F6900EC1A97 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 745C3E802C1927B300C0BE07;
-			remoteInfo = PizzaPhotogrammetry;
-		};
-		745C3E9E2C1927B400C0BE07 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7B35772726155F6900EC1A97 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 745C3E802C1927B300C0BE07;
-			remoteInfo = PizzaPhotogrammetry;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3AACFD8D2CBD36EDA66607F9 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
@@ -75,18 +55,13 @@
 		74521B492C30E1B80047E82E /* ProgressDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressDescription.swift; sourceTree = "<group>"; };
 		74521B4B2C30F6CE0047E82E /* PizzaScenesCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaScenesCache.swift; sourceTree = "<group>"; };
 		74521B4D2C30F74C0047E82E /* TransformSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformSetupView.swift; sourceTree = "<group>"; };
-		745C3E812C1927B300C0BE07 /* PizzaPhotogrammetry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PizzaPhotogrammetry.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		745C3E812C1927B300C0BE07 /* ScanCraft.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScanCraft.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		745C3E832C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaPhotogrammetryApp.swift; sourceTree = "<group>"; };
 		745C3E852C1927B300C0BE07 /* ItemsToModelSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsToModelSplitView.swift; sourceTree = "<group>"; };
 		745C3E872C1927B300C0BE07 /* PhotogrammetryFolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotogrammetryFolder.swift; sourceTree = "<group>"; };
 		745C3E892C1927B400C0BE07 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		745C3E8C2C1927B400C0BE07 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		745C3E8E2C1927B400C0BE07 /* PizzaPhotogrammetry.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PizzaPhotogrammetry.entitlements; sourceTree = "<group>"; };
-		745C3E932C1927B400C0BE07 /* PizzaPhotogrammetryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PizzaPhotogrammetryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		745C3E972C1927B400C0BE07 /* PizzaPhotogrammetryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaPhotogrammetryTests.swift; sourceTree = "<group>"; };
-		745C3E9D2C1927B400C0BE07 /* PizzaPhotogrammetryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PizzaPhotogrammetryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		745C3EA12C1927B500C0BE07 /* PizzaPhotogrammetryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaPhotogrammetryUITests.swift; sourceTree = "<group>"; };
-		745C3EA32C1927B500C0BE07 /* PizzaPhotogrammetryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaPhotogrammetryUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7463576E2C1C9DEF005E54E1 /* Model.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = Model.usdz; sourceTree = "<group>"; };
 		746CB9102C7E9E3C0010B2CA /* ZeroPlanes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroPlanes.swift; sourceTree = "<group>"; };
 		746CB9122C7E9E4B0010B2CA /* Floor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Floor.swift; sourceTree = "<group>"; };
@@ -105,20 +80,6 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		745C3E7E2C1927B300C0BE07 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		745C3E902C1927B400C0BE07 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		745C3E9A2C1927B400C0BE07 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -189,7 +150,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		745C3E822C1927B300C0BE07 /* PizzaPhotogrammetry */ = {
+		745C3E822C1927B300C0BE07 /* ScanCraft */ = {
 			isa = PBXGroup;
 			children = (
 				745C3E832C1927B300C0BE07 /* PizzaPhotogrammetryApp.swift */,
@@ -200,7 +161,7 @@
 				745C3E8E2C1927B400C0BE07 /* PizzaPhotogrammetry.entitlements */,
 				745C3E8B2C1927B400C0BE07 /* Preview Content */,
 			);
-			path = PizzaPhotogrammetry;
+			path = ScanCraft;
 			sourceTree = "<group>";
 		};
 		745C3E8B2C1927B400C0BE07 /* Preview Content */ = {
@@ -209,23 +170,6 @@
 				745C3E8C2C1927B400C0BE07 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		745C3E962C1927B400C0BE07 /* PizzaPhotogrammetryTests */ = {
-			isa = PBXGroup;
-			children = (
-				745C3E972C1927B400C0BE07 /* PizzaPhotogrammetryTests.swift */,
-			);
-			path = PizzaPhotogrammetryTests;
-			sourceTree = "<group>";
-		};
-		745C3EA02C1927B500C0BE07 /* PizzaPhotogrammetryUITests */ = {
-			isa = PBXGroup;
-			children = (
-				745C3EA12C1927B500C0BE07 /* PizzaPhotogrammetryUITests.swift */,
-				745C3EA32C1927B500C0BE07 /* PizzaPhotogrammetryUITestsLaunchTests.swift */,
-			);
-			path = PizzaPhotogrammetryUITests;
 			sourceTree = "<group>";
 		};
 		746FCE5A2C1CC32A00F5E4BC /* Data */ = {
@@ -267,9 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				7B357763261566B200EC1A97 /* README.md */,
-				745C3E822C1927B300C0BE07 /* PizzaPhotogrammetry */,
-				745C3E962C1927B400C0BE07 /* PizzaPhotogrammetryTests */,
-				745C3EA02C1927B500C0BE07 /* PizzaPhotogrammetryUITests */,
+				745C3E822C1927B300C0BE07 /* ScanCraft */,
 				7B35773026155F6900EC1A97 /* Products */,
 				3FA622068595B839DAC9BC34 /* Configuration */,
 				13329AE4E82D15B3A35CBB4C /* LICENSE */,
@@ -280,9 +222,7 @@
 		7B35773026155F6900EC1A97 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				745C3E812C1927B300C0BE07 /* PizzaPhotogrammetry.app */,
-				745C3E932C1927B400C0BE07 /* PizzaPhotogrammetryTests.xctest */,
-				745C3E9D2C1927B400C0BE07 /* PizzaPhotogrammetryUITests.xctest */,
+				745C3E812C1927B300C0BE07 /* ScanCraft.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -290,9 +230,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		745C3E802C1927B300C0BE07 /* PizzaPhotogrammetry */ = {
+		745C3E802C1927B300C0BE07 /* ScanCraft */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 745C3EAB2C1927B500C0BE07 /* Build configuration list for PBXNativeTarget "PizzaPhotogrammetry" */;
+			buildConfigurationList = 745C3EAB2C1927B500C0BE07 /* Build configuration list for PBXNativeTarget "ScanCraft" */;
 			buildPhases = (
 				745C3E7D2C1927B300C0BE07 /* Sources */,
 				745C3E7E2C1927B300C0BE07 /* Frameworks */,
@@ -302,48 +242,12 @@
 			);
 			dependencies = (
 			);
-			name = PizzaPhotogrammetry;
+			name = ScanCraft;
 			packageProductDependencies = (
 			);
 			productName = PizzaPhotogrammetry;
-			productReference = 745C3E812C1927B300C0BE07 /* PizzaPhotogrammetry.app */;
+			productReference = 745C3E812C1927B300C0BE07 /* ScanCraft.app */;
 			productType = "com.apple.product-type.application";
-		};
-		745C3E922C1927B400C0BE07 /* PizzaPhotogrammetryTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 745C3EAC2C1927B500C0BE07 /* Build configuration list for PBXNativeTarget "PizzaPhotogrammetryTests" */;
-			buildPhases = (
-				745C3E8F2C1927B400C0BE07 /* Sources */,
-				745C3E902C1927B400C0BE07 /* Frameworks */,
-				745C3E912C1927B400C0BE07 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				745C3E952C1927B400C0BE07 /* PBXTargetDependency */,
-			);
-			name = PizzaPhotogrammetryTests;
-			productName = PizzaPhotogrammetryTests;
-			productReference = 745C3E932C1927B400C0BE07 /* PizzaPhotogrammetryTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		745C3E9C2C1927B400C0BE07 /* PizzaPhotogrammetryUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 745C3EAD2C1927B500C0BE07 /* Build configuration list for PBXNativeTarget "PizzaPhotogrammetryUITests" */;
-			buildPhases = (
-				745C3E992C1927B400C0BE07 /* Sources */,
-				745C3E9A2C1927B400C0BE07 /* Frameworks */,
-				745C3E9B2C1927B400C0BE07 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				745C3E9F2C1927B400C0BE07 /* PBXTargetDependency */,
-			);
-			name = PizzaPhotogrammetryUITests;
-			productName = PizzaPhotogrammetryUITests;
-			productReference = 745C3E9D2C1927B400C0BE07 /* PizzaPhotogrammetryUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -360,17 +264,9 @@
 					745C3E802C1927B300C0BE07 = {
 						CreatedOnToolsVersion = 15.4;
 					};
-					745C3E922C1927B400C0BE07 = {
-						CreatedOnToolsVersion = 15.4;
-						TestTargetID = 745C3E802C1927B300C0BE07;
-					};
-					745C3E9C2C1927B400C0BE07 = {
-						CreatedOnToolsVersion = 15.4;
-						TestTargetID = 745C3E802C1927B300C0BE07;
-					};
 				};
 			};
-			buildConfigurationList = 7B35772A26155F6900EC1A97 /* Build configuration list for PBXProject "HelloPhotogrammetry" */;
+			buildConfigurationList = 7B35772A26155F6900EC1A97 /* Build configuration list for PBXProject "ScanCraft" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -386,9 +282,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				745C3E802C1927B300C0BE07 /* PizzaPhotogrammetry */,
-				745C3E922C1927B400C0BE07 /* PizzaPhotogrammetryTests */,
-				745C3E9C2C1927B400C0BE07 /* PizzaPhotogrammetryUITests */,
+				745C3E802C1927B300C0BE07 /* ScanCraft */,
 			);
 		};
 /* End PBXProject section */
@@ -401,20 +295,6 @@
 				745C3E8D2C1927B400C0BE07 /* Preview Assets.xcassets in Resources */,
 				745C3E8A2C1927B400C0BE07 /* Assets.xcassets in Resources */,
 				7463576F2C1C9DEF005E54E1 /* Model.usdz in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		745C3E912C1927B400C0BE07 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		745C3E9B2C1927B400C0BE07 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,37 +335,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		745C3E8F2C1927B400C0BE07 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				745C3E982C1927B400C0BE07 /* PizzaPhotogrammetryTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		745C3E992C1927B400C0BE07 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				745C3EA22C1927B500C0BE07 /* PizzaPhotogrammetryUITests.swift in Sources */,
-				745C3EA42C1927B500C0BE07 /* PizzaPhotogrammetryUITestsLaunchTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		745C3E952C1927B400C0BE07 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 745C3E802C1927B300C0BE07 /* PizzaPhotogrammetry */;
-			targetProxy = 745C3E942C1927B400C0BE07 /* PBXContainerItemProxy */;
-		};
-		745C3E9F2C1927B400C0BE07 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 745C3E802C1927B300C0BE07 /* PizzaPhotogrammetry */;
-			targetProxy = 745C3E9E2C1927B400C0BE07 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		745C3EA52C1927B500C0BE07 /* Debug */ = {
@@ -552,98 +402,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		745C3EA72C1927B500C0BE07 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HL3C4F29U9;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GENERATE_INFOPLIST_FILE = YES;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dodobrands.PizzaPhotogrammetryTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PizzaPhotogrammetry.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PizzaPhotogrammetry";
-			};
-			name = Debug;
-		};
-		745C3EA82C1927B500C0BE07 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HL3C4F29U9;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GENERATE_INFOPLIST_FILE = YES;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dodobrands.PizzaPhotogrammetryTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PizzaPhotogrammetry.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PizzaPhotogrammetry";
-			};
-			name = Release;
-		};
-		745C3EA92C1927B500C0BE07 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HL3C4F29U9;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GENERATE_INFOPLIST_FILE = YES;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dodobrands.PizzaPhotogrammetryUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = PizzaPhotogrammetry;
-			};
-			name = Debug;
-		};
-		745C3EAA2C1927B500C0BE07 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = HL3C4F29U9;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu17;
-				GENERATE_INFOPLIST_FILE = YES;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 14.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dodobrands.PizzaPhotogrammetryUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = PizzaPhotogrammetry;
 			};
 			name = Release;
 		};
@@ -769,7 +527,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		745C3EAB2C1927B500C0BE07 /* Build configuration list for PBXNativeTarget "PizzaPhotogrammetry" */ = {
+		745C3EAB2C1927B500C0BE07 /* Build configuration list for PBXNativeTarget "ScanCraft" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				745C3EA52C1927B500C0BE07 /* Debug */,
@@ -778,25 +536,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		745C3EAC2C1927B500C0BE07 /* Build configuration list for PBXNativeTarget "PizzaPhotogrammetryTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				745C3EA72C1927B500C0BE07 /* Debug */,
-				745C3EA82C1927B500C0BE07 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		745C3EAD2C1927B500C0BE07 /* Build configuration list for PBXNativeTarget "PizzaPhotogrammetryUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				745C3EA92C1927B500C0BE07 /* Debug */,
-				745C3EAA2C1927B500C0BE07 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7B35772A26155F6900EC1A97 /* Build configuration list for PBXProject "HelloPhotogrammetry" */ = {
+		7B35772A26155F6900EC1A97 /* Build configuration list for PBXProject "ScanCraft" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7B35773426155F6900EC1A97 /* Debug */,
