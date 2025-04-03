@@ -19,7 +19,7 @@ struct PizzaSceneView: View {
         self.scene = scene
         self._modelPosition = modelPosition
         self._transform = transform
-        self.cameraNode = createCamera(mode: cameraMode)
+        self.cameraNode = ProjectionCamera(mode: cameraMode)
         
         transformPizzaNode()
     }
@@ -29,7 +29,7 @@ struct PizzaSceneView: View {
     }
     
     func updateBox() {
-        scene.updateBox(
+        scene.box.update(
             boundingBox: modelPosition.boundingBox,
             orientation: modelPosition.boundingBoxOrientation)
     }
@@ -43,7 +43,8 @@ struct PizzaSceneView: View {
                 .autoenablesDefaultLighting,
                 .temporalAntialiasingEnabled,
             ]
-        ).onAppear {
+        )
+        .onAppear {
             updateBox()
             transformPizzaNode()
         }.onChange(of: modelPosition) { oldValue, newValue in

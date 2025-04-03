@@ -13,7 +13,7 @@ class NotificationCenter {
     func requestPermission() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
             if success {
-                print("All set!")
+                print("Notifications are set!")
             } else if let error {
                 print(error.localizedDescription)
             }

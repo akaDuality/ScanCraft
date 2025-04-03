@@ -16,6 +16,8 @@ class PizzaScenesCache {
     }
 }
 
+import SceneKit
+
 struct PizzaScenes {
     private(set) var preview: PizzaScene
     private(set) var previewAligned: PizzaScene
@@ -25,6 +27,12 @@ struct PizzaScenes {
         self.preview = PizzaScene(url: folder.previewDestination)
         self.previewAligned = PizzaScene(url: folder.previewAlignedDestination)
         self.result = PizzaScene(url: folder.resultDestination)
+        
+        self.previewAligned.hideBox()
+        self.previewAligned.addFloor()
+        
+        self.result.hideBox()
+        self.result.addFloor()
     }
 }
 

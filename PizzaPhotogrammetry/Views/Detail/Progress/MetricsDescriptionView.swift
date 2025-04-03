@@ -25,6 +25,8 @@ struct MetricsDescriptionView: View {
                                     .progressViewStyle(.circular)
                                     .controlSize(.small)
                                     .padding(4)
+                                
+                                // TODO: when to hide?
                             }
                         }      
                     }

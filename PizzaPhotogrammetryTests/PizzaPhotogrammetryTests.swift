@@ -9,18 +9,10 @@
 import XCTest
 @testable import PizzaPhotogrammetry
 
-final class PizzaPhotogrammetryTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+final class MetricsTests: XCTestCase {
 
     @MainActor
-    func testExample() throws {
+    func test_whenAddNilMetrics_shouldCombine() throws {
         let sut = Processing(url: URL(string: "google.com")!)
         
         sut.stage = .creatingSession
@@ -31,5 +23,4 @@ final class PizzaPhotogrammetryTests: XCTestCase {
         
         XCTAssertEqual(sut.metrics.map(\.stage), [.creatingSession, .preProcessing, .imageAlignment])
     }
-
 }

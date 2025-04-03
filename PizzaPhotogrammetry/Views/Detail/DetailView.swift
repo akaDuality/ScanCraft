@@ -8,8 +8,6 @@ struct DetailView: View {
     var renderAction: () -> Void
     var previewAction: () -> Void
     
-    @State var mode: Photogrammetry.Mode
-    
     init(item: Binding<PhotogrammetryFolder>,
          progress: Processing?,
          scenes: PizzaScenes,
@@ -20,14 +18,13 @@ struct DetailView: View {
         self.scenes = scenes
         
         let mode = item.wrappedValue.mode
-        self.mode = mode
         self.renderAction = renderAction
         self.previewAction = previewAction
     }
     
     var body: some View {
         HStack {
-            switch mode {
+            switch item.mode {
             case .processing:
                 if let progress {
                     ModelProgressView(item: item, progress: progress, retryAction: { _ in })
@@ -82,7 +79,7 @@ struct DetailView: View {
             
         }.toolbar {
             ToolbarItem(placement: .principal) {
-                Picker("Preview mode", selection: $mode) {
+                Picker("Preview mode", selection: $item.mode) {
                     ForEach(item.possibleModes(processing: progress), id: \.self) { mode in
                         HStack(spacing: 8) {
                             Text(mode.name)

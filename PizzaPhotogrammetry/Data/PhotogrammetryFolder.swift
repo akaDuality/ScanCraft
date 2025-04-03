@@ -13,8 +13,8 @@ import RealityKit
 @Model
 final class PhotogrammetryFolder {
     
-    let id: UUID
-    let sourceFolder: URL
+    var id: UUID
+    var sourceFolder: URL
     var status: Status = Status.waiting
     var mode: Photogrammetry.Mode
     
